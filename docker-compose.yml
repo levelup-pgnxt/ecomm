@@ -2,3 +2,5 @@ version: "3.9"
 services:
   product-container:
     build: ./product/
+    volumes:
+      - ./:/app
