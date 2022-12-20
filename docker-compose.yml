@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  product:
+    image: node:16-alpine
+    container_name: ecomm-product
