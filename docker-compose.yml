@@ -3,4 +3,8 @@ services:
   product-container:
     build: ./product/
     volumes:
-      - ./:/app
+      - ./product/:/app/product
+  account-container:
+    build: ./account/
+    volumes:
+      - ./account/:/app/account
