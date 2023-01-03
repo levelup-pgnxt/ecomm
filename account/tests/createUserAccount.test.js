@@ -1,5 +1,7 @@
 import createUserAccount from '../src/use-case/createUserAccount';
 import DATATEST from '../tests/data-tests/dataTest';
+import jest from 'jest-mock';
+
 
 describe('Função creteUserAccount', () => {
 
@@ -82,6 +84,35 @@ describe('Função creteUserAccount', () => {
             it('Retorna a mensagem O campo "senha" não deve ser vazio!', () => {
                 expect(createUserAccount(DATATEST[11]))
                 .toBe('O campo "senha" não deve ser vazio!');
+           });
+        })
+    });
+
+    describe('Verificar o resultado da função', () => {
+        describe('Verificar se a função é chamda um vez', () => {
+            it('Se é chamada ao menos uma vez', () => {
+                const createUserAccount = jest.fn();
+                createUserAccount()
+                expect(createUserAccount).toHaveBeenCalled();
+           });
+        })
+        describe('Verificar se retorna o cadastro com id', () => {
+            const objId = { id: 1 };
+            it('Retorna com a propriedade "id"', () => {
+                expect(createUserAccount(DATATEST[12])).toMatchObject(objId);
+           });
+        })
+        describe('Verificar se retorna o cadastro com a data de criação', () => {
+            const createdDate = new Date().toLocaleDateString('sv');
+            const objCreatedDate = { createdDate };
+            it('Retorna com a propriedade "createdDate"', () => {
+                expect(createUserAccount(DATATEST[12])).toMatchObject(objCreatedDate);
+           });
+        })
+        describe('Verificar se retorna o cadastro com nome, email e senha', () => {
+            const newUser = { name: DATATEST[12]["nome"], email: DATATEST[12]["email"], password: DATATEST[12]["senha"] };
+            it('Retorna com as propriedades "name, email e password"', () => {
+                expect(createUserAccount(DATATEST[12])).toMatchObject(newUser);
            });
         })
     });
