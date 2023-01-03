@@ -1,12 +1,5 @@
 import createUserAccount from '../src/use-case/createUserAccount';
-
-const DATATEST = [
-    { email: 'teste@teste.com', senha: '123456' },
-    { nome: 12345, email: 'teste@teste.com', senha: '123456' },
-    { nome: "", email: 'teste@teste.com', senha: '123456' },
-    { nome: "Paulo", email: 'teste@teste.com', senha: '123456' },
-    { nome: "Paulo Leite", senha: '123456' },
-];
+import DATATEST from '../tests/data-tests/dataTest';
 
 describe('Função creteUserAccount', () => {
 
@@ -40,37 +33,56 @@ describe('Função creteUserAccount', () => {
 
     describe('Verificar o campo email', () => {
         describe('Verificar se campo email é passado', () => {
-            it('Retorna a mensagem O campo "email" deve ser do tipo string', () => {
-                expect(createUserAccount(nome, email, senha))
-                .toBe('O campo "email" deve ser do tipo string!');
+            it('Retorna a mensagem O campo "email" é obrigatório!', () => {
+                expect(createUserAccount(DATATEST[4]))
+                .toBe('O campo "email" é obrigatório!');
            });
         })
         describe('Verificar se campo email é um string', () => {
-            const nome = "Paulo Leite";
-            const email = 123456;
-            const senha = "123456";
             it('Retorna a mensagem O campo "email" deve ser do tipo string', () => {
-                expect(createUserAccount(nome, email, senha))
+                expect(createUserAccount(DATATEST[5]))
                 .toBe('O campo "email" deve ser do tipo string!');
            });
         })
+        describe('Verificar se campo email está preenchido', () => {
+            it('Retorna a mensagem O campo "email" não deve ser vazio!', () => {
+                expect(createUserAccount(DATATEST[6]))
+                .toBe('O campo "email" não deve ser vazio!');
+           });
+        })
         describe('Verificar se o campo possui um email válido', () => {
-            const nome = "Paulo Leite";
-            const email = "testeemailcom";
-            const senha = "123456";
-            it('Retorna a mensagem O campo dever ser um "email" válido', () => {
-                expect(createUserAccount(nome, email, senha))
+            it('Retorna a mensagem O campo dever ser um "email" válido!', () => {
+                expect(createUserAccount(DATATEST[7]))
                 .toBe('O campo dever ser um "email" válido!');
             });
         })
-        describe('Verificar se o campo email está preenchido', () => {
-            const nome = "Paulo Leite";
-            const email = "";
-            const senha = "123456";
-            it('Retorna a mensagem O campo "email" não deve ser vazio', () => {
-                expect(createUserAccount(nome, email, senha))
-                .toBe('O campo "email" não deve ser vazio');
+    });
+
+    describe('Verificar o campo senha', () => {
+        describe('Verificar se campo senha é passado', () => {
+            it('Retorna a mensagem O campo "senha" é obrigatório!', () => {
+                expect(createUserAccount(DATATEST[8]))
+                .toBe('O campo "senha" é obrigatório!');
+           });
+        })
+        describe('Verificar se campo senha é um string', () => {
+            it('Retorna a mensagem O campo "senha" deve ser do tipo string', () => {
+                expect(createUserAccount(DATATEST[9]))
+                .toBe('O campo "senha" deve ser do tipo string!');
+           });
+        })
+        describe('Verificar se o campo possui o senha possui o tamanho mínimo especificado', () => {
+            const limit = 6;
+            it(`'Retorna a mensagem O campo "senha" deve ter no mínimo ${limit} caracteres'`, () => {
+                expect(createUserAccount(DATATEST[10]))
+                .toBe(`'O campo "senha" deve ter no mínimo ${limit} caracteres!'`);
             });
+        })
+        describe('Verificar se campo senha está preenchido', () => {
+            it('Retorna a mensagem O campo "senha" não deve ser vazio!', () => {
+                expect(createUserAccount(DATATEST[11]))
+                .toBe('O campo "senha" não deve ser vazio!');
+           });
         })
     });
 });

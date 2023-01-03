@@ -1,5 +1,4 @@
 import Joi from 'joi';
-// import { getSavedUsers, saveUsersCustomer } from '../services/utils.js';
 
 const usersCustomer = [];
 
@@ -32,10 +31,10 @@ const validateParams = (data) => {
             'any.required': 'O campo "email" é obrigatório!'
         }),
         senha: Joi.string().min(limit).required().messages({
-            'string.base': 'O campo "senha" deve ser do tipo string',
-            'string.empty': 'O campo "senha" não deve ser vazio',
-            'string.min': `'O campo "senha" deve ter no mínimo ${limit} caracteres'`,
-            'any.required': 'O campo "nome" é obrigatório!'
+            'string.base': 'O campo "senha" deve ser do tipo string!',
+            'string.empty': 'O campo "senha" não deve ser vazio!',
+            'string.min': `'O campo "senha" deve ter no mínimo ${limit} caracteres!'`,
+            'any.required': 'O campo "senha" é obrigatório!'
         }),
     });
 
