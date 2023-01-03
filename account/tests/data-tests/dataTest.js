@@ -11,6 +11,7 @@ const DATATEST = [
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: 123456 },
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123' },
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '' },
+    { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123456' },
 ];
 
 export default DATATEST;
