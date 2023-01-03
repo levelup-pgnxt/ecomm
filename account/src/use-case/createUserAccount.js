@@ -1,18 +1,15 @@
 import Joi from 'joi';
+import UsersCustomer from '../services/utils.js';
 
-const usersCustomer = [];
+const usersCustomer = new UsersCustomer;
 
 const createUserAccount = (data) => {
     const { value, error } = validateParams(data);
     if (error) return error.message;
 
-    const id = usersCustomer.length + 1;
+    const newUser = usersCustomer.push(value);
 
-    console.log(id);
-    const result = { id, ...value } 
-    usersCustomer.push(result)
-
-    return result;
+    return newUser;
 };
 
 const validateParams = (data) => {
@@ -41,11 +38,5 @@ const validateParams = (data) => {
     const result = schema.validate(data);
     return result;
 };
-
-console.log(createUserAccount({
-    nome: "Paulo Leite",
-    email: "phvleite@gmail.com",
-    senha: "30086900"
-}));
 
 export default createUserAccount;
