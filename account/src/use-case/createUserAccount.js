@@ -1,6 +1,4 @@
-import { UsersCustomer, validateParams } from '../services/utils.js';
-
-const usersCustomer = new UsersCustomer;
+import { usersCustomer, validateParams } from '../services/utils.js';
 
 const createUserAccount = (data) => {
     const { value, error } = validateParams(data);
