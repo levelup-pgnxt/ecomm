@@ -25,6 +25,16 @@ class UsersCustomer {
         return this.usersCustomer[lastIndex].id + 1;
     };
 
+    getUserByEmail (email) {
+        const result = this.usersCustomer.find((user) => user.email === email);
+        return result;
+    };
+
+    getUserById (id) {
+        const result = this.usersCustomer.find((user) => user.id === id);
+        return result;
+    };
+
     listAllUsers () {
         const allUsers = [];
         this.usersCustomer.forEach((user) => {
