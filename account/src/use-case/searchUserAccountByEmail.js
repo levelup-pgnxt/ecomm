@@ -6,7 +6,8 @@ const seachrUserAccountByEmail = (data) => {
 
     const userByEmail = usersCustomer.getUserByEmail(value);
 
-    if (userByEmail === undefined) return "Usuário não localizado";
+    const message = 'Usuário não localizado!';
+    if (userByEmail === undefined) return message;
     return userByEmail;
 };
 
