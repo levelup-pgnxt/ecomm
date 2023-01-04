@@ -13,7 +13,11 @@ const DATATEST = [
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: 123456 },
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123' },
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '' },
-    { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123456' },
+    { nome: "Alnat Casado", email: 'casadoalnat@gmail.com', senha: '123456' },
+    { nome: "Tânia Gusmão", email: 'tania@hotmail.com', senha: '123456' },
+    { nome: "Julha Esmeralda", email: 'esmeralda@uol.com.br', senha: '123456' },
+    { nome: "Ednaldo Bandeira", email: 'edbandeira@caetes.com.br', senha: '123456' },
+    { nome: "Annie Rossiter", email: 'annie@gmail.com', senha: '123456' },
 ];
 
 const chance = new Chance;
