@@ -78,7 +78,7 @@ describe('Função changeUserName', () => {
                 expect(changeUserName(DATATEST[26])).toBe(false);
            });
         })
-        describe('Verificar se retorna true ao encontrar e remover o usário', () => {
+        describe('Verificar se retorna true ao encontrar e remover o usuário', () => {
             it('Retorna true caso encontre e remova o usuário', () => {
                 expect(changeUserName(DATATEST[25])).toBe(true);
            });

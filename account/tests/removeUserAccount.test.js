@@ -45,12 +45,12 @@ describe('Função removeUserAccount', () => {
                 expect(removeUserAccount).toHaveBeenCalled();
            });
         })
-        describe('Verificar se retorna false ao não encontrar o usário', () => {
+        describe('Verificar se retorna false ao não encontrar o usuário', () => {
             it('Retorna false caso não encontre o usuário', () => {
                 expect(removeUserAccount({ email: "email@email.com" })).toBe(false);
            });
         })
-        describe('Verificar se retorna true ao encontrar e remover o usário', () => {
+        describe('Verificar se retorna true ao encontrar e remover o usuário', () => {
             it('Retorna true caso encontre e remova o usuário', () => {
                 expect(removeUserAccount({ email: "annie@gmail.com" })).toBe(true);
            });
