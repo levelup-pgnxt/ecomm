@@ -25,8 +25,11 @@ class UsersCustomer {
         return this.usersCustomer[lastIndex].id + 1;
     };
 
+    _getLength () {
+        return this.usersCustomer.length;
+    };
+
     getUserByEmail ({ email }) {
-        console.log(email);
         const result = this.usersCustomer.find((user) => user.email === email);
         return result;
     };
@@ -34,6 +37,17 @@ class UsersCustomer {
     getUserById (id) {
         const result = this.usersCustomer.find((user) => user.id === id);
         return result;
+    };
+
+    remove ({ email }) {
+        const size = this.usersCustomer.length;
+        for (let ind = 0; ind < size; ind += 1) {
+            if (this.usersCustomer[ind]["email"] === email) {
+                this.usersCustomer.splice(ind, 1)
+                return true;
+            }
+        };
+        return false;
     };
 
     listAllUsers () {
