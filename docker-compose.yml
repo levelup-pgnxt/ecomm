@@ -2,3 +2,6 @@ version: '3.9'
 services:
   ecommproduct:
     image: pauloleitepagonxt/ecomm-product
+
+  ecommaccount:
+    image: pauloleitepagonxt/ecomm-account

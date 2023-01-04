@@ -25,6 +25,42 @@ class UsersCustomer {
         return this.usersCustomer[lastIndex].id + 1;
     };
 
+    _getLength () {
+        return this.usersCustomer.length;
+    };
+
+    getUserByEmail ({ email }) {
+        const result = this.usersCustomer.find((user) => user.email === email);
+        return result;
+    };
+
+    getUserById (id) {
+        const result = this.usersCustomer.find((user) => user.id === id);
+        return result;
+    };
+
+    remove ({ email }) {
+        const size = this.usersCustomer.length;
+        for (let ind = 0; ind < size; ind += 1) {
+            if (this.usersCustomer[ind]["email"] === email) {
+                this.usersCustomer.splice(ind, 1)
+                return true;
+            }
+        };
+        return false;
+    };
+
+    changeName ({ email, newName }) {
+        const size = this.usersCustomer.length;
+        for (let ind = 0; ind < size; ind += 1) {
+            if (this.usersCustomer[ind]["email"] === email) {
+                this.usersCustomer[ind]["name"] = newName
+                return true;
+            }
+        };
+        return false;
+    };
+
     listAllUsers () {
         const allUsers = [];
         this.usersCustomer.forEach((user) => {
@@ -32,7 +68,26 @@ class UsersCustomer {
         });
         return allUsers;
     };
+
+    listUser ({ email }) {
+        let user = {};
+        const size = this.usersCustomer.length;
+        for (let ind = 0; ind < size; ind += 1) {
+            if (this.usersCustomer[ind]["email"] === email) {
+                user = {
+                    id: this.usersCustomer[ind].id,
+                    name :this.usersCustomer[ind].name,
+                    email :this.usersCustomer[ind].email,
+                    createdDate: this.usersCustomer[ind].createdDate
+                };
+                return user;
+            }
+        };
+        return false;
+    };
 };
+
+const usersCustomer = new UsersCustomer;
 
 const validateParams = (data) => {
     const limit = 6;
@@ -56,9 +111,50 @@ const validateParams = (data) => {
             'any.required': 'O campo "senha" é obrigatório!'
         }),
     });
+ 
+    const result = schema.validate(data);
+    return result;
+};
+
+const validateEmail = (data) => {
+    const schema = Joi.object().keys({
+        email: Joi.string().email().required().messages({
+            'string.email': 'O campo dever ser um "email" válido!',
+            'string.base': 'O campo "email" deve ser do tipo string!',
+            'string.empty': 'O campo "email" não deve ser vazio!',
+            'any.required': 'O campo "email" é obrigatório!'
+        }),
+    });
 
     const result = schema.validate(data);
     return result;
 };
 
-export { UsersCustomer, validateParams };
+const validateEmailNewName = (data) => {
+    const limit = 6;
+    const schema = Joi.object().keys({
+        email: Joi.string().email().required().messages({
+            'string.email': 'O campo dever ser um "email" válido!',
+            'string.base': 'O campo "email" deve ser do tipo string!',
+            'string.empty': 'O campo "email" não deve ser vazio!',
+            'any.required': 'O campo "email" é obrigatório!'
+        }),
+        newName: Joi.string().min(limit).empty().required().messages({
+            'string.base': 'O campo "newName" deve ser do tipo texto!',
+            'string.empty': 'O campo "newName" não deve ser vazio!',
+            'string.min': `'O campo "newName" deve ter no mínimo ${limit} caracteres!'`,
+            'any.required': 'O campo "newName" é obrigatório!'
+        }),
+    });
+
+    const result = schema.validate(data);
+    return result;
+};
+
+export {
+    UsersCustomer,
+    validateParams,
+    validateEmail,
+    validateEmailNewName,
+    usersCustomer
+};

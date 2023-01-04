@@ -1,3 +1,5 @@
+import Chance from 'chance';
+
 const DATATEST = [
     { email: 'teste@teste.com', senha: '123456' },
     { nome: 12345, email: 'teste@teste.com', senha: '123456' },
@@ -11,7 +13,32 @@ const DATATEST = [
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: 123456 },
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123' },
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '' },
-    { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123456' },
+    { nome: "Alnat Casado", email: 'casadoalnat@gmail.com', senha: '123456' },
+    { nome: "Tânia Gusmão", email: 'tania@hotmail.com', senha: '123456' },
+    { nome: "Julha Esmeralda", email: 'esmeralda@uol.com.br', senha: '123456' },
+    { nome: "Ednaldo Bandeira", email: 'edbandeira@caetes.com.br', senha: '123456' },
+    { nome: "Annie Rossiter", email: 'annie@gmail.com', senha: '123456' },
+    { email: 'teste@teste.com' },
+    { newName: 12345, email: 'teste@teste.com' },
+    { newName: "", email: 'teste@teste.com' },
+    { newName: "Paulo", email: 'teste@teste.com' },
+    { newName: "Paulo Leite" },
+    { newName: "Lauro Augusto", email: 123456 },
+    { newName: "Lauro Augusto", email: '' },
+    { newName: "Lauro Augusto", email: 'testeteste.com' },
+    { newName: "Anetildes Rossiter", email: 'annie@gmail.com' },
+    { newName: "Anetildes Rossiter", email: 'anetildes@gmail.com' },
 ];
 
-export default DATATEST;
+const chance = new Chance;
+const DATAUSERS = [];
+const QTD_USERS = 100;
+
+for (let ind = 1; ind <= QTD_USERS; ind += 1) {
+    const nome = chance.name({ nationality: 'it', middle: true });
+    const email = chance.email({ domain: 'testes.com' });
+    const senha = chance.string({ length: 6 });
+    DATAUSERS.push({ nome, email, senha });
+}
+
+export { DATATEST, DATAUSERS };

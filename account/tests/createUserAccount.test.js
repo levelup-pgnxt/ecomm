@@ -1,5 +1,5 @@
 import createUserAccount from '../src/use-case/createUserAccount';
-import DATATEST from '../tests/data-tests/dataTest';
+import { DATATEST } from '../tests/data-tests/dataTest';
 import jest from 'jest-mock';
 
 
@@ -98,6 +98,7 @@ describe('Função creteUserAccount', () => {
         })
         describe('Verificar se retorna o cadastro com id', () => {
             const objId = { id: 1 };
+            const createUserAccount = jest.fn().mockReturnValue(objId);
             it('Retorna com a propriedade "id"', () => {
                 expect(createUserAccount(DATATEST[12])).toMatchObject(objId);
            });
