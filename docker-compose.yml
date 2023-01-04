@@ -1,5 +1,10 @@
-version: '3.9'
+version: "3.9"
 services:
-  product: 
-    build: ./product
-    container_name: ecomm-product
+  product-container:
+    build: ./product/
+    volumes:
+      - ./product/:/app/product
+  account-container:
+    build: ./account/
+    volumes:
+      - ./account/:/app/account
