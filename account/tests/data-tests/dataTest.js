@@ -20,7 +20,7 @@ const chance = new Chance;
 const DATAUSERS = [];
 const QTD_USERS = 100;
 
-for (let ind = 0; ind <= QTD_USERS; ind += 1) {
+for (let ind = 1; ind <= QTD_USERS; ind += 1) {
     const nome = chance.name({ nationality: 'it', middle: true });
     const email = chance.email({ domain: 'testes.com' });
     const senha = chance.string({ length: 6 });
