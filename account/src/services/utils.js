@@ -25,7 +25,8 @@ class UsersCustomer {
         return this.usersCustomer[lastIndex].id + 1;
     };
 
-    getUserByEmail (email) {
+    getUserByEmail ({ email }) {
+        console.log(email);
         const result = this.usersCustomer.find((user) => user.email === email);
         return result;
     };
@@ -43,6 +44,8 @@ class UsersCustomer {
         return allUsers;
     };
 };
+
+const usersCustomer = new UsersCustomer;
 
 const validateParams = (data) => {
     const limit = 6;
@@ -66,9 +69,23 @@ const validateParams = (data) => {
             'any.required': 'O campo "senha" é obrigatório!'
         }),
     });
+ 
+    const result = schema.validate(data);
+    return result;
+};
+
+const validateEmail = (data) => {
+    const schema = Joi.object().keys({
+        email: Joi.string().email().required().messages({
+            'string.email': 'O campo dever ser um "email" válido!',
+            'string.base': 'O campo "email" deve ser do tipo string!',
+            'string.empty': 'O campo "email" não deve ser vazio!',
+            'any.required': 'O campo "email" é obrigatório!'
+        }),
+    });
 
     const result = schema.validate(data);
     return result;
 };
 
-export { UsersCustomer, validateParams };
+export { UsersCustomer, validateParams, validateEmail, usersCustomer };
