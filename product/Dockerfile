@@ -1,5 +1,6 @@
 FROM node:18
-WORKDIR /app-node
-COPY . .
+WORKDIR /app/product
+COPY package*.json .
 RUN npm install
+COPY . .
 ENTRYPOINT npm start
