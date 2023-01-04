@@ -1,5 +1,4 @@
 let accounts = [];
-let systemDate = new Date();
 
 function createUserUseCase(name, email, password) {
   let userId = accounts.length + 1;
@@ -9,7 +8,7 @@ function createUserUseCase(name, email, password) {
     name: name + ` ` + userId,
     email: email,
     password: password,
-    createdDate: systemDate.toLocaleString(),
+    createdDate: new Date().toLocaleString(),
   });
   return accounts;
 }
