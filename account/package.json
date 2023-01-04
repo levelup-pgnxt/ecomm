@@ -1,0 +1,20 @@
+{
+  "name": "ecomm",
+  "version": "1.0.0",
+  "description": "Projeto de Ecommerce criando durante o programa LevelUp da Alura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karinapimenta/ecomm.git"
+  },
+  "author": "Karina Pimenta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karinapimenta/ecomm/issues"
+  },
+  "homepage": "https://github.com/Karinapimenta/ecomm#readme",
+  "type": "module"
+}
