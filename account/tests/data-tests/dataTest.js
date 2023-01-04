@@ -18,6 +18,16 @@ const DATATEST = [
     { nome: "Julha Esmeralda", email: 'esmeralda@uol.com.br', senha: '123456' },
     { nome: "Ednaldo Bandeira", email: 'edbandeira@caetes.com.br', senha: '123456' },
     { nome: "Annie Rossiter", email: 'annie@gmail.com', senha: '123456' },
+    { email: 'teste@teste.com' },
+    { newName: 12345, email: 'teste@teste.com' },
+    { newName: "", email: 'teste@teste.com' },
+    { newName: "Paulo", email: 'teste@teste.com' },
+    { newName: "Paulo Leite" },
+    { newName: "Lauro Augusto", email: 123456 },
+    { newName: "Lauro Augusto", email: '' },
+    { newName: "Lauro Augusto", email: 'testeteste.com' },
+    { newName: "Anetildes Rossiter", email: 'annie@gmail.com' },
+    { newName: "Anetildes Rossiter", email: 'anetildes@gmail.com' },
 ];
 
 const chance = new Chance;
