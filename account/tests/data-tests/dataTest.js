@@ -1,3 +1,5 @@
+import Chance from 'chance';
+
 const DATATEST = [
     { email: 'teste@teste.com', senha: '123456' },
     { nome: 12345, email: 'teste@teste.com', senha: '123456' },
@@ -14,4 +16,15 @@ const DATATEST = [
     { nome: "Alnat Casado", email: 'teste@teste.com.br', senha: '123456' },
 ];
 
-export default DATATEST;
+const chance = new Chance;
+const DATAUSERS = [];
+const QTD_USERS = 100;
+
+for (let ind = 0; ind <= QTD_USERS; ind += 1) {
+    const nome = chance.name({ nationality: 'it', middle: true });
+    const email = chance.email({ domain: 'testes.com' });
+    const senha = chance.string({ length: 6 });
+    DATAUSERS.push({ nome, email, senha });
+}
+
+export { DATATEST, DATAUSERS };
