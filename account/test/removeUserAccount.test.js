@@ -8,8 +8,9 @@ createUserUseCase(`Nome`, `nome4@dominio.com`, 123456);
 createUserUseCase(`Nome`, `nome5@dominio.com`, 123456);
 createUserUseCase(`Nome`, `nome6@dominio.com`, 123456);
 createUserUseCase(`Nome`, `nome7@dominio.com`, 123456);
+createUserUseCase(`Nome`, `nome7@dominio.com`, 123456);
 
 
 
-removeUserUseCase(`nome6@dominio.com`)
+removeUserUseCase(`nome7@dominio.com`)
 console.log(accounts);

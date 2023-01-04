@@ -1,9 +1,10 @@
 import { createUserUseCase, accounts } from "../use-case/createUserAccount.js";
 
 function removeUserUseCase(emailFind) {
-  let newArray = accounts.filter((account) => account.email !== emailFind);
-  accounts.length = 0;
-  return accounts.push(newArray);
+  accounts.splice(accounts.findIndex((account) => account.email === emailFind),1)
+  return accounts
 }
+
+
 
 export { removeUserUseCase };
