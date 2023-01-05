@@ -1,6 +1,6 @@
-const allAccounts = []
+const allAccounts = [];
 
-export default function createUserUseCase(name, email, password) {
+function createUserUseCase(name, email, password) {
     const userObject = {
         id: allAccounts.length + 1,
         name: name,
@@ -13,3 +13,4 @@ export default function createUserUseCase(name, email, password) {
     return userObject;
 }
 
+export {createUserUseCase, allAccounts};
