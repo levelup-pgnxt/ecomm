@@ -1,10 +1,4 @@
-export const usuarios = [{
-    id: 0,
-    nome: 'Matheus L',
-    email: 'teste@teste.com',
-    senha: '12456',
-    createdDate: new Date().toLocaleDateString('pt-BR')
-}]
+import { usuarios } from "./usuarios.js"
 
 export function createUserUseCase (nome, email, senha){
 
