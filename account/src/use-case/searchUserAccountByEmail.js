@@ -6,10 +6,9 @@ export default function searchUserAccountByEmailUseCase (email){
 
         if (accounts[_].email === email){
             return accounts[_].name;
-        }else {
-            return false;
         }
     }
+    return false;
 }
 
 
