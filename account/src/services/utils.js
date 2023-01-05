@@ -34,7 +34,7 @@ class UsersCustomer {
         return result;
     };
 
-    getUserById (id) {
+    getUserById ({ id }) {
         const result = this.usersCustomer.find((user) => user.id === id);
         return result;
     };
@@ -55,6 +55,17 @@ class UsersCustomer {
         for (let ind = 0; ind < size; ind += 1) {
             if (this.usersCustomer[ind]["email"] === email) {
                 this.usersCustomer[ind]["name"] = newName
+                return true;
+            }
+        };
+        return false;
+    };
+
+    addAddress ({ email, address }) {
+        const size = this.usersCustomer.length;
+        for (let ind = 0; ind < size; ind += 1) {
+            if (this.usersCustomer[ind]["email"] === email) {
+                this.usersCustomer[ind]["address"] = { ...address };
                 return true;
             }
         };
@@ -151,10 +162,66 @@ const validateEmailNewName = (data) => {
     return result;
 };
 
+const validateEmailAddress = (data) => {
+    const schema = Joi.object().keys({
+        email: Joi.string().email().required().messages({
+            'string.email': 'O campo dever ser um "email" válido!',
+            'string.base': 'O campo "email" deve ser do tipo string!',
+            'string.empty': 'O campo "email" não deve ser vazio!',
+            'any.required': 'O campo "email" é obrigatório!'
+        }),
+        address: Joi.object().required().message({
+            'any.required': 'O campo "endereço" é obrigatório!'
+        }).keys({
+            logradouro: Joi.string().empty().required().messages({
+                'string.base': 'O campo "logradouro" deve ser do tipo texto!',
+                'string.empty': 'O campo "logradouro" não deve ser vazio!',
+                'any.required': 'O campo "logradouro" é obrigatório!'
+            }),
+            numero: Joi.string().empty().required().messages({
+                'string.base': 'O campo "numero" deve ser do tipo texto!',
+                'string.empty': 'O campo "numero" não deve ser vazio!',
+                'any.required': 'O campo "numero" é obrigatório!'
+            }),
+            complemento: Joi.string().messages({
+                'string.base': 'O campo "numero" deve ser do tipo texto!',
+            }),
+            bairro: Joi.string().empty().required().messages({
+                'string.base': 'O campo "bairro" deve ser do tipo texto!',
+                'string.empty': 'O campo "bairro" não deve ser vazio!',
+                'any.required': 'O campo "bairro" é obrigatório!'
+            }),
+            cep: Joi.string().empty().required().mim(9).max(9).messages({
+                'string.base': 'O campo "cep" deve ser do tipo texto!',
+                'string.empty': 'O campo "cep" não deve ser vazio!',
+                'any.required': 'O campo "cep" é obrigatório!',
+                'string.min': 'O campo "cep" deve ter 9 caracteres! (99999-999)',
+                'string.max': 'O campo "cep" deve ter 9 caracteres! (99999-999)'
+            }),
+            cidade: Joi.string().empty().required().messages({
+                'string.base': 'O campo "cidade" deve ser do tipo texto!',
+                'string.empty': 'O campo "cidade" não deve ser vazio!',
+                'any.required': 'O campo "cidade" é obrigatório!'
+            }),
+            uf: Joi.string().uppercase().empty().required().mim(2).max(2).messages({
+                'string.base': 'O campo "uf" deve ser do tipo texto!',
+                'string.empty': 'O campo "uf" não deve ser vazio!',
+                'any.required': 'O campo "uf" é obrigatório!',
+                'string.min': 'O campo "uf" deve ter 2 caracteres! (AA)',
+                'string.max': 'O campo "uf" deve ter 2 caracteres! (AA)',
+                'string.uppercase': 'O texto do campo "uf" deve ser em maiúsculo! (AA)'
+            }),
+        })
+    });
+
+    const result = schema.validate(data);
+    return result;
+};
+
 export {
-    UsersCustomer,
     validateParams,
     validateEmail,
     validateEmailNewName,
+    validateEmailAddress,
     usersCustomer
 };
