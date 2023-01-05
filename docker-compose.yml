@@ -2,9 +2,5 @@ version: "3.9"
 services:
   product-container:
     build: ./product/
-    volumes:
-      - ./product/:/app/product
   account-container:
     build: ./account/
-    volumes:
-      - ./account/:/app/account
