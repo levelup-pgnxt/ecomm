@@ -5,5 +5,5 @@ const josue = createUserUseCase('Josué Lima', 'josuelima@gmail.com', 'senhaDoJo
 const alexandre = createUserUseCase('Alexandre Aquiles', 'alexandre@gmail.com', 'senhaDoAlexandre');
 
 
-console.log(josue);
-console.log(alexandre);
+// console.log(josue);
+// console.log(alexandre);
