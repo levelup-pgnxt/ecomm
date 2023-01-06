@@ -1,6 +1,6 @@
 import createUserAccount from '../src/use-case/createUserAccount.js';
 import changeUserName from '../src/use-case/changeUserName.js';
-import { DATATEST } from '../tests/data-tests/dataTest.js';
+import DATATEST from '../tests/data-tests/dataTest.js';
 import { usersCustomer } from '../src/services/utils.js';
 import jest from 'jest-mock';
 
