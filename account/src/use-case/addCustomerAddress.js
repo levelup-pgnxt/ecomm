@@ -4,7 +4,7 @@ const addCustomerAddress = (data) => {
     const { value, error } = validateEmailAddress(data);
     if (error) return error.message;
 
-    const result = usersCustomer.changeName(value);
+    const result = usersCustomer.addAddress(value);
 
     return result;
 };
