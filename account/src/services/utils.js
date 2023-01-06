@@ -73,11 +73,11 @@ class UsersCustomer {
     };
 
     listAllUsers () {
-        const allUsers = [];
-        this.usersCustomer.forEach((user) => {
-            allUsers.push([user.id, user.name, user.email, user.createdDate]);
-        });
-        return allUsers;
+        // const allUsers = [];
+        // this.usersCustomer.forEach((user) => {
+        //     allUsers.push([user.id, user.name, user.email, user.createdDate]);
+        // });
+        return this.usersCustomer;
     };
 
     listUser ({ email }) {
@@ -89,6 +89,11 @@ class UsersCustomer {
         };
         return false;
     };
+
+    getUsersByState({ uf }) {
+        const result = this.usersCustomer.filter((user) => user.address?.uf === uf);
+        return result;
+    }
 };
 
 const usersCustomer = new UsersCustomer;
@@ -129,6 +134,19 @@ const validateEmail = (data) => {
             'any.required': 'O campo "email" é obrigatório!'
         }),
     });
+
+    const result = schema.validate(data);
+    return result;
+};
+
+const validateUf = (data) => {
+    const schema = Joi.object().keys({
+        uf: Joi.string().uppercase().empty().required().messages({
+            'string.base': 'O campo "uf" deve ser do tipo texto!',
+            'string.empty': 'O campo "uf" não deve ser vazio!',
+            'any.required': 'O campo "uf" é obrigatório!',
+        }),
+});
 
     const result = schema.validate(data);
     return result;
@@ -209,5 +227,6 @@ export {
     validateEmail,
     validateEmailNewName,
     validateEmailAddress,
+    validateUf,
     usersCustomer
 };
