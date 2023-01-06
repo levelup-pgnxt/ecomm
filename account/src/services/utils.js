@@ -73,11 +73,11 @@ class UsersCustomer {
     };
 
     listAllUsers () {
-        // const allUsers = [];
-        // this.usersCustomer.forEach((user) => {
-        //     allUsers.push([user.id, user.name, user.email, user.createdDate]);
-        // });
-        return this.usersCustomer;
+        const allUsers = [];
+        this.usersCustomer.forEach((user) => {
+            allUsers.push([user.id, user.name, user.email, user.createdDate]);
+        });
+        return allUsers;
     };
 
     listUser ({ email }) {
