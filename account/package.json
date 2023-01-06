@@ -1,0 +1,13 @@
+{
+    "name": "account",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+      "start": "echo \"Error: no start specified\" && exit 1",
+      "test": "node test/createUserAccount.test.js"
+    },
+    "author": "Alexandre Aquiles",
+    "license": "MIT"
+  }
+
