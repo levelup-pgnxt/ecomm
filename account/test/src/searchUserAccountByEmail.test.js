@@ -1,4 +1,7 @@
 import { searchUserAccountByEmailUseCase } from "../../src/use-case/searchUserAccountByEmail.js";
 
-console.log(searchUserAccountByEmailUseCase('teste@teste.com'))
-console.log(searchUserAccountByEmailUseCase('nao.existe@email.com'))
+const teste = searchUserAccountByEmailUseCase('teste@teste.com')
+const naoExiste = searchUserAccountByEmailUseCase('nao.existe@email.com')
+
+console.log(teste)
+console.log(naoExiste)
