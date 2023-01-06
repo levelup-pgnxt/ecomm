@@ -1,8 +1,0 @@
-version: "3.3"
-services:
-  product:
-    container_name: ecomm-product
-    build: ./product
-  account:
-    container_name: ecomm-account
-    build: ./account
