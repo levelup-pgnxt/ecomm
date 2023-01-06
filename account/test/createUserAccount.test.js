@@ -3,8 +3,10 @@ import {
   accounts,
 } from "../src/use-case/createUserAccount.js";
 
-createUserUseCase("gabi", "gabi@email.com", "12334");
-createUserUseCase("layssa", "layssa@email.com", "123ss34");
-createUserUseCase("roberto", "roberto@email.com", "1237534");
+const newUser1 = createUserUseCase("layssa", "layssa@email.com", "123ss34");
+const newUser2 = createUserUseCase("roberto", "roberto@email.com", "1237534");
+
+console.log(newUser1);
+console.log(newUser2);
 
 console.log(accounts);
