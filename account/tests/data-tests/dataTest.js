@@ -1,5 +1,3 @@
-import Chance from 'chance';
-
 const DATATEST = [
     { email: 'teste@teste.com', senha: '123456' },
     { nome: 12345, email: 'teste@teste.com', senha: '123456' },
@@ -28,17 +26,35 @@ const DATATEST = [
     { newName: "Lauro Augusto", email: 'testeteste.com' },
     { newName: "Anetildes Rossiter", email: 'annie@gmail.com' },
     { newName: "Anetildes Rossiter", email: 'anetildes@gmail.com' },
+    { address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 123456789, address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: '', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartinssuperrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com' },
+    { email: 'yasminribeiromartins@superrito.com', address: { numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 123456789, numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: '', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: 1422, bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', complemento: 123456, bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 123456, cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: '', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: 83609090 }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 123456, uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: '', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 12, cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: '', cep: '83609-090' }},
+    { nome: 'Yasmin R Martins', email: 'yasminribeiromartins@superrito.com', senha: 'Oong7woosai' }, 
+    { email: 'asminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { email: 'yasminribeiromartins@superrito.com', address: { logradouro: 'Rua das Perdizes', numero: '1422', bairro: 'bairro', cidade: 'Campo Largo', uf: 'PR', cep: '83609-090' }},
+    { nome: 'Tiago F Lima', email: 'tiagofernandeslima@superrito.com', senha: 'Eu4caip8ma3' },
+    { email: 'tiagofernandeslima@superrito.com', address: { logradouro: 'Rua Francisco José Carvalho', numero: '816', bairro: 'bairro', cidade: 'São Paulo', uf: 'SP', cep: '04191-130' }},
 ];
 
-const chance = new Chance;
-const DATAUSERS = [];
-const QTD_USERS = 100;
-
-for (let ind = 1; ind <= QTD_USERS; ind += 1) {
-    const nome = chance.name({ nationality: 'it', middle: true });
-    const email = chance.email({ domain: 'testes.com' });
-    const senha = chance.string({ length: 6 });
-    DATAUSERS.push({ nome, email, senha });
-}
-
-export { DATATEST, DATAUSERS };
+export default DATATEST;

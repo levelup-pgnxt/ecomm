@@ -34,7 +34,7 @@ class UsersCustomer {
         return result;
     };
 
-    getUserById (id) {
+    getUserById ({ id }) {
         const result = this.usersCustomer.find((user) => user.id === id);
         return result;
     };
@@ -61,6 +61,17 @@ class UsersCustomer {
         return false;
     };
 
+    addAddress ({ email, address }) {
+        const size = this.usersCustomer.length;
+        for (let ind = 0; ind < size; ind += 1) {
+            if (this.usersCustomer[ind]["email"] === email) {
+                this.usersCustomer[ind]["address"] = { ...address };
+                return true;
+            }
+        };
+        return false;
+    };
+
     listAllUsers () {
         const allUsers = [];
         this.usersCustomer.forEach((user) => {
@@ -70,21 +81,19 @@ class UsersCustomer {
     };
 
     listUser ({ email }) {
-        let user = {};
         const size = this.usersCustomer.length;
         for (let ind = 0; ind < size; ind += 1) {
             if (this.usersCustomer[ind]["email"] === email) {
-                user = {
-                    id: this.usersCustomer[ind].id,
-                    name :this.usersCustomer[ind].name,
-                    email :this.usersCustomer[ind].email,
-                    createdDate: this.usersCustomer[ind].createdDate
-                };
-                return user;
+                return this.usersCustomer[ind];
             }
         };
         return false;
     };
+
+    getUsersByState({ uf }) {
+        const result = this.usersCustomer.filter((user) => user.address?.uf === uf);
+        return result;
+    }
 };
 
 const usersCustomer = new UsersCustomer;
@@ -130,6 +139,19 @@ const validateEmail = (data) => {
     return result;
 };
 
+const validateUf = (data) => {
+    const schema = Joi.object().keys({
+        uf: Joi.string().uppercase().empty().required().messages({
+            'string.base': 'O campo "uf" deve ser do tipo texto!',
+            'string.empty': 'O campo "uf" não deve ser vazio!',
+            'any.required': 'O campo "uf" é obrigatório!',
+        }),
+});
+
+    const result = schema.validate(data);
+    return result;
+};
+
 const validateEmailNewName = (data) => {
     const limit = 6;
     const schema = Joi.object().keys({
@@ -151,10 +173,60 @@ const validateEmailNewName = (data) => {
     return result;
 };
 
+const validateEmailAddress = (data) => {
+    const schema = Joi.object().keys({
+        email: Joi.string().email().required().messages({
+            'string.email': 'O campo dever ser um "email" válido!',
+            'string.base': 'O campo "email" deve ser do tipo string!',
+            'string.empty': 'O campo "email" não deve ser vazio!',
+            'any.required': 'O campo "email" é obrigatório!'
+        }),
+        address: Joi.object().required().keys({
+            logradouro: Joi.string().empty().required().messages({
+                'string.base': 'O campo "logradouro" deve ser do tipo texto!',
+                'string.empty': 'O campo "logradouro" não deve ser vazio!',
+                'any.required': 'O campo "logradouro" é obrigatório!'
+            }),
+            numero: Joi.string().empty().required().messages({
+                'string.base': 'O campo "número" deve ser do tipo texto!',
+                'string.empty': 'O campo "número" não deve ser vazio!',
+                'any.required': 'O campo "número" é obrigatório!'
+            }),
+            complemento: Joi.string().messages({
+                'string.base': 'O campo "complemento" deve ser do tipo texto!',
+            }),
+            bairro: Joi.string().empty().required().messages({
+                'string.base': 'O campo "bairro" deve ser do tipo texto!',
+                'string.empty': 'O campo "bairro" não deve ser vazio!',
+                'any.required': 'O campo "bairro" é obrigatório!'
+            }),
+            cep: Joi.string().empty().required().messages({
+                'string.base': 'O campo "cep" deve ser do tipo texto!',
+                'string.empty': 'O campo "cep" não deve ser vazio!',
+                'any.required': 'O campo "cep" é obrigatório!',
+            }),
+            cidade: Joi.string().empty().required().messages({
+                'string.base': 'O campo "cidade" deve ser do tipo texto!',
+                'string.empty': 'O campo "cidade" não deve ser vazio!',
+                'any.required': 'O campo "cidade" é obrigatório!'
+            }),
+            uf: Joi.string().uppercase().empty().required().messages({
+                'string.base': 'O campo "uf" deve ser do tipo texto!',
+                'string.empty': 'O campo "uf" não deve ser vazio!',
+                'any.required': 'O campo "uf" é obrigatório!',
+            }),
+        })
+    });
+
+    const result = schema.validate(data);
+    return result;
+};
+
 export {
-    UsersCustomer,
     validateParams,
     validateEmail,
     validateEmailNewName,
+    validateEmailAddress,
+    validateUf,
     usersCustomer
 };

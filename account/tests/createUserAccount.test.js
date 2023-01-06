@@ -1,5 +1,5 @@
 import createUserAccount from '../src/use-case/createUserAccount';
-import { DATATEST } from '../tests/data-tests/dataTest';
+import DATATEST from '../tests/data-tests/dataTest.js';
 import jest from 'jest-mock';
 
 
