@@ -64,3 +64,5 @@ export const accounts = [
           }
     }
 ]
+
+console.log('accounts loaded');
