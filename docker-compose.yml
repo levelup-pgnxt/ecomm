@@ -8,3 +8,11 @@ services:
     build: ./account/
     volumes:
       - ./account/:/app/account
+  mongo-ecomm:
+    image: mongo
+    restart: always
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: admin
+        MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27017:27017
