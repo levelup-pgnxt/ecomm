@@ -1,0 +1,16 @@
+use('ecomm');
+
+const categories = db.categories.find({
+    status: 'ATIVA'
+});
+
+categories.forEach((category) => {
+    db.categories({
+        categoria: { $eq: category.nome }
+    }, {
+        $set: {
+            'categoria.categoria_id': category._id,
+            'categoria.nome': category.nome
+        }
+    })
+});
