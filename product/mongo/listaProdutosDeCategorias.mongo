@@ -1,0 +1,1 @@
+db.products.find({ $or: [{"CATEGORIA": "LIVROS"}, {"CATEGORIA": "CELULARES"}]})
