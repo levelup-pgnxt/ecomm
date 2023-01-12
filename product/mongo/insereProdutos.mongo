@@ -93,7 +93,7 @@ db.products.insertMany([
     "slug": "livro-refactoring",
     "precoUnitario": 173.9,
     "quantidadeEmEstoque": 1,
-    "categoria": "LIVROS"
+    "categoria": "livros"
   },
   {
     "produto": "Cama queen size",
@@ -101,7 +101,7 @@ db.products.insertMany([
     "slug": "cama-queen-size-dener",
     "precoUnitario": 3100,
     "quantidadeEmEstoque": 2,
-    "categoria": "MÓVEIS"
+    "categoria": "moveis"
   },
   {
     "produto": "Central multimidia",
@@ -109,7 +109,7 @@ db.products.insertMany([
     "slug": "central-multimidia-automotiva",
     "precoUnitario": 711.18,
     "quantidadeEmEstoque": 1,
-    "categoria": "AUTOMOTIVA"
+    "categoria": "automotiva"
   },
   {
     "produto": "Building Microservices",
@@ -117,7 +117,7 @@ db.products.insertMany([
     "slug": "livro-building-microservices",
     "precoUnitario": 300.28,
     "quantidadeEmEstoque": 2,
-    "categoria": "LIVROS"
+    "categoria": "livros"
   },
   {
     "produto": "Galaxy Tab S8",
@@ -125,6 +125,6 @@ db.products.insertMany([
     "slug": "tablet-galaxy-tab-s8",
     "precoUnitario": 5939.1,
     "quantidadeEmEstoque": 4,
-    "categoria": "INFORMÁTICA"
+    "categoria": "informatica"
   }
 ])
