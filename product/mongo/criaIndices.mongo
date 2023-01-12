@@ -1,0 +1,5 @@
+db.products.createIndex({"categoria.nome": 1})
+
+db.products.createIndex({"categoria.status": 1})
+
+db.products.createIndex({slug: 1}, {unique:true})
