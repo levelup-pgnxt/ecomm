@@ -1,20 +1,35 @@
 db.createCollection("categories");
 db.categories.insertMany([
-
-    {"nome": "informática", "status": true},
-
-    {"nome": "beleza", "status": false},
-
-    {"nome": "celulares", "status": true},
-
-    {"nome": "móveis", "status": true},
-
-    {"nome": "luxo", "status": false},
-
-    {"nome": "esporte", "status": false},
-
-    {"nome": "automotiva", "status": true},
-
-    {"nome": "livros", "status": true}    
-
+    {
+        nome:"INFORMÁTICA",
+        status:true
+    },
+    {
+        nome:"BELEZA",
+        status:false
+    },
+    {
+        nome:"CELULARES",
+        status:true
+    },
+    {
+        nome:"MÓVEIS",
+        status:true
+    },
+    {
+        nome:"LUXO",
+        status:false
+    },
+    {
+        nome:"ESPORTE",
+        status:false
+    },
+    {
+        nome:"AUTOMOTIVA",
+        status:true
+    },
+    {
+        nome:"LIVROS",
+        status:true
+    }
 ])

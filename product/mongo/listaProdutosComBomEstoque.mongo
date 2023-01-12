@@ -1,0 +1,5 @@
+db.products.find(
+    {
+        "QUANTIDADE EM ESTOQUE": {$gte:3}},
+    {"QUANTIDADE EM ESTOQUE": 1, "PRODUTO":1, _id:1}
+)
