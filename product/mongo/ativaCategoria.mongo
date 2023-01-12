@@ -1,4 +1,4 @@
 db.categories.updateOne(
-    {nome: "ESPORTE"},
-    {$set: {status: "ATIVA"}}
+    {"nome": "ESPORTE"},
+    {$set: {"status": "ATIVA"}}
 ) 
