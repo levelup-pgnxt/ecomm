@@ -1,0 +1,4 @@
+db.products.find(
+    {"PREÇO UNITÁRIO": {$gte: 1000, $lte: 2000}},
+    {"PRODUTO": 1, "PREÇO UNITÁRIO": 1}
+)
