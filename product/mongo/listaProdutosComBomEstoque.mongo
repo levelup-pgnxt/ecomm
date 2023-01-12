@@ -1,1 +1,1 @@
-db.products.find({"QUANTIDADE EM ESTOQUE": {$gte: 3}}, {"PRODUTO": 1, "QUANTIDADE EM ESTOQUE": 1})
+db.products.find({quantidadeEmEstoque: {$gte: 3}}, {produto: 1, quantidadeEmEstoque: 1})

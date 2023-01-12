@@ -1,1 +1,1 @@
-db.categories.find({"STATUS":"ATIVA"})
+db.categories.find({status:"ativa"})

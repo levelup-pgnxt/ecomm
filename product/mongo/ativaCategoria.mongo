@@ -1,1 +1,1 @@
-db.categories.updateOne({"NOME":"ESPORTE"}, {$set: {"STATUS": "ATIVA"}})
+db.categories.updateOne({nome:"esporte"}, {$set: {status: "ativa"}})
