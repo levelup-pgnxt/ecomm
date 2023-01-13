@@ -5,12 +5,42 @@ const categories = db.categories.find({
 });
 
 categories.forEach((category) => {
-    db.categories({
+    db.products.updateMany({
         categoria: { $eq: category.nome }
+    }, {
+        $unset: {
+            'categoria': ""
+        }
+    })
+});
+
+categories.forEach((category) => {
+    db.products.updateMany({
+        categoria: { $eq: category.nome }
+    }, {
+        $set: {
+            'cat': category.nome
+        }
+    })
+});
+
+categories.forEach((category) => {
+    db.products.updateMany({
+        cat: { $eq: category.nome }
     }, {
         $set: {
             'categoria.categoria_id': category._id,
             'categoria.nome': category.nome
+        }
+    })
+});
+
+categories.forEach((category) => {
+    db.products.updateMany({
+        cat: { $eq: category.nome }
+    }, {
+        $unset: {
+            'cat': ""
         }
     })
 });

@@ -5,7 +5,6 @@ db.products.find({
         $gte: 3
     }
 }, {
-    '_id': 1,
-    'produto': 1,
+    'nome': 1,
     'estoque': 1
 });

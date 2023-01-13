@@ -6,7 +6,6 @@ db.products.find({
             { precoUnitario: { $lte: Decimal128('2000.00') }}
         ]
 }, {
-    '_id': 1,
-    'produto': 1,
+    'nome': 1,
     'precoUnitario': 1
 });
