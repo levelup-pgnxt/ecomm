@@ -20,11 +20,4 @@ db.products.find({}).forEach((product) => {
 
 
 
-use('ecomm-product');
-db.prodCateg.drop()
-
-use('ecomm-product');
-db.prodCateg.find()
-
-
 
