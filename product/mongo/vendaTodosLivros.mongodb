@@ -1,0 +1,9 @@
+use('ecomm-product');
+db.prodCateg.updateMany({
+    "categoria.nomeCategoria": "LIVROS"
+    }, 
+    {
+        $set: { 
+            "quantidadeEmEstoque": 0
+        }
+})
