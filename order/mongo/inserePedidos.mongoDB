@@ -1,0 +1,23 @@
+use('ecomm-order');
+
+db.orders.insertOne({
+    dataPedido: new Date(),
+    clienteId: '-',
+    nomeCliente: '-',
+    enderecoEntrega: {
+        rua: '-',
+        numero: '-',
+        complemento: '-',
+        bairro: '-',
+        cidade: '-',
+        uf: '-',
+        cep: '-'
+    },
+    itens: [{
+        produtoId: '-',
+        nomeProduto: '-',
+        quantidade: 0,
+        desconto: 0,
+        precoUnitario: 0
+    }]
+});
