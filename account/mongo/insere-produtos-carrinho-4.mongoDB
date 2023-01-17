@@ -1,0 +1,36 @@
+use('ecomm');
+
+const produtos = db.products.find({
+    'categoria.nome': 'LIVROS',
+});
+
+const livrosCarrinho = [];
+
+produtos.forEach((produto) => {
+    const livro = db.products.findOneAndUpdate({
+        nome: { $eq: produto.nome },
+        estoque: { $gt: 0 }
+    }, {
+        $inc: {
+            estoque: -1,
+        }
+    }, {
+        projection: {
+            nome: 1,
+            precoUnitario: 1
+        }
+    })
+    livrosCarrinho.push(livro);
+});
+
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Mariana Hamada'
+}, {
+    $push: {
+        'carrinho.produtos': {
+            $each: livrosCarrinho
+        }
+    }
+});

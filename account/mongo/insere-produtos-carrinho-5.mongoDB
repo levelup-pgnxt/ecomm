@@ -1,0 +1,25 @@
+use('ecomm');
+
+const produto = db.products.findOneAndUpdate({
+    nome: 'iPhone 13 Pro',
+    estoque: { $gt: 0 }
+}, {
+    $inc: {
+        estoque: -1
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1
+    }
+});
+
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Mariana Hamada'
+}, {
+    $push: {
+        'carrinho.produtos': produto
+    }
+});
