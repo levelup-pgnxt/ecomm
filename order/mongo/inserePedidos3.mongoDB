@@ -2,7 +2,7 @@ use('ecomm-account');
 
 db.users.aggregate([{
     $match: {
-        nome: 'Túlio Yoshimura'
+        nome: 'Renato Mantovani'
     }
 }, {
     $project: {
@@ -10,7 +10,7 @@ db.users.aggregate([{
         userId: "$_id",
         nome: "$nome",
         data: ISODate(),
-        enderecoEntrega: '$endereco',
+        enderecoEntrega: '$enderecoEntrega',
         itens: '$carrinho.produtos',
         valorTotal: {
             $sum: '$carrinho.produtos.precoUnitario'
@@ -23,7 +23,7 @@ db.users.aggregate([{
 }]);
 
 db.users.updateOne({
-    nome: 'Túlio Yoshimura'
+    nome: 'Renato Mantovani'
 }, {
     $set: {
         'carrinho.produtos': []

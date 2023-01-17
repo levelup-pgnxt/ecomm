@@ -2,7 +2,7 @@ use('ecomm-account');
 
 db.users.aggregate([{
     $match: {
-        nome: 'Túlio Yoshimura'
+        nome: 'Mariana Hamada'
     }
 }, {
     $project: {
@@ -13,7 +13,7 @@ db.users.aggregate([{
         enderecoEntrega: '$endereco',
         itens: '$carrinho.produtos',
         valorTotal: {
-            $sum: '$carrinho.produtos.precoUnitario'
+            $sum: Decimal128('$carrinho.produtos.precoUnitario')
         }
     }
 }, {
@@ -23,7 +23,7 @@ db.users.aggregate([{
 }]);
 
 db.users.updateOne({
-    nome: 'Túlio Yoshimura'
+    nome: 'Mariana Hamada'
 }, {
     $set: {
         'carrinho.produtos': []

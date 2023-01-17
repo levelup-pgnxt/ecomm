@@ -2,7 +2,7 @@ use('ecomm-account');
 
 db.users.aggregate([{
     $match: {
-        nome: 'Túlio Yoshimura'
+        nome: 'Alice Gonçalves'
     }
 }, {
     $project: {
@@ -23,7 +23,7 @@ db.users.aggregate([{
 }]);
 
 db.users.updateOne({
-    nome: 'Túlio Yoshimura'
+    nome: 'Alice Gonçalves'
 }, {
     $set: {
         'carrinho.produtos': []
