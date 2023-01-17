@@ -1,0 +1,16 @@
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Renato Mantovani'
+}, {
+    $set: {
+        enderecoEntrega: {
+            rua: 'Rua Guedes Nogueira',
+            numero: '529',
+            bairro: 'Pitanguinha',
+            cidade: 'Maceió',
+            uf: 'AL',
+            cep: '57052-372'
+        }
+    }
+})
