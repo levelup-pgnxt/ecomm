@@ -1,0 +1,41 @@
+use('ecomm');
+
+const produto1 = db.products.findOneAndUpdate({
+    nome: 'Monitor Dell 27"',
+    estoque: { $gt: 0 }
+}, {
+    $inc: {
+        estoque: -1
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1
+    }
+});
+
+const produto2 = db.products.findOneAndUpdate({
+    nome: 'Central multimidia',
+    estoque: { $gt: 0 }
+}, {
+    $inc: {
+        estoque: -1
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1
+    }
+});
+
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Túlio Yoshimura'
+}, {
+    $push: {
+        'carrinho.produtos': {
+            $each: [produto1, produto2]
+        }
+    }
+});

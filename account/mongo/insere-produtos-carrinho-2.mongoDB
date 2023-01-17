@@ -1,0 +1,25 @@
+use('ecomm');
+
+const produto = db.products.findOneAndUpdate({
+    nome: 'Sofá 3 lugares',
+    estoque: { $gt: 0 }
+}, {
+    $inc: {
+        estoque: -1
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1
+    }
+});
+
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Alice Gonçalves'
+}, {
+    $push: {
+        'carrinho.produtos': produto
+    }
+});
