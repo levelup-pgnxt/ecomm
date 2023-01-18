@@ -5,21 +5,27 @@ const produtos = db.products.find({
 });
 
 const livrosCarrinho = [];
+const qtdeItem = 1;
 
 produtos.forEach((produto) => {
     const livro = db.products.findOneAndUpdate({
         nome: { $eq: produto.nome },
-        estoque: { $gt: 0 }
+        $and: [{ estoque: {$gt: 0 }}, { estoque: { $gte: qtdeItem }}]
     }, {
         $inc: {
-            estoque: -1,
+            estoque: -qtdeItem,
         }
     }, {
         projection: {
             nome: 1,
-            precoUnitario: 1
+            precoUnitario: 1,
+            desconto: 1,
         }
     })
+    livro['qtdeItem'] = qtdeItem;
+    livro['valorDescontos'] = Decimal128((qtdeItem * livro.desconto).toFixed(2));
+    livro['subTotal'] = Decimal128((qtdeItem * livro.precoUnitario).toFixed(2));
+    livro['subTotalLiquido'] = Decimal128((livro.subTotal - livro.valorDescontos).toFixed(2));
     livrosCarrinho.push(livro);
 });
 
