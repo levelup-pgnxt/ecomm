@@ -1,0 +1,13 @@
+use('ecomm');
+
+db.products.updateMany({
+    'categoria.nome': { $eq: 'LIVROS' }
+}, [{
+    $set: { desconto: '$precoUnitario' }
+}]);
+
+db.products.updateMany({
+    'categoria.nome': { $eq: 'LIVROS' }
+}, {
+    $mul: { desconto: Decimal128((0.10).toFixed(2)) }
+});

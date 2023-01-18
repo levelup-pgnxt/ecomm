@@ -1,0 +1,9 @@
+use('ecomm-account');
+
+db.users.updateMany({}, {
+    $set: {
+        carrinho: {
+            produtos: []
+        }
+    }
+});

@@ -1,0 +1,24 @@
+use('ecomm');
+
+db.products.insertMany([{
+    nome: 'Cabo HDMI 2.0 - 4k',
+    descricao: 'Cabo HDMI 2.0 - 4k, Ultra HD, 3d, 19 Pinos - 3 metros',
+    slug: 'cabo-hdmi-2.0-4k',
+    precoUnitario: Decimal128('34.99'),
+    estoque: 50,
+    categoria: {
+        categoria_id: ObjectId('63bc6ed7b0e9faa4cdfa0eee'),
+        nome: "INFORMÁTICA"
+    }
+}, {
+    nome: 'Camiseta Masculina Fitness Tech 2.0',
+    descricao: 'Camiseta masculina fitness com tecnologia Heatgear que mantém o suor longe do corpo',
+    slug: 'camiseta-masculina-fitness-tech',
+    precoUnitario: Decimal128('99.99'),
+    estoque: 100,
+    categoria: {
+        categoria_id: ObjectId('63bc6ed7b0e9faa4cdfa0ef3'),
+        nome: "ESPORTE"
+    }
+}
+]);
