@@ -8,3 +8,18 @@ services:
     container_name: ecomm-account
     build: ./account
 
+  mongo:
+    container_name: mongo-alura
+    image: mongo
+    restart: always
+    volumes:
+      - db-mongo-alura:/data/db
+    ports:
+      - 27017:27017
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+
+volumes:
+  db-mongo-alura:

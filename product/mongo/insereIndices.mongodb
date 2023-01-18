@@ -1,0 +1,9 @@
+use('ecomm-product')
+
+
+db.products.createIndex({produto: 1})
+db.products.createIndex({precoUnitario: 1})
+db.categories.createIndex({status: 1})
+
+db.products.getIndexes()
+db.categories.getIndexes()
