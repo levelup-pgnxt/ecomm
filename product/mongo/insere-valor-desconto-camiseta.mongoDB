@@ -1,0 +1,14 @@
+use('ecomm');
+
+db.products.updateOne({
+    nome: 'Camiseta Masculina Fitness Tech 2.0'
+}, {
+    $set: { desconto: Decimal128('19.99') }
+});
+
+
+db.products.updateOne({
+    nome: 'Sofá 3 lugares'
+}, {
+    $set: { desconto: Decimal128('250.00') }
+});
