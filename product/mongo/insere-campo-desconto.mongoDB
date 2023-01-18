@@ -1,0 +1,5 @@
+use('ecomm');
+
+db.products.updateMany({}, {
+    $set: { desconto: Decimal128('0') }
+});
