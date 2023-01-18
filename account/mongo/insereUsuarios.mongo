@@ -3,7 +3,7 @@ db.users.insertMany([
         {
             nome: "Mabel Pines",
             email: "mabelp@example.com",
-            senha: "senhadamabel",
+            senha: "$2y$10$ENcIh1wvpWImyl7jhqEBp.xXmunWdSEqEQ3u4ayYZxKgdwO9DIRgm",
             dataDeCriacaoUsuario: ISODate (),
             cpf: "317.551.070-13",
             telefone: "(98) 4343-1212",
@@ -20,7 +20,7 @@ db.users.insertMany([
         {
             nome: "Dipper Pines",
             email: "dipperp@example.com",
-            senha: "senhadodipper",
+            senha: "$2y$10$cZWJc2hnVTdk2SZY0ODRCe.wvv/OjvIv9p7I94Mh8AlWRri8tPldq",
             dataDeCriacaoUsuario: ISODate (),
             cpf: "067.896.720-28",
             telefone: "(98) 4343-1212",
@@ -37,7 +37,7 @@ db.users.insertMany([
         {
             nome: "Pacífica Northwest",
             email: "npacifica@example.com",
-            senha: "eusouryka",
+            senha: "$2y$10$NGMMdC8TX/.HvDvyZS.0C.LBGnMkYV0CWx6aRM.tjxkfnkLfn/22G",
             dataDeCriacaoUsuario: ISODate (),
             cpf: "761.106.640-49",
             telefone: "(98) 98888-5555",
