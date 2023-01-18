@@ -1,8 +1,10 @@
 use('ecomm-account');
 
+const user = 'Renato Mantovani';
+
 db.users.aggregate([{
     $match: {
-        nome: 'Renato Mantovani'
+        nome: { $eq: user }
     }
 }, {
     $project: {
@@ -32,7 +34,7 @@ db.users.aggregate([{
 }]);
 
 db.users.updateOne({
-    nome: 'Renato Mantovani'
+    nome: { $eq: user }
 }, {
     $set: {
         'carrinho.produtos': []

@@ -12,8 +12,17 @@ db.users.aggregate([{
         data: ISODate(),
         enderecoEntrega: '$endereco',
         itens: '$carrinho.produtos',
+        qtdeTotalItens: {
+            $sum: '$carrinho.produtos.qtdeItem'
+        },
+        valorTotalDescontos: {
+            $sum: '$carrinho.produtos.valorDescontos'
+        },
         valorTotal: {
-            $sum: '$carrinho.produtos.precoUnitario'
+            $sum: '$carrinho.produtos.subTotal'
+        },
+        valorTotalLiquido: {
+            $sum: '$carrinho.produtos.subTotalLiquido'
         }
     }
 }, {

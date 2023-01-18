@@ -1,0 +1,36 @@
+use('ecomm-account');
+
+const user = db.users.findOne({
+    nome: 'Renato Mantovani'
+});
+
+use('ecomm-order');
+
+db.orders.aggregate([{
+    $match: { nome: { $eq: user.nome }}
+}, {
+    $project: {
+        quantityItems: {
+            $sum: '$itens.qtdeItem'
+        },
+        sumDiscounts: {
+            $sum: '$itens.desconto'
+        },
+        sumItems: {
+            $sum: '$itens.precoUnitario'
+        }
+    }
+}, {
+    $group: {
+        _id: null,
+        quantityItemsTotal: {
+            $sum: '$quantityItems'
+        },
+        sumDiscountsTotal: {
+            $sum: '$sumDiscounts'
+        },
+        sumItemsTotal: {
+            $sum: '$sumItems'
+        }
+    }
+}]).pretty();
