@@ -1,0 +1,45 @@
+use('ecomm-order')
+db.createCollection('pedidos')
+db.pedidos.insertMany([
+    {
+        dataHoraCompra: new ISODate(),
+        cliente: "Pietra Antônia Mirella",
+        endereco: {
+            rua: "Rua Cândido Mariano",
+            numero: "869",
+            complemento: "apt 703",
+            bairro: "Jardim Nova Era",
+            cep: "26266-080",
+            cidade: "Nova Iguaçu",
+            estado: "RJ"
+        },
+        itens: [{
+            produto: "Notebook Samsung",
+            quantidade: 3,
+            descontoValor: 150.00,
+            precoUnitario: 3523
+        }]
+    },
+    {
+        dataHoraCompra: new ISODate(),
+        cliente: "Marcos Roberto Vieira",
+        endereco: {
+            rua: "Avenida João Ponce de Arruda",
+            numero: "132",
+            complemento: "apt 302",
+            bairro: "Vila São José",
+            cep: "78745-040",
+            cidade: "Rondonópolis",
+            estado: "MT"
+        },
+        itens: [{
+                produto: "iPhone 13 Pro",
+                quantidade: 5,
+                descontoValor: 1000.00,
+                precoUnitario: 9176
+        }]
+    }
+])
+
+
+
