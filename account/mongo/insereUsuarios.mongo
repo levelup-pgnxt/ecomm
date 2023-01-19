@@ -1,4 +1,4 @@
-db.users.insertMany([
+db.users.insertMany(
     [
         {
             nome: "Mabel Pines",
@@ -7,7 +7,7 @@ db.users.insertMany([
             dataDeCriacaoUsuario: ISODate (),
             cpf: "317.551.070-13",
             telefone: "(98) 4343-1212",
-            endereco: [{
+            endereco: {
                 rua: "Gopher Road",
                 numero: "618",
                 complemento: "Mystery Shack",
@@ -15,7 +15,7 @@ db.users.insertMany([
                 cep: "12000-012",
                 cidade: "Gravity Falls",
                 estado: "MA"
-            }],
+            },
         },
         {
             nome: "Dipper Pines",
@@ -24,7 +24,7 @@ db.users.insertMany([
             dataDeCriacaoUsuario: ISODate (),
             cpf: "067.896.720-28",
             telefone: "(98) 4343-1212",
-            endereco: [{
+            endereco: {
                 rua: "Gopher Road",
                 numero: "618",
                 complemento: "Mystery Shack",
@@ -32,7 +32,7 @@ db.users.insertMany([
                 cep: "12000-012",
                 cidade: "Gravity Falls",
                 estado: "MA"
-            }],
+            },
         },
         {
             nome: "Pacífica Northwest",
@@ -41,7 +41,7 @@ db.users.insertMany([
             dataDeCriacaoUsuario: ISODate (),
             cpf: "761.106.640-49",
             telefone: "(98) 98888-5555",
-            endereco: [{
+            endereco: {
                 rua: "Mansão Northwest St",
                 numero: "s/n",
                 complemento: "s/n",
@@ -49,7 +49,7 @@ db.users.insertMany([
                 cep: "32000-032",
                 cidade: "Gravity Falls",
                 estado: "MA"
-            }],
+            },
         }
     ]
-])
+)
