@@ -1,0 +1,10 @@
+db.products.update(
+    {
+        produto: "Galaxy Tab S8"
+    },
+    {
+        $set: {
+            qtdeEmEstoque: 2
+        }
+    }
+)
