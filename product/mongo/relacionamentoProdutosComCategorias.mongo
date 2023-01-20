@@ -1,0 +1,10 @@
+db.products.find({}).forEach((product) => {
+  let categoryInfo = db.categories.findOne({ nome: product.categoria });
+
+  product.categoria = {
+    _id: categoryInfo._id,
+    nome: categoryInfo.nome
+  };
+
+  db.products.replaceOne({ _id: product._id }, product);
+});
