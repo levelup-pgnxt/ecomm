@@ -1,5 +1,6 @@
 FROM node:16-alpine
-WORKDIR /app-products
-COPY . .
+WORKDIR /app-account
+COPY package*.json .
 RUN npm install
+COPY . .
 ENTRYPOINT npm start
