@@ -1,5 +1,7 @@
 use('ecomm-order')
 db.createCollection('pedidos')
+
+use('ecomm-order')
 db.pedidos.insertMany([
     {
         dataHoraCompra: new ISODate(),
@@ -43,3 +45,23 @@ db.pedidos.insertMany([
 
 
 
+use('ecomm-order')
+db.pedidos.insertOne({
+    dataHoraCompra: new ISODate(),
+        cliente: "Joao Paulo",
+        endereco: {
+            rua: "Rua setubal",
+            numero: "1548",
+            complemento: "apt 102",
+            bairro: "Boa Viagem",
+            cep: "51030-010",
+            cidade: "Recife",
+            estado: "PE"
+        },
+        itens: [{
+            produto: "Galaxy Tab S8",
+            quantidade: 2,
+            descontoValor: 100.00,
+            precoUnitario: 5939.1
+        }]
+    })
