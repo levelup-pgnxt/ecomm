@@ -1,0 +1,58 @@
+use('ecomm-order')
+
+db.orders.insertMany([
+    {
+        createdDate: new ISODate(),
+        customer: {
+            name: 'Matheus Leme',
+            cpf: '185.980.960-08',
+            customerId: '63cad705d1107f767ccf08c6'
+        },
+        deliveryAddress: {
+            street: 'Rua Gérson Pereira de Brito',
+            number: 'S/N',
+            complement: 'Próximo à praça',
+            cep: '02844-180',
+            district: 'Vila Penteado',
+            city: 'São Paulo',
+            uf: 'SP'
+        },
+        itens: [{
+            productName: 'iPhone 13 Pro',
+            productId: '63c146c4278578c2b6df48a0',
+            quantityInStock: 1,
+            unitPrice: NumberDecimal(9176.00),
+            discountAmount: NumberDecimal(499.99)
+        }]
+    },
+    {
+        createdDate: new ISODate(),
+        customer: {
+            name: 'Joao Alberto',
+            cpf: '903.741.180-00',
+            customerId: '63cad705d1107f767ccf08c7'
+        },
+        deliveryAddress: {
+            street: 'Rua Francisco Marques',
+            number: '1253',
+            complement: 'S/N',
+            cep: '08311-150',
+            district: 'Parque São Rafael',
+            city: 'São Paulo',
+            uf: 'SP'
+        },
+        itens: [{
+            productName: 'iPhone 13 Pro',
+            productId: '63c146c4278578c2b6df48a0',
+            quantityInStock: 1,
+            unitPrice: NumberDecimal(9176.00),
+            discountAmount: NumberDecimal(99.99)
+        }, {
+            productName: 'Galaxy Tab S8',
+            productId: '63c146c4278578c2b6df48ab',
+            quantityInStock: 2,
+            unitPrice: NumberDecimal(5939.10),
+            discountAmount: NumberDecimal(600.10)
+        }]
+    }
+])
