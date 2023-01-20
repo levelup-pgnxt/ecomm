@@ -18,8 +18,8 @@ db.pedidos.insertMany([
         itens: [{
             produto: "Notebook Samsung",
             quantidade: 3,
-            descontoValor: 150.00,
-            precoUnitario: 3523
+            descontoValor: Decimal128.fromString("150.99"),
+            precoUnitario: Decimal128.fromString("3523.99")
         }]
     },
     {
@@ -37,8 +37,8 @@ db.pedidos.insertMany([
         itens: [{
                 produto: "iPhone 13 Pro",
                 quantidade: 5,
-                descontoValor: 1000.00,
-                precoUnitario: 9176
+                descontoValor: Decimal128.fromString("1000.99"),
+                precoUnitario: Decimal128.fromString("9176.99")
         }]
     }
 ])
@@ -61,7 +61,7 @@ db.pedidos.insertOne({
         itens: [{
             produto: "Galaxy Tab S8",
             quantidade: 2,
-            descontoValor: 100.00,
-            precoUnitario: 5939.1
+            descontoValor: Decimal128.fromString("100.99"),
+            precoUnitario: Decimal128.fromString("5939.99")
         }]
     })
