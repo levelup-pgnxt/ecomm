@@ -1,0 +1,67 @@
+use('ecomm-order')
+db.createCollection('pedidos')
+
+use('ecomm-order')
+db.pedidos.insertMany([
+    {
+        dataHoraCompra: new ISODate(),
+        cliente: "Pietra Antônia Mirella",
+        endereco: {
+            rua: "Rua Cândido Mariano",
+            numero: "869",
+            complemento: "apt 703",
+            bairro: "Jardim Nova Era",
+            cep: "26266-080",
+            cidade: "Nova Iguaçu",
+            estado: "RJ"
+        },
+        itens: [{
+            produto: "Notebook Samsung",
+            quantidade: 3,
+            descontoValor: Decimal128.fromString("150.99"),
+            precoUnitario: Decimal128.fromString("3523.99")
+        }]
+    },
+    {
+        dataHoraCompra: new ISODate(),
+        cliente: "Marcos Roberto Vieira",
+        endereco: {
+            rua: "Avenida João Ponce de Arruda",
+            numero: "132",
+            complemento: "apt 302",
+            bairro: "Vila São José",
+            cep: "78745-040",
+            cidade: "Rondonópolis",
+            estado: "MT"
+        },
+        itens: [{
+                produto: "iPhone 13 Pro",
+                quantidade: 5,
+                descontoValor: Decimal128.fromString("1000.99"),
+                precoUnitario: Decimal128.fromString("9176.99")
+        }]
+    }
+])
+
+
+
+use('ecomm-order')
+db.pedidos.insertOne({
+    dataHoraCompra: new ISODate(),
+        cliente: "Joao Paulo",
+        endereco: {
+            rua: "Rua setubal",
+            numero: "1548",
+            complemento: "apt 102",
+            bairro: "Boa Viagem",
+            cep: "51030-010",
+            cidade: "Recife",
+            estado: "PE"
+        },
+        itens: [{
+            produto: "Galaxy Tab S8",
+            quantidade: 2,
+            descontoValor: Decimal128.fromString("100.99"),
+            precoUnitario: Decimal128.fromString("5939.99")
+        }]
+    })
