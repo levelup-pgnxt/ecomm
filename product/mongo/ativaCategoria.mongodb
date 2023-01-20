@@ -1,0 +1,14 @@
+use('ecomm-product')
+
+db.categories.updateOne({
+    NOME: "ESPORTE"
+    //colocar o nome EXATAMENTE IGUAL É NECESSÁRIO
+
+}, {
+    $set: {
+        STATUS:"ATIVA"
+
+    }
+
+})
+

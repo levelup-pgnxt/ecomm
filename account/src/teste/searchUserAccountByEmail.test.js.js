@@ -8,8 +8,9 @@ const emailEncontrado = searchUserAccountByEmailUseCase(emailPesquisado)
 console.log(listaUsuariosTeste)
 console.log(emailEncontrado)
 //procurar e retornar APENAS o objeto que tem o email
-var pos = listaUsuariosTeste.indexOf(emailEncontrado);
+var pos = listaUsuariosTeste.indegitxOf(emailEncontrado);
 console.log(pos)
 
 const newlistaUsuariosTeste = listaUsuariosTeste.splice(pos+1, 0);
 console.log(newlistaUsuariosTeste)
+
