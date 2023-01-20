@@ -1,0 +1,31 @@
+use('ecomm-order')
+db.pedidos.aggregate([
+    {
+        $unwind: "$itens"
+    },
+    {
+        $group: {
+            _id: "$cliente",
+            totalItens: {
+                $sum: "$itens.quantidade"
+            },
+            totalPrice: {
+                $sum: {
+                    $multiply: ["$itens.quantidade","$itens.precoUnitario"]
+                }
+            },
+            totalDiscount: {
+                $sum: {
+                    $multiply: ["$itens.quantidade","$itens.descontoValor"]
+                }
+            }
+
+        }
+    },
+    {
+        $out: "Out"
+    }
+])
+
+db.Out.find({ _id: "Joao Paulo"})
+
