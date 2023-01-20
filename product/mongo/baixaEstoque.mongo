@@ -1,10 +1,10 @@
-db.products.update(
+db.products.updateOne(
     {
-        produto: "Galaxy Tab S8"
+        nome: "Galaxy Tab S8"
     },
     {
-        $set: {
-            qtdeEmEstoque: 2
+        $inc: {
+            qtdeEmEstoque: -2
         }
     }
 )
