@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: API ecomm - products
+  description: API para consulta produtos da plataforma ecomm
+  version: 0.0.1
+  termsOfService: https://www.ecomm.com/terms-of-services
+  contact:
+    name: Suporte ao usuário
+    email: suporte@ecomm.com
+    url: https://www.ecomm.com/support
+  license:
+    name: 'licença: GPLv3'
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Documentação Operacional
+  url: https://www.ecomm.com/ecomm-operations
+servers:
+- url: https://www.ecomm.com/api
+  description: API plataforma ecomm
+paths:
+  /api/categories:
+    get:
+      summary: Recupera todas as categorias
+      tags:
+      - categories
+      responses:
+        '200':
+          $ref: '#/components/responses/categories'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        _id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+  responses:
+    categories:
+      description: Sucesso
+      content:
+        aplication/json:
+          schema:
+            $ref: '#/components/schemas/Categories'
+    '404':
+      description: recurso não encontrado
+      content:
+        application/json:
+          example: 'Not Found'
+    '500':
+      description: Erro servidor
+      content:
+        application/json:
+          example: 'Internal Server Error'        
