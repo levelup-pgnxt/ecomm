@@ -17,6 +17,8 @@ externalDocs:
 servers:
 - url: https://www.ecomm.com/api
   description: API plataforma ecomm
+- url: https://www.ecomm.com/api/admin
+  description: API plataforma ecomm administrador
 paths:
   /api/categories:
     get:
@@ -24,11 +26,25 @@ paths:
       tags:
       - categories
       responses:
-        '200':
+        200:
           $ref: '#/components/responses/categories'
-        '404':
+        404:
           $ref: '#/components/responses/404'
-        '500':
+        500:
+          $ref: '#/components/responses/500'
+  /api/admin/categories:
+    post:
+      summary: Cadastra uma nova categoria
+      tags:
+      - admin/categories
+      requestBody:
+        $ref: '#/components/requestBodies/CategoriesBodies'
+      responses:
+        201:
+          $ref: '#/components/responses/Category'
+        401:
+          $ref: '#/components/responses/401'
+        500:
           $ref: '#/components/responses/500'
 components:
   schemas:
@@ -45,6 +61,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Category'
+    CategoryCreateUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
   responses:
     categories:
       description: Sucesso
@@ -52,13 +73,30 @@ components:
         aplication/json:
           schema:
             $ref: '#/components/schemas/Categories'
-    '404':
+    Category:
+      description: Sucesso
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/Category'
+    401:
+      description: usuário não autorizado
+      content:
+        application/json:
+          example: 'Unauthorized'
+    404:
       description: recurso não encontrado
       content:
         application/json:
           example: 'Not Found'
-    '500':
+    500:
       description: Erro servidor
       content:
         application/json:
           example: 'Internal Server Error'        
+  requestBodies:
+    CategoriesBodies:
+      content:
+        aplication/json:
+          schema:
+            $ref: '#/components/schemas/CategoryCreateUpdate'
