@@ -60,6 +60,44 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+  /api/admin/categories/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    put:
+      summary: Atualiza os dados de uma categoria
+      tags:
+      - admin/categories
+      requestBody:
+        $ref: '#/components/requestBodies/CategoriesBodies'
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Ativa/Desativa uma categoria
+      tags:
+      - admin/categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Exclui uma categoria
+      tags:
+      - admin/categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   schemas:
     Category:
