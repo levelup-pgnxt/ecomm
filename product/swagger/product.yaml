@@ -26,11 +26,25 @@ paths:
       tags:
       - categories
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/categories'
-        404:
+        '404':
           $ref: '#/components/responses/404'
-        500:
+        '500':
+          $ref: '#/components/responses/500'
+  /api/categories/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Recupera uma categoria
+      tags:
+      - categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
           $ref: '#/components/responses/500'
   /api/admin/categories:
     post:
@@ -40,11 +54,11 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/CategoriesBodies'
       responses:
-        201:
+        '201':
           $ref: '#/components/responses/Category'
-        401:
+        '401':
           $ref: '#/components/responses/401'
-        500:
+        '500':
           $ref: '#/components/responses/500'
 components:
   schemas:
@@ -79,17 +93,17 @@ components:
         application/json:
           schema: 
             $ref: '#/components/schemas/Category'
-    401:
+    '401':
       description: usuário não autorizado
       content:
         application/json:
           example: 'Unauthorized'
-    404:
+    '404':
       description: recurso não encontrado
       content:
         application/json:
           example: 'Not Found'
-    500:
+    '500':
       description: Erro servidor
       content:
         application/json:
@@ -100,3 +114,10 @@ components:
         aplication/json:
           schema:
             $ref: '#/components/schemas/CategoryCreateUpdate'
+  parameters:
+    ID: 
+      name: _id
+      in: path
+      schema:
+        type: integer
+      required: true
