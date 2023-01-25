@@ -216,7 +216,7 @@ components:
     Category:
       type: object
       properties:
-        _id:
+        id:
           type: integer
         nome:
           type: string
@@ -234,7 +234,7 @@ components:
     Product:
       type: object
       properties:
-        _id:
+        id:
           type: integer
         nome:
           type: string
