@@ -27,7 +27,7 @@ paths:
       - categories
       responses:
         '200':
-          $ref: '#/components/responses/categories'
+          $ref: '#/components/responses/Categories'
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -98,6 +98,119 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
+  /api/products:
+    get:
+      summary: Recupera todos os produtos
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Recupera um produto
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/:
+    post:
+      summary: Cadastra um novo produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductsBodies'
+      responses:
+        '201':
+          $ref: '#/components/responses/Product'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    put:
+      summary: Atualiza os dados de um produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductsBodies'
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Exclui um produto
+      tags:
+      - admin/products
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/discounts-values/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    patch:
+      summary: Registra um valor de desconto a um produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductDiscountsBodiesByValueOrPercentage'
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/discounts-percentage/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    patch:
+      summary: Registra um valor percentual de desconto sobre o preço de venda de um produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductDiscountsBodiesByValueOrPercentage'
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/discounts-category/:
+    patch:
+      summary: Registra um desconto percentual para todos os produtos de uma categoria
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductDiscountsBodiesByCategory'
+      responses:
+        '201':
+          $ref: '#/components/responses/Products'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   schemas:
     Category:
@@ -118,11 +231,66 @@ components:
       properties:
         nome:
           type: string
+    Product:
+      type: object
+      properties:
+        _id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        estoque:
+          type: integer
+        desconto:
+          type: number
+        categoria:
+          type: object
+          properties:
+            categoria_id:
+              type: integer
+            nome:
+              type: string
+    Products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+    ProductCreateUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        estoque:
+          type: integer
+        categoria_id:
+          type: integer
+    ProductDiscountsByValueOrPercentage:
+      type: object
+      properties:
+        value:
+          type: number
+    ProductsDiscountsByCategory:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+        value:
+          type: number
   responses:
-    categories:
+    Categories:
       description: Sucesso
       content:
-        aplication/json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Categories'
     Category:
@@ -131,6 +299,18 @@ components:
         application/json:
           schema: 
             $ref: '#/components/schemas/Category'
+    Products:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Products'
+    Product:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
     '401':
       description: usuário não autorizado
       content:
@@ -149,12 +329,27 @@ components:
   requestBodies:
     CategoriesBodies:
       content:
-        aplication/json:
+        application/json:
           schema:
             $ref: '#/components/schemas/CategoryCreateUpdate'
+    ProductsBodies:
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/ProductCreateUpdate'
+    ProductDiscountsBodiesByValueOrPercentage:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductDiscountsByValueOrPercentage'
+    ProductDiscountsBodiesByCategory:
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/ProductsDiscountsByCategory'
   parameters:
     ID: 
-      name: _id
+      name: id
       in: path
       schema:
         type: integer
