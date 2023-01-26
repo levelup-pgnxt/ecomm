@@ -1,0 +1,12 @@
+use('ecomm-product')
+
+db.products.findOneAndUpdate({
+    nome: 'Galaxy Tab S8',
+    quantidadeEmEstoque: { 
+        $gt: 0
+    }
+}, {
+    $inc: {
+        quantidadeEmEstoque: -2
+    }
+})

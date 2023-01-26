@@ -1,0 +1,49 @@
+use('ecomm-order')
+
+const user = db.orders.findOne({
+    'customer.name': 'Joao Alberto'
+})
+
+db.orders.aggregate([{
+        $match: {'customer.name': {
+            $eq: user.customer.name
+            }}
+    },
+    {
+        $unwind: '$itens'
+    },
+    {
+        $addFields: {
+            fullPrice: {
+                $multiply: ['$itens.quantityInStock', '$itens.unitPrice']
+            }
+        }
+    },
+    {
+        $group: {
+            _id: '$_id',
+            itensQuantity: {
+                $push: '$itens.quantityInStock'
+            },
+            fullPrice: {
+                $push: '$fullPrice'
+            },
+            totalDiscount: {
+                $push: '$itens.discountAmount'
+            }
+        }
+    },
+    {
+        $project: {
+            itensQuantity: {
+                $sum: '$itensQuantity'
+            },
+            fullPrice: {
+                $sum: '$fullPrice'
+            },
+            totalDiscount: {
+                $sum: '$totalDiscount'
+            }
+        }
+    }
+])

@@ -1,0 +1,52 @@
+use('ecomm-account')
+
+db.accounts.insertMany([{
+    name: 'Matheus Leme',
+    email: 'emaildomatheus@example.com',
+    password: '$2y$10$jEDEDx7wzUHA50Px7ene2uRjWImUYubpOphD4Zffsp/u.rTZXnqAi',
+    createdDate: new ISODate(),
+    cpf: '185.980.960-08',
+    phone: '+55 (11) 98153-2153',
+    address: {
+        street: 'Rua Gérson Pereira de Brito',
+        number: 'S/N',
+        complement: 'Próximo à praça',
+        cep: '02844-180',
+        district: 'Vila Penteado',
+        city: 'São Paulo',
+        uf: 'SP'
+    }
+},
+{
+    name: 'Joao Alberto',
+    email: 'emaildojoao@example.com',
+    password: '$2y$10$Mkjm1VKnJKIJvZayNQ/P7eI/DoSkqcSOZy2z.n2NROPAQzr/9ofA6',
+    createdDate: new ISODate(),
+    cpf: '903.741.180-00',
+    phone: '+55 (11) 96532-5649',
+    address: {
+        street: 'Rua Francisco Marques',
+        number: '1253',
+        complement: 'S/N',
+        cep: '08311-150',
+        district: 'Parque São Rafael',
+        city: 'São Paulo',
+        uf: 'SP'
+    }
+}, {
+    name: 'Renan Tagliafico',
+    email: 'emaildorenan@example.com',
+    password: '$2y$10$oycMBlEMPH14dkUR33ddKORND4kE4fMVC26TqNLo/jJjgDPBQ6CNy',
+    createdDate: new ISODate(),
+    cpf: '093.744.150-38',
+    phone: '+55 (51) 6542-5329',
+    address: {
+        street: 'Rua Joaquim Duarte',
+        number: '1253',
+        complement: 'S/N',
+        cep: '94135-260',
+        district: 'Bom Sucesso',
+        city: 'Gravataí',
+        uf: 'RS'
+    }
+}])
