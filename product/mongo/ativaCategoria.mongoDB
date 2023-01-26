@@ -1,0 +1,9 @@
+use('ecomm');
+
+db.categories.findOneAndUpdate({
+    nome: 'ESPORTE'
+}, {
+    $set: {
+        status: 'ATIVA'
+    }
+});

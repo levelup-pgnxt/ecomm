@@ -1,0 +1,11 @@
+use('ecomm');
+
+db.products.find({
+        $and: [ 
+            { precoUnitario: { $gte: Decimal128('1000.00') }},
+            { precoUnitario: { $lte: Decimal128('2000.00') }}
+        ]
+}, {
+    'nome': 1,
+    'precoUnitario': 1
+});

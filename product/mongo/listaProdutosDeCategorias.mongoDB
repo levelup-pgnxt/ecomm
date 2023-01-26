@@ -1,0 +1,5 @@
+use('ecomm');
+
+db.products.find({
+    categoria: { $in: ['LIVROS', 'CELULARES'] }
+});
