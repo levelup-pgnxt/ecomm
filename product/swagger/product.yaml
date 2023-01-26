@@ -185,6 +185,71 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
+  /products/pricerange:
+    get:
+      parameters:
+      - name: prices
+        in: query
+        schema:
+          type: object
+          properties:
+            min:
+              type: number
+            max:
+              type: number
+        required: true
+      tags:
+      - /products/pricerange
+      summary: Recupera produtos em uma faixa de preços
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          $ref: '#/components/responses/NotFound'
+  /products/category:
+    get:
+      parameters:
+      - name: category
+        in: query
+        schema:
+          type: string
+        required: true
+      tags:
+      - /products/category
+      summary: Recupera produtos de uma determinada categoria
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          $ref: '#/components/responses/NotFound'
+/products/stock:
+    get:
+      parameters:
+      - name: stock
+        in: query
+        schema:
+          type: integer
+        required: true
+      tags:
+      - /products/stock
+      summary: Recupera produtos de acordo com o estoque
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
     Category:
