@@ -88,6 +88,8 @@ paths:
         404:
           $ref: '#/components/responses/NotFound'
     patch:
+      tags:
+      - /admin/categories
       summary: Altera o status de uma categoria
       responses:
         200:
@@ -107,6 +109,82 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
+  /admin/products:
+    post:
+      tags:
+      - /admin/products
+      security:
+      - auth: []
+      summary: Insere novo produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        201:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    get:
+      tags:
+      - /admin/products
+      summary: Lista todos os produtos existentes
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+  /admin/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      tags:
+      - /categories
+      summary: Recupera um produto pelo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        404:
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+      - /admin/products
+      summary: Altera um produto pelo id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        200:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+      - /admin/products
+      summary: Apaga produto pelo id
+      responses:
+        200:
+          description: Produto foi deletado
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
     Category:
@@ -122,13 +200,34 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Category"
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        qtdeEmEstoque:
+          type: integer
+        categoriaId:
+          type: integer
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/Product"
   securitySchemes:
     auth:
       type: http
       scheme: bearer
   responses:
     Success:
-      description: "Sucesso"
+      description: "Cadastrado com sucesso"
       content:
         application/json:
           schema:
@@ -142,6 +241,6 @@ components:
       description: Categoria não encontrada
       content:
         application/json:
-          example: "Nenhuma categoria correspondente encontrada"
+          example: "Não encontrado"
           
         
