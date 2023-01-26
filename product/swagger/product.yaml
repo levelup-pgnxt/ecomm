@@ -124,6 +124,49 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
+  /api/products/findByValue:
+    parameters:
+      - $ref: '#/components/parameters/MaxValue'
+      - $ref: '#/components/parameters/MinValue'
+    get:
+      summary: Recupera os produto entres os valores solicitados
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products/findByStock:
+    parameters:
+      - $ref: '#/components/parameters/Stock'
+    get:
+      summary: Recupera os produto com o estoque maior que o valor solicitado
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products/findByCategory:
+    parameters:
+      - $ref: '#/components/parameters/Category'
+    get:
+      summary: Recupera os produto de uma determinada categoria
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   /api/admin/products/:
     post:
       summary: Cadastra um novo produto
@@ -351,6 +394,30 @@ components:
     ID: 
       name: id
       in: path
+      schema:
+        type: integer
+      required: true
+    MaxValue:
+      name: max-value
+      in: query
+      schema: 
+        type: number
+      required: true
+    MinValue:
+      name: min-value
+      in: query
+      schema:
+        type: integer
+      required: true
+    Category:
+      name: category
+      in: query
+      schema:
+        type: string
+      required: true
+    Stock:
+      name: stock 
+      in: query
       schema:
         type: integer
       required: true
