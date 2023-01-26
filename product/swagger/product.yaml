@@ -1,0 +1,31 @@
+openapi: 3.0.3
+info:
+  title: Ecomm Products API
+  description: 'API responsável pela consulta dos produtos no ecomm'
+  version: 0.0.1
+paths:
+  /api/categories:
+    get:
+      summary: Recupera ID, nome e status de todas as categorias.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
