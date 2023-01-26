@@ -19,17 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    nome:
-                      type: string
-                    status:
-                      type: string
-                minItems: 1
+                $ref: "#/components/schemas/Categories"
         204:
           description: Não há categorias cadastradas
         404:
@@ -57,13 +47,53 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    nome:
-                      type: string
-                    status:
-                      type: string
+                $ref: "#/components/schemas/Category"
+  /admin/categories:
+    post:
+      security:
+      - auth: []
+      summary: Insere nova categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+  responses:
+    UnauthorizedError:
+      description: "Requisição não autorizada"
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
