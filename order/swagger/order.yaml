@@ -1,0 +1,399 @@
+openapi: 3.0.1
+info:
+  title: API ecomm - users account
+  description: API para consulta e gerenciamento dos usuários da plataforma ecomm
+  version: 0.0.1
+  termsOfService: https://www.ecomm.com/terms-of-services
+  contact:
+    name: Suporte ao usuário
+    email: suporte@ecomm.com
+    url: https://www.ecomm.com/support
+  license:
+    name: 'licença: GPLv3'
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Documentação Operacional
+  url: https://www.ecomm.com/ecomm-operations
+servers:
+- url: https://www.ecomm.com/api
+  description: API plataforma ecomm
+- url: https://www.ecomm.com/api/admin
+  description: API plataforma ecomm administrador
+paths:
+  /api/users:
+    get:
+      summary: Resgata todas os usuários
+      tags:
+      - users
+      responses:
+        '200':
+          $ref: '#/components/responses/Users'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/users/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Resgata um usuário
+      tags:
+      - users
+      responses:
+        '200':
+          $ref: '#/components/responses/User'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/users:
+    post:
+      summary: Cadastra um novo usuário
+      tags:
+      - admin/users
+      requestBody:
+        $ref: '#/components/requestBodies/UsersBodies'
+      responses:
+        '201':
+          $ref: '#/components/responses/User'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/users/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    put:
+      summary: Atualiza os dados de um usuário
+      tags:
+      - admin/users
+      requestBody:
+        $ref: '#/components/requestBodies/UsersBodies'
+      responses:
+        '200':
+          $ref: '#/components/responses/User'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Exclui um usuário
+      tags:
+      - admin/users
+      responses:
+        '200':
+          $ref: '#/components/responses/User'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/orders/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Resgata um pedido
+      tags:
+      - admin/orders
+      responses:
+        '200':
+          $ref: '#/components/responses/Order'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/orders/:
+    post:
+      summary: Cadastra um novo pedido
+      tags:
+      - admin/orders
+      requestBody:
+        $ref: '#/components/requestBodies/OrdersBodies'
+      responses:
+        '201':
+          $ref: '#/components/responses/Order'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+          minLength: 6
+        email:
+          type: string
+          minLength: 6
+          format: email
+        senha:
+          type: string
+          minLength: 6
+        data: 
+          type: string
+          format: date-time
+          example: '2023-01-25T12:52:28Z'
+        cpf:
+          type: string
+          pattern: '^\d{3}.\d{3}.\d{3}-\d{2}$'
+          example: '999.999.999-99'
+        telefone:
+          type: string
+          pattern: '^(\d{2}) \d{5}-\d{4}$'
+          example: '(99) 99999-9999'
+        endereco:
+          type: object
+          properties:
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            bairro:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+            cep: 
+              type: string
+              pattern: '^\d{5}-\d{3}$'
+              example: '99999-999'
+        carrinho:
+          type: object
+          properties:
+            produtos:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                  nome:
+                    type: string
+                  precoUnitario:
+                    type: number
+                  desconto:
+                    type: number
+                  qtdeItem:
+                    type: integer
+                  valorDescontos:
+                    type: number
+                  subTotal:
+                    type: number
+                  subTotalLiquido:
+                    type: number
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    UserCreateUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
+          minLength: 6
+        email:
+          type: string
+          minLength: 6
+          format: email
+        senha:
+          type: string
+          minLength: 6
+        cpf:
+          type: string
+          pattern: '^\d{3}.\d{3}.\d{3}-\d{2}$'
+          example: '999.999.999-99'
+        telefone:
+          type: string
+          pattern: '^(\d{2}) \d{5}-\d{4}$'
+          example: '(99) 99999-9999'
+        endereco:
+          type: object
+          properties:
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            bairro:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+            cep: 
+              type: string
+              pattern: '^\d{5}-\d{3}$'
+              example: '99999-999'
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        data: 
+          type: string
+          format: date-time
+          example: '2023-01-25T12:52:28Z'
+        userId: 
+          type: integer
+        nome:
+          type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            bairro:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+            cep: 
+              type: string
+              pattern: '^\d{5}-\d{3}$'
+              example: '99999-999'
+        itens:
+          type: object
+          properties:
+            produtos:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                  nome:
+                    type: string
+                  precoUnitario:
+                    type: number
+                  desconto:
+                    type: number
+                  qtdeItem:
+                    type: integer
+                  valorDescontos:
+                    type: number
+                  subTotal:
+                    type: number
+                  subTotalLiquido:
+                    type: number
+        qtdeTotalItens:
+          type: integer
+        valorTotal:
+          type: number
+        valorTotalDescontos:
+          type: number
+        valorTotalLiquido:
+          type: number
+    Orders:
+      type: array
+      items:
+        $ref: '#/components/schemas/Order'
+    OrderCreateUpdate:
+      type: object
+      properties:
+        userId: 
+          type: integer
+        enderecoEntrega:
+          type: object
+          properties:
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            bairro:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+            cep: 
+              type: string
+              pattern: '^\d{5}-\d{3}$'
+              example: '99999-999'
+        itens:
+          type: object
+          properties:
+            produtos:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                  precoUnitario:
+                    type: number
+                  desconto:
+                    type: number
+                  qtdeItem:
+                    type: integer
+  responses:
+    Users:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Users'
+    User:
+      description: Sucesso
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/User'
+    Orders:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Orders'
+    Order:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Order'
+    '401':
+      description: usuário não autorizado
+      content:
+        application/json:
+          example: 'Unauthorized'
+    '404':
+      description: recurso não encontrado
+      content:
+        application/json:
+          example: 'Not Found'
+    '500':
+      description: Erro servidor
+      content:
+        application/json:
+          example: 'Internal Server Error'        
+  requestBodies:
+    UsersBodies:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreateUpdate'
+    OrdersBodies:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderCreateUpdate'
+  parameters:
+    ID: 
+      name: id
+      in: path
+      schema:
+        type: integer
+      required: true
