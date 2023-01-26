@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Ecomm Products API
-  description: 'API responsável pela consulta dos produtos no ecomm'
+  description: 'API responsável pelas requisições nos produtos do e-commerce'
   version: 0.0.1
 paths:
   /api/categories:
@@ -14,6 +14,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Categories"
+  /api/admin/categories:
+    post:
+      summary: Cria uma nova categoria.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        401:
+          description: 'Usuário não autorizado.'
+          content:
+            application/json:
+              example: 'Unauthorized'
 components:
   schemas:
     Category:
