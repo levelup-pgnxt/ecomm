@@ -1,7 +1,11 @@
 openapi: 3.0.3
 info:
   title: Ecomm Orders API
-  description: "API responsável pelas requisições nos pedidos do e-commerce"
+  description: |-
+    Essa é uma API criada para o projeto **Ecomm**. 
+    O Projeto é um ecommerce baseado no Mercado Livre e demais ecommerces.
+    
+    Essa API é responsável pelas requisições nos pedidos do **Ecomm**
   version: 0.0.1
   contact: 
     name: Matheus Leme
@@ -41,7 +45,7 @@ paths:
       summary: Recupera um pedido pelo ID.
       responses:
         200:
-          description: Sucesso
+          description: Sucesso.
           content:
             application/json:
               schema: 

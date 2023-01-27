@@ -1,7 +1,11 @@
 openapi: 3.0.3
 info:
   title: Ecomm Products API
-  description: "API responsável pelas requisições nos produtos do e-commerce"
+  description: |-
+    Essa é uma API criada para o projeto **Ecomm**. 
+    O Projeto é um ecommerce baseado no Mercado Livre e demais ecommerces.
+    
+    Essa API é responsável pelas requisições nos produtos do **Ecomm**
   version: 0.0.1
   contact: 
     name: Matheus Leme
@@ -16,7 +20,7 @@ paths:
       summary: Recupera ID, nome e status de todas as categorias.
       responses:
         200:
-          description: Success
+          description: Sucesso.
           content:
             application/json:
               schema:
@@ -33,7 +37,7 @@ paths:
               $ref: "#/components/schemas/Category"
       responses:
         201:
-          description: Created
+          description: Categoria criada com sucesso.
           content:
             application/json:
               schema:
@@ -51,7 +55,7 @@ paths:
       summary: Recupera uma categoria pelo ID.
       responses:
         200:
-          description: Sucesso
+          description: Sucesso.
           content:
             application/json:
               schema:
@@ -77,7 +81,7 @@ paths:
               $ref: "#/components/schemas/Category"
       responses:
         200:
-          description: Categoria atualizada com sucesso
+          description: Categoria atualizada com sucesso.
           content:
             application/json:
               schema:
@@ -103,7 +107,7 @@ paths:
       summary: Ativa categoria.
       responses:
         200:
-          description: Sucesso
+          description: Sucesso.
           content:
             application/json:
               schema:
@@ -124,7 +128,7 @@ paths:
               $ref: "#/components/schemas/Product"
       responses:
         201:
-          description: Created
+          description: Produto criado com sucesso.
           content:
             application/json:
               schema:
@@ -136,7 +140,7 @@ paths:
       summary: Recupera todas as informações de todos os produtos.
       responses:
         200:
-          description: Success
+          description: Successo.
           content:
             application/json:
               schema:
@@ -152,7 +156,7 @@ paths:
       summary: Recupera um produto pelo ID.
       responses:
         200:
-          description: Sucesso
+          description: Sucesso.
           content:
             application/json:
               schema: 
@@ -178,7 +182,7 @@ paths:
               $ref: "#/components/schemas/Product"
       responses:
         200:
-          description: Produto atualizado com sucesso
+          description: Produto atualizado com sucesso.
           content:
             application/json:
               schema:

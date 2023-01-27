@@ -1,7 +1,11 @@
 openapi: 3.0.3
 info:
   title: Ecomm Accounts API
-  description: "API responsável pelas requisições nos usuarios do e-commerce"
+  description: |-
+    Essa é uma API criada para o projeto **Ecomm**. 
+    O Projeto é um ecommerce baseado no Mercado Livre e demais ecommerces.
+    
+    Essa API é responsável pelas requisições nos usuários do **Ecomm**
   version: 0.0.1
   contact: 
     name: Matheus Leme
@@ -35,7 +39,7 @@ paths:
       summary: Recupera todas as informações de todos os usuários.
       responses:
         200:
-          description: Success
+          description: Successo.
           content:
             application/json:
               schema:
@@ -51,7 +55,7 @@ paths:
       summary: Recupera um usuário pelo ID.
       responses:
         200:
-          description: Sucesso
+          description: Sucesso.
           content:
             application/json:
               schema: 
@@ -77,7 +81,7 @@ paths:
               $ref: "#/components/schemas/User"
       responses:
         200:
-          description: Usuário atualizado com sucesso
+          description: Usuário atualizado com sucesso.
           content:
             application/json:
               schema:
