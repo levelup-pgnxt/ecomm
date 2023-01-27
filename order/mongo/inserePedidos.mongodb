@@ -1,0 +1,65 @@
+use('ecomm-order');
+db.createCollection('orders');
+
+db.orders.insertMany([
+    {
+        "dataPedido": new ISODate(),
+        "cliente": {          
+            _id:"63caa265e16762b36912d162",
+            nome:"sadsdasdasdasd"
+        },
+        "enderecoEntrega": {           
+            rua_endereco:"rua tal 1",
+            n_endereco:"10",
+            complemento:"alameda tal",
+            cep:"55513235",
+            cidade:"belem2",
+            estado:"para2"
+        },
+        "itensPedido": [
+            {
+                "produto": "Notebook Samsung",
+                "quantidade": 1,
+                "desconto": NumberDecimal(10),
+                "preco_unitario": NumberDecimal(3523),
+                
+            },
+            {
+                "produto": "Sofá 3 lugares",
+                "quantidade": 1,
+                "desconto": NumberDecimal(10),
+                "precoUnitario": NumberDecimal(2500)
+            }
+        ]
+    },{
+        "dataPedido": new ISODate(),
+        "cliente": {          
+            _id:"63caa265e16762b36912d162",
+            nome:"sadsdasdasdasd"
+        },
+        "enderecoEntrega": {           
+            rua_endereco:"rua tal 2",
+            n_endereco:"10",
+            complemento:"alameda tal",
+            cep:"55513235",
+            cidade:"belem3",
+            estado:"para3"
+        },
+        "itensPedido": [
+            {
+                "produto": "Clean Architecture",
+                "quantidade": 2,
+                "desconto": NumberDecimal(10),
+                "preco_unitario": NumberDecimal(102,9),
+                
+            },
+            {
+                "produto": "Mesa de jantar 6 lugares",
+                "quantidade": 1,
+                "desconto": NumberDecimal(10),
+                "precoUnitario": NumberDecimal(3678,98)
+            }
+        ]
+    }
+
+])
