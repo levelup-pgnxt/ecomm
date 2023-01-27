@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: API de produtos
+  version: 0.0.1
+  license:
+    name: "Licença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Documentação burocrática
+  url: https://mockapi.io
+servers:
+- url: https://63d2ba2c1780fd6ab9cbb875.mockapi.io/
+  description: API de produtos
+paths:
+  /api/categories:
+    get:
+      summary: Lista todas as categorias
+      responses: 
+        200:
+          description: Sucesso, retorna todas as categorias
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categories"
+        404:
+          description: Sem categorias cadastradas
+    post:
+      summary: Cria nova categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/categorie"
+      responses:
+        201:
+          description: Categoria cadastrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categorie"
+        401:
+          description: Usuário não autorizado
+        404:
+          description: API não encontrada
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Encontra a categoria
+      responses: 
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categorie"
+        401:
+          description: Usuário não autorizado
+        404:
+          description: Categoria não encontrada
+    put:
+      summary: Atualiza a categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/categorie"
+      responses:
+        201:
+          description: Categoria atualizada
+        401:
+          description: Usuário não autorizado
+        404:
+          description: Categoria não encontrada
+    delete:
+      summary: Deleta a categoria
+      responses:
+        200:
+          description: Categoria deletada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categorie"
+        401:
+          description: Usuário não autorizado
+        404:
+          description: Categoria não encontrada
+    patch:
+      summary: Atualiza a categoria com o PATCH
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      responses:
+        204:
+          description: Categoria atualizada
+        401:
+          description: Usuário não autorizado
+        404:
+          description: Categoria não encontrada
+security:
+- auth: []
+
+components:
+  schemas:
+    categorie:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        status:
+          type: string
+    categories:
+        type: array
+        items:
+          $ref: "#/components/schemas/categorie"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+        
