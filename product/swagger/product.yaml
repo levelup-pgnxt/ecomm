@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Ecomm Products API
-  description: 'API responsável pelas requisições nos produtos do e-commerce'
+  description: "API responsável pelas requisições nos produtos do e-commerce"
   version: 0.0.1
   contact: 
     name: Matheus Leme
@@ -37,7 +37,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Category"
         401:
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
   /api/categories/{id}:
     parameters:
     - name: id
@@ -55,7 +55,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Category"
         404:
-          $ref: '#/components/responses/NotFound'
+          $ref: "#/components/responses/NotFound"
   /api/admin/categories/{id}:
     parameters:
     - name: id
@@ -79,18 +79,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/Category"
         401:
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
         404:
-          $ref: '#/components/responses/NotFound'
+          $ref: "#/components/responses/NotFound"
     delete:
       summary: Deleta uma categoria pelo ID.
       responses:
         200:
           description: Categoria deletada com sucesso.
         401:
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
         404:
-          $ref: '#/components/responses/NotFound'
+          $ref: "#/components/responses/NotFound"
     patch:
       summary: Ativa categoria.
       responses:
@@ -101,33 +101,136 @@ paths:
               schema:
                 $ref: "#/components/schemas/Category"
         401:
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
         404:
-          $ref: '#/components/responses/NotFound'
+          $ref: "#/components/responses/NotFound"
+  /api/admin/products:
+    post:
+      summary: Cria um novo produto.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+  /api/products:
+    get:
+      summary: Recupera todas as informações de todos os produtos.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+  /api/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get: 
+      summary: Recupera um produto pelo ID.
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Product"
+        404:
+          $ref: "#/components/responses/NotFound"
+  /api/admin/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    put:
+      summary: Atualiza os produtos pelo ID.
+      description: Atualiza todas as informações dos produtos.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        200:
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Deleta um produto pelo ID.
+      responses:
+        200:
+          description: Produto deletado com sucesso.
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          $ref: "#/components/responses/NotFound"
 components:
   schemas:
     Category:
       type: object
       properties:
-        id:
+        categorieId:
           type: string
           format: uuid
-        name:
+        categorieName:
           type: string
-        status:
+        categorieStatus:
           type: string
     Categories:
       type: array
       items:
         $ref: "#/components/schemas/Category"
+    Product:
+      type: object
+      properties:
+        productId:
+          type: string
+          format: uuid
+        productName:
+          type: string
+        productDescription:
+          type: string
+        productSlug:
+          type: string
+        productUnitPrice:
+          type: number
+        productQuantityInStock:
+          type: number
+        categorieId:
+          type: string
+          format: uuid
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/Product"
   responses:
     UnauthorizedError:
-      description: 'Usuário não autorizado.'
+      description: "Usuário não autorizado."
       content:
         application/json:
-          example: 'Unauthorized'
+          example: "Unauthorized"
     NotFound:
-      description: 'Não encontrado.'
+      description: "Não encontrado."
       content:
         application/json:
-          example: 'Not Found'
+          example: "Not Found"
