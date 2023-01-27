@@ -24,25 +24,7 @@ paths:
                 $ref: "#/components/schemas/categories"
         404:
           description: Sem categorias cadastradas
-    post:
-      summary: Cria nova categoria
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/categorie"
-      responses:
-        201:
-          description: Categoria cadastrada com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/categorie"
-        401:
-          description: Usuário não autorizado
-        404:
-          description: API não encontrada
-  /api/admin/categories/{id}:
+  /api/categories/{id}:
     parameters:
     - name: id
       in: path
@@ -62,7 +44,37 @@ paths:
           description: Usuário não autorizado
         404:
           description: Categoria não encontrada
+          
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    post:
+      security:
+      - auth: []
+      summary: Cria nova categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/categorie"
+      responses:
+        201:
+          description: Categoria cadastrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categorie"
+        401:
+          description: Usuário não autorizado
+        404:
+          description: API não encontrada
     put:
+      security:
+      - auth: []
       summary: Atualiza a categoria
       requestBody:
         content:
@@ -77,6 +89,8 @@ paths:
         404:
           description: Categoria não encontrada
     delete:
+      security:
+      - auth: []
       summary: Deleta a categoria
       responses:
         200:
@@ -90,6 +104,8 @@ paths:
         404:
           description: Categoria não encontrada
     patch:
+      security:
+      - auth: []
       summary: Atualiza a categoria com o PATCH
       requestBody:
         content:
@@ -106,8 +122,9 @@ paths:
           description: Usuário não autorizado
         404:
           description: Categoria não encontrada
-security:
-- auth: []
+  
+
+
 
 components:
   schemas:
@@ -129,4 +146,4 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-        
+         
