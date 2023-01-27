@@ -13,6 +13,8 @@ info:
 paths:
   /api/admin/users:
     post:
+      security: 
+      - auth: []
       summary: Cria um novo produto.
       requestBody:
         content:
@@ -64,6 +66,8 @@ paths:
         type: string
       required: true
     put:
+      security: 
+      - auth: []
       summary: Atualiza os usuários pelo ID.
       description: Atualiza todas as informações dos usuários.
       requestBody:
@@ -83,6 +87,8 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      security: 
+      - auth: []
       summary: Deleta um usuário pelo ID.
       responses:
         200:
@@ -139,3 +145,8 @@ components:
       content:
         application/json:
           example: "Not Found"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

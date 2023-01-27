@@ -13,6 +13,8 @@ info:
 paths:
   /api/admin/orders:
     post:
+      security:
+      - auth: []
       summary: Cria um novo pedido.
       requestBody:
         content:
@@ -95,3 +97,8 @@ components:
       content:
         application/json:
           example: "Not Found"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

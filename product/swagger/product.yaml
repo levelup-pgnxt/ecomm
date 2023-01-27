@@ -23,6 +23,8 @@ paths:
                 $ref: "#/components/schemas/Categories"
   /api/admin/categories:
     post:
+      security:
+      - auth: []
       summary: Cria uma nova categoria.
       requestBody:
         content:
@@ -64,6 +66,8 @@ paths:
         type: string
       required: true
     put:
+      security:
+      - auth: []
       summary: Atualiza categoria pelo ID.
       description: Atualiza todas as informações da categoria.
       requestBody:
@@ -83,6 +87,8 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      security:
+      - auth: []
       summary: Deleta uma categoria pelo ID.
       responses:
         200:
@@ -92,6 +98,8 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     patch:
+      security:
+      - auth: []
       summary: Ativa categoria.
       responses:
         200:
@@ -106,6 +114,8 @@ paths:
           $ref: "#/components/responses/NotFound"
   /api/admin/products:
     post:
+      security:
+      - auth: []
       summary: Cria um novo produto.
       requestBody:
         content:
@@ -157,6 +167,8 @@ paths:
         type: string
       required: true
     put:
+      security:
+      - auth: []
       summary: Atualiza os produtos pelo ID.
       description: Atualiza todas as informações dos produtos.
       requestBody:
@@ -176,6 +188,8 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      security:
+      - auth: []
       summary: Deleta um produto pelo ID.
       responses:
         200:
@@ -234,3 +248,8 @@ components:
       content:
         application/json:
           example: "Not Found"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
