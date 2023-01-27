@@ -34,6 +34,24 @@ paths:
                 $ref: "#/components/schemas/Category"
         401:
           $ref: '#/components/responses/UnauthorizedError'
+  /api/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      summary: Recupera uma categoria pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        404:
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
     Category:
@@ -41,6 +59,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         status:
@@ -55,3 +74,8 @@ components:
       content:
         application/json:
           example: 'Unauthorized'
+    NotFound:
+      description: 'Não encontrado.'
+      content:
+        application/json:
+          example: 'Not Found'
