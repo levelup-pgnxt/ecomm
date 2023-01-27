@@ -3,6 +3,13 @@ info:
   title: Ecomm Products API
   description: 'API responsável pelas requisições nos produtos do e-commerce'
   version: 0.0.1
+  contact: 
+    name: Matheus Leme
+    email: matheus.santos@pagonxt.com
+    url: https://github.com/LemeLHP
+  license:
+    name: Licença Pública
+    url: https://www.gnu.org/licenses/gpl-3.0.html
 paths:
   /api/categories:
     get:
@@ -21,10 +28,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                nome:
-                  type: string
+              $ref: "#/components/schemas/Category"
       responses:
         201:
           description: Created
@@ -42,7 +46,7 @@ paths:
         type: string
       required: true
     get:
-      summary: Recupera uma categoria pelo ID
+      summary: Recupera uma categoria pelo ID.
       responses:
         200:
           description: Sucesso
@@ -50,6 +54,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Category"
+        404:
+          $ref: '#/components/responses/NotFound'
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    put:
+      summary: Atualiza categoria pelo ID.
+      description: Atualiza todas as informações da categoria.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        200:
+          description: Categoria atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Deleta uma categoria pelo ID.
+      responses:
+        200:
+          description: Categoria deletada com sucesso.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Ativa categoria.
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
 components:
