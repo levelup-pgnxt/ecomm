@@ -223,6 +223,73 @@ paths:
           description: Usuário não autorizado
         404:
           description: Produto não encontrado
+          
+          
+          
+          
+  /api/products/listByPrice:
+    parameters:
+    - name: max
+      in: query
+      schema:
+        type: number
+      required: true
+    - name: min
+      in: query
+      schema:
+        type: number
+      required: true   
+    get:
+      summary: Encontra todos os produtos na faixa min - max
+      responses:
+        200:
+          description: Produtos encontrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/products"
+        404:
+          description: Produtos não encontrados
+          
+  /api/products/listByCategory:
+    parameters:
+    - name: category
+      in: query
+      schema:
+        type: string
+      required: true
+    get:
+      summary: Encontra todos os produtos de determinada categoria
+      responses:
+        200:
+          description: Produtos dessa categoria foram econtrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/products"
+        404:
+          description: Produtos dessa categoria não encontrados
+
+  /api/products/listByStock:
+    parameters:
+    - name: stock
+      in: query
+      schema:
+        type: number
+      required: true
+    get:
+      summary: Encontra todos os produtos de estoque maior que estoque
+      responses:
+        200:
+          description: Produtos foram econtrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/products"
+        404:
+          description: Produtos não encontrados
+          
+       
 components:
   schemas:
     categorie:
