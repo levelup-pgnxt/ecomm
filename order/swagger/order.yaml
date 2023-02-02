@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: Ecomm Orders API
+  description: |-
+    Essa é uma API criada para o projeto **Ecomm**. 
+    O Projeto é um ecommerce baseado no Mercado Livre e demais ecommerces.
+    
+    Essa API é responsável pelas requisições nos pedidos do **Ecomm**
+  version: 0.0.1
+  contact: 
+    name: Matheus Leme
+    email: matheus.santos@pagonxt.com
+    url: https://github.com/LemeLHP
+  license:
+    name: Licença Pública
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+paths:
+  /api/admin/orders:
+    post:
+      security:
+      - auth: []
+      summary: Cria um novo pedido.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+      responses:
+        201:
+          description: Pedido criado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+  /api/orders/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get: 
+      summary: Recupera um pedido pelo ID.
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Order"
+        404:
+          $ref: "#/components/responses/NotFound"
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        deliverAddress:
+          type: object
+          properties:
+            streetDeliverAddress:
+              type: string
+            numberDeliverAddress:
+              type: string
+            complementDeliverAddress:
+              type: string
+            cepDeliverAddress:
+              type: string
+            cityDeliverAddress:
+              type: string
+            stateDeliverAddress:
+              type: string
+        itens:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItensPedido"
+    ItensPedido:
+      type: object
+      properties:
+        itemId:
+          type: string
+        itemQuantity:
+          type: number
+        discountAmount:
+          type: number
+        unitPrice:
+          type: number
+  responses:
+    UnauthorizedError:
+      description: "Usuário não autorizado."
+      content:
+        application/json:
+          example: "Unauthorized"
+    NotFound:
+      description: "Não encontrado."
+      content:
+        application/json:
+          example: "Not Found"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
