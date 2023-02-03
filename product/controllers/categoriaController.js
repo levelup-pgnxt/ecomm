@@ -38,6 +38,23 @@ class CategoriaController {
             })
         }
     }
+
+    static atualizaCategoria = (req, res) => {
+        let nomeCategoria = req.body.nome
+        const id = req.params.id
+
+        if(!validacaoCategoria(nomeCategoria)) {
+            res.status(400).send({message: 'Nome da categoria inválido'})
+        } else {
+            categorias.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+                if(err) {
+                    res.status(404).send({message: `${err.message} - Categoria não encontrada`})
+                } else {
+                    res.status(200).send({message: 'Categoria atualizada com sucesso.'})
+                }
+            })
+        }
+    }
 }
 
 
