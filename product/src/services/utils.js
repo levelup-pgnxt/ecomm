@@ -1,47 +1,24 @@
+import mongoose from 'mongoose';
 import Joi from 'joi';
 import runSchema from './validator.js';
 
 const limit = 3;
 
 const validates = {
-    paramsNewCategory: runSchema(Joi.object().keys({
-        nome: Joi.string().min(limit).empty().required().pattern(/^[A-Za-z]\w.+/).messages({
+    paramsCategory: runSchema(Joi.object().keys({
+        nome: Joi.string().min(limit).empty().required().pattern(/^[A-ZÇÂÃÕÉÁÓ]+/).messages({
             'string.base': 'O campo "nome" deve ser do tipo texto!',
             'string.empty': 'O campo "nome" não deve ser vazio!',
             'string.min': `'O campo "nome" deve ter no mínimo ${limit} caracteres!'`,
-            'string.pattern.base': 'O campo "nome" deve iniciar por uma letra!',
+            'string.pattern.base': 'O campo "nome" deve iniciar por uma letra e todas devem ser maiúsculas!',
             'any.required': 'O campo "nome" é obrigatório!'
         }),
-    }))
+    })),
+
+    paramsID: (id) => mongoose.Types.ObjectId.isValid(id),
+
 };
 
-// const validateParams = (data) => {
-//     const limit = 3;
-//     const schema = Joi.object().keys({
-//         nome: Joi.string().pattern(/^[a-z]\w.+/).min(limit).empty().required().messages({
-//             'string.base': 'O campo "nome" deve ser do tipo texto!',
-//             'string.pattern': 'O campo "nome" deve iniciar por uma letra!',
-//             'string.empty': 'O campo "nome" não deve ser vazio!',
-//             'string.min': `'O campo "nome" deve ter no mínimo ${limit} caracteres!'`,
-//             'any.required': 'O campo "nome" é obrigatório!'
-//         }),
-//     });
- 
-//     const { error, value } = schema.validate(data);
-
-//     if (error) {
-//         console.log(error);
-//         let msg = error.details[0].message;
-//         if (msg.substr(1, 1) === '[') {
-//           msg = msg.replace(msg.substr(1, 4), '');
-//         }
-//         error.message = msg;
-//         error.type = error.details[0].type;
-//         throw error;
-//     }
-    
-//     return value;
-// };
 
 // const validateEmail = (data) => {
 //     const schema = Joi.object().keys({
