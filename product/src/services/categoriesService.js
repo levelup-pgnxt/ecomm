@@ -37,6 +37,11 @@ class CategoryService {
         return result;
     };
 
+    static checkIsExistsCategory = async (name) => {
+        const exist = await categories.findOne({ nome: name });
+        return !!exist;
+    };
+
 };
 
 export default CategoryService;
