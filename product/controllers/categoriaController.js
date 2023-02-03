@@ -21,7 +21,7 @@ class CategoriaController {
         })
     }
 
-    static criaCategoria = (req, res) => {
+    static criarCategoria = (req, res) => {
         let nomeCategoria = req.body.nome
 
         if(!validacaoCategoria(nomeCategoria)) {
@@ -39,7 +39,7 @@ class CategoriaController {
         }
     }
 
-    static atualizaCategoria = (req, res) => {
+    static atualizarCategoria = (req, res) => {
         let nomeCategoria = req.body.nome
         const id = req.params.id
 
@@ -54,6 +54,20 @@ class CategoriaController {
                 }
             })
         }
+    }
+
+    static excluirCategoria = (req, res) => {
+        const id = req.params.id
+
+        categorias.findByIdAndDelete(id, (err, categorias) => {
+            if(err) {
+                res.status(500).send({message: err.message})
+            } else if(!categorias) {
+                res.status(404).send({message: 'Categoria não encontrada.'})
+            } else {
+                res.status(200).send({message: 'Categoria excluida com sucesso.'})
+            }
+        })
     }
 }
 
