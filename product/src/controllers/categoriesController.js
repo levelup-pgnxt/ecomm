@@ -1,5 +1,6 @@
 import CategoryService from '../services/categoriesService.js';
 import validates from '../services/utils.js';
+import NotFoundError from '../errors/NotFoundError.js';
 
 class CategoryController {
 
@@ -37,9 +38,15 @@ class CategoryController {
 
     static createCategory = async (req, res) => {
         const { nome } = validates.paramsCategory(req.body);
-        const status = 'ATIVA';
-        const newCategory = await CategoryService.createCategory({ nome: nome, status: status });
-        res.status(201).send(newCategory.toJSON());
+        const isExist = await CategoryService.checkIsExistsCategory(nome);
+        if (isExist) {
+            const message = 'Categoria já cadastrada!';
+            throw new NotFoundError(message);
+        } else {
+            const status = 'ATIVA';
+            const newCategory = await CategoryService.createCategory({ nome: nome, status: status });
+            res.status(201).send(newCategory.toJSON());
+        }
     };
 
     static updateCategory = async (req, res) => {
