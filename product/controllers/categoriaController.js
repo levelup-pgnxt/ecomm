@@ -9,6 +9,18 @@ class CategoriaController {
         })
     }
 
+    static listarCategoriaPorId = (req, res) => {
+        const id = req.params.id
+
+        categorias.findById(id, (err, categorias) => {
+            if(err) {
+                res.status(404).send({message: `${err} - Categoria não encontrada`})
+            } else {
+                res.status(200).send(categorias)
+            }
+        })
+    }
+
     static criaCategoria = (req, res) => {
         let nomeCategoria = req.body.nome
 
