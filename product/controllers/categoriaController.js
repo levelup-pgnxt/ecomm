@@ -42,7 +42,7 @@ class CategoriaController {
     }
 
     static atualizarCategoria = (req, res) => {
-        let nomeCategoria = req.body.nome
+        const nomeCategoria = req.body.nome
         const id = req.params.id
 
         if(!validacaoCategoria(nomeCategoria)) {
@@ -73,7 +73,20 @@ class CategoriaController {
             }
         })
     }
-}
 
+    static ativaCategoria = (req, res) => {
+        const id = req.params.id
+
+        categorias.findByIdAndUpdate(id, {$set: {status: "ATIVA"}}, (err, categorias) => {
+            if(err) {
+                res.status(500).send({message: err.message})
+            } else if (!categorias) {
+                res.status(404).send({message: 'Categoria não encontrada.'})
+            } else {
+                res.status(200).json(categorias)
+            }
+        })
+    }
+}
 
 export default CategoriaController;
