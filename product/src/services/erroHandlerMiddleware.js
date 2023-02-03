@@ -1,6 +1,6 @@
 const errorHandlerMiddleware = (err, _req, res, _next) => {
     const { name, message, type, code } = err;
-    // console.log('erro no hand: ', err);
+
     if (type && type.substring(6) === '.min') {
       return res.status(422).json({ message });
     }
