@@ -8,47 +8,91 @@ class CategoryController {
         res.status(200).json(listCategories);
     };
 
-    // static getCategoryById = (req, res) => {
-    //     const { id } = req.params;
-    //     categories.findById(id,  (err, category) => {
-    //         if (err) {
-    //             res.status(404).send({ message: `${err.message} - Categoria não localizado!` });
-    //         } else {
-    //             res.status(200).json(category);
-    //         }
-    //     }); 
-    // };
+    static getCategoryById = async (req, res) => {
+        const { id } = req.params;
+        const isValideID = validates.paramsID(id);
+
+        if (isValideID) {
+            const category = await CategoryService.getCategoryById(id);
+            if (!category) {
+                res.status(404).send({ message: 'Categoria não localizada!' });
+            } else {
+                res.status(200).json(category);
+            };
+        } else {
+            res.status(400).send({ message: 'ID inválido!' });
+        }
+    };
+
+    static getCategoryByName = async (req, res) => {
+        const { categories } = req.query;
+        const searchName = new RegExp(`${categories}.*`, 'igm');
+        const result = await CategoryService.getCategoryByName(searchName);
+        if (!result) {
+            res.status(404).send({ message: 'Categoria não localizada!' });
+        } else {
+            res.status(200).json(result);
+        };
+    };
 
     static createCategory = async (req, res) => {
-        const { nome } = validates.paramsNewCategory(req.body);
+        const { nome } = validates.paramsCategory(req.body);
         const status = 'ATIVA';
         const newCategory = await CategoryService.createCategory({ nome: nome, status: status });
         res.status(201).send(newCategory.toJSON());
     };
 
-    // static updateCategory = (req, res) => {
-    //     const { id } = req.params;
+    static updateCategory = async (req, res) => {
+        const { id } = req.params;
+        const isValideID = validates.paramsID(id);
 
-    //     categories.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-    //         if (!err) {
-    //             res.status(200).send({ message: 'Categoria atualizado com sucesso!'});
-    //         } else {
-    //             res.status(500).send({ message: `${err.message} - falha ao atualizar categoria!` });
-    //         };
-    //     });
-    // };
+        if (isValideID) {
+            const { nome } = validates.paramsCategory(req.body);
+            const updateCategory = await CategoryService.updateCategory(id, nome);
+            if (!updateCategory) {
+                res.status(404).send({ message: 'Categoria não localizada!' });
+            } else {
+                res.status(201).send({ message: 'Categoria atualizada!' });
+            };
+        } else {
+            res.status(400).send({ message: 'ID inválido!' });
+        }
+    };
 
-    // static deleteCategoryById = (req, res) => {
-    //     const { id } = req.params;
+    static activateDeactivateCategory = async (req, res) => {
+        const { id } = req.params;
+        const isValideID = validates.paramsID(id);
 
-    //     categories.findByIdAndDelete(id, (err) => {
-    //         if (!err) {
-    //             res.status(200).send({ message: 'Categoria removido com sucesso!'});
-    //         } else {
-    //             res.status(500).send({ message: `${err.message} - falha ao deletar categoria!` });
-    //         };
-    //     });
-    // };
+        if (isValideID) {
+            const dados = await CategoryService.getCategoryById(id);
+            if (!dados) {
+                res.status(404).send({ message: 'Categoria não localizada!' });
+            } else {
+                let { status } = dados;
+                status === 'ATIVA' ? status = 'INATIVA' : status = 'ATIVA';
+                await CategoryService.activateDeactivateCategory(id, status);
+                res.status(201).send({ message: `Status atualizado para "${status}"!` });
+            }
+        } else {
+            res.status(400).send({ message: 'ID inválido!' });
+        }
+    };
+
+    static deleteCategoryById = async (req, res) => {
+        const { id } = req.params;
+        const isValideID = validates.paramsID(id);
+
+        if (isValideID) {
+            const deleteCategory = await CategoryService.deleteCategoryById(id);
+            if (!deleteCategory) {
+                res.status(404).send({ message: 'Categoria não localizada!' });
+            } else {
+                res.status(204);
+            };
+        } else {
+            res.status(400).send({ message: 'ID inválido!' });
+        }
+    };
 };
 
 export default CategoryController;
