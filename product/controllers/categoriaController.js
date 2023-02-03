@@ -14,7 +14,9 @@ class CategoriaController {
 
         categorias.findById(id, (err, categorias) => {
             if(err) {
-                res.status(404).send({message: `${err} - Categoria não encontrada`})
+                res.status(500).send({message: err.message})
+            } else if(!categorias){
+                res.status(404).send({message: 'Categoria não encontrada'})
             } else {
                 res.status(200).send(categorias)
             }
@@ -46,9 +48,11 @@ class CategoriaController {
         if(!validacaoCategoria(nomeCategoria)) {
             res.status(400).send({message: 'Nome da categoria inválido'})
         } else {
-            categorias.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+            categorias.findByIdAndUpdate(id, req.body, (err, categorias) => {
                 if(err) {
-                    res.status(404).send({message: `${err.message} - Categoria não encontrada`})
+                    res.status(500).send({message: err.message})
+                } else if(!categorias){
+                    res.status(404).send({message: 'Categoria não encontrada.'})
                 } else {
                     res.status(200).send({message: 'Categoria atualizada com sucesso.'})
                 }
