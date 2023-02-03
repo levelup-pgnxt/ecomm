@@ -8,9 +8,11 @@ const pathId = '/categories/:id'
 
 router
     .get(path, categoriesController.getAllCategories)
-    // .get(pathId, authorController.getAuthorById)
+    .get(`${path}/search`, categoriesController.getCategoryByName)
+    .get(pathId, categoriesController.getCategoryById)
     .post(path, categoriesController.createCategory)
-    // .put(pathId, authorController.updateAuthor)
-    // .delete(pathId, authorController.deleteAuthorById)
+    .put(pathId, categoriesController.updateCategory)
+    .patch(pathId, categoriesController.activateDeactivateCategory)
+    .delete(pathId, categoriesController.deleteCategoryById)
 
 export default router;
