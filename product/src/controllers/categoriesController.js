@@ -71,14 +71,14 @@ class CategoryController {
         const isValideID = validates.paramsID(id);
 
         if (isValideID) {
-            const dados = await CategoryService.getCategoryById(id);
-            if (!dados) {
+            const dataCategory = await CategoryService.getCategoryById(id);
+            if (!dataCategory) {
                 res.status(404).send({ message: 'Categoria não localizada!' });
             } else {
-                let { status } = dados;
+                let { status } = dataCategory;
                 status === 'ATIVA' ? status = 'INATIVA' : status = 'ATIVA';
                 await CategoryService.activateDeactivateCategory(id, status);
-                res.status(201).send({ message: `Status atualizado para "${status}"!` });
+                res.status(201).send({ message: `Status da categoria atualizado para "${status}"!` });
             }
         } else {
             res.status(400).send({ message: 'ID inválido!' });
