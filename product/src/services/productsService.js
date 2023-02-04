@@ -32,14 +32,21 @@ class ProductService {
         return result;
     };
 
+    static getProductsByStock = async (stock) => {
+        const result = await products.find({ estoque: { $gt: Number(stock) }})
+            .populate('categoria', { _id: 0, nome: 1});
+        return result;
+    };
+
     static createProduct = async (data) => {
         const newProduct = new products(data);
         await newProduct.save();
         return newProduct;
     };
 
-    static updateProduct = async (id, nome) => {
-        const result = await products.findByIdAndUpdate(id, { $set: { nome: nome } });
+    static updateProduct = async (id, data) => {
+        const result = await products.findByIdAndUpdate(id,
+            { $set: data }, { new: true });
         return result;
     };
 

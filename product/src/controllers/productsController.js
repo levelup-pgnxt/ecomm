@@ -51,6 +51,16 @@ class ProductController {
         };
     };
 
+    static getProductsByStock = async (req, res) => {
+        const { stock } = validates.valueStock(req.query);
+        const result = await ProductService.getProductsByStock(stock);
+        if (!result) {
+            res.status(404).send({ message: 'Produtos não localizados!' });
+        } else {
+            res.status(200).json(result);
+        };
+    };
+
     static getProductsByCategoryId = async (req, res) => {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
@@ -97,13 +107,23 @@ class ProductController {
         const isValideID = validates.paramsID(id);
 
         if (isValideID) {
-            const { nome } = validates.paramsProduct(req.body);
-            const updateProduct = await ProductService.updateProduct(id, nome);
-            if (!updateProduct) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
+            const dataProduct = validates.paramsProduct(req.body);
+            const { categoria } = dataProduct;
+            const isValideIdCategory = validates.paramsID(categoria);
+            const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
+            const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
+            const validateCategory = isValideIdCategory && isExistCategory && isActiveCategory;
+            if (validateCategory) {
+                const updateProduct = await ProductService.updateProduct(id, dataProduct);
+                if (!updateProduct) {
+                    res.status(404).send({ message: 'Produto não localizado!' });    
+                }
+                res.status(201).send(updateProduct.toJSON());
             } else {
-                res.status(201).send({ message: 'Categoria atualizada!' });
-            };
+                if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
+                if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
+                if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+            }; 
         } else {
             res.status(400).send({ message: 'ID inválido!' });
         }
