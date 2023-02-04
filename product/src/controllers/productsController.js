@@ -31,7 +31,7 @@ class ProductController {
         const searchName = new RegExp(`${products}.*`, 'igm');
         const result = await ProductService.getProductByName(searchName);
         if (!result) {
-            res.status(404).send({ message: 'Categoria não localizada!' });
+            res.status(404).send({ message: 'Produto não localizado!' });
         } else {
             res.status(200).json(result);
         };
@@ -71,25 +71,6 @@ class ProductController {
             } else {
                 res.status(201).send({ message: 'Categoria atualizada!' });
             };
-        } else {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
-    };
-
-    static activateDeactivateProduct = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
-
-        if (isValideID) {
-            const dados = await ProductService.getProductById(id);
-            if (!dados) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                let { status } = dados;
-                status === 'ATIVA' ? status = 'INATIVA' : status = 'ATIVA';
-                await ProductService.activateDeactivateProduct(id, status);
-                res.status(201).send({ message: `Status atualizado para "${status}"!` });
-            }
         } else {
             res.status(400).send({ message: 'ID inválido!' });
         }

@@ -13,7 +13,8 @@ class ProductService {
     };
 
     static getProductByName = async (name) => {
-        const category = await products.find({ nome: { $regex: name }});
+        const category = await products.find({ nome: { $regex: name }})
+            .populate('categoria', { _id: 0, nome: 1});
         return category;
     };
 
@@ -25,11 +26,6 @@ class ProductService {
 
     static updateProduct = async (id, nome) => {
         const result = await products.findByIdAndUpdate(id, { $set: { nome: nome } });
-        return result;
-    };
-
-    static activateDeactivateProduct = async (id, newStatus) => {
-        const result = await products.findByIdAndUpdate(id, { $set: { status: newStatus }});
         return result;
     };
 
