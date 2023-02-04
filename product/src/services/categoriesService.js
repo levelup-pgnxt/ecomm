@@ -42,6 +42,17 @@ class CategoryService {
         return !!exist;
     };
 
+    static checkIsExistsCategoryById = async (id) => {
+        const exist = await categories.findById(id);
+        return !!exist;
+    };
+
+    static checkIsCategoryActive = async (id) => {
+        const exist = await categories.findOne({ 
+            _id: { $eq: id },
+            status: { $eq: 'ATIVA' }});
+        return !!exist;
+    };
 };
 
 export default CategoryService;
