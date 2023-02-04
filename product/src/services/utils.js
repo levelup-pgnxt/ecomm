@@ -72,6 +72,14 @@ const validates = {
             'any.required': 'O campo "mínimo" é obrigatório!'
         }),
     })),
+
+    valueStock: runSchema(Joi.object().keys({
+        stock: Joi.number().integer().greater(0).required().messages({
+            'number.base': 'O campo "estoque" deve ser do tipo numérico!',
+            'number.greater': 'O campo "estoque" deve ser maior que zero!',
+            'any.required': 'O campo "estoque" é obrigatório!'
+        }),
+    })),
 };
 
 
