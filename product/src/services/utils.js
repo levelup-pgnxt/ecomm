@@ -59,6 +59,19 @@ const validates = {
             'any.required': 'O campo "categoria" é obrigatório!'
         }),
     })),
+
+    valuesMaxMin: runSchema(Joi.object().keys({
+        max: Joi.number().precision(2).greater(0).required().messages({
+            'number.base': 'O campo "máximo" deve ser do tipo numérico!',
+            'number.greater': 'O campo "máximo" deve ser maior que zero!',
+            'any.required': 'O campo "máximo" é obrigatório!'
+        }),
+        min: Joi.number().precision(2).greater(0).required().messages({
+            'number.base': 'O campo "mínimo" deve ser do tipo numérico!',
+            'number.greater': 'O campo "mínimo" deve ser maior que zero!',
+            'any.required': 'O campo "mínimo" é obrigatório!'
+        }),
+    })),
 };
 
 
