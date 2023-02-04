@@ -7,7 +7,8 @@ class ProductService {
     };
 
     static getProductById = async (id) => {
-        const category = await products.findById(id);
+        const category = await products.findById(id)
+            .populate('categoria', { _id: 0, nome: 1});
         return category;
     };
 
