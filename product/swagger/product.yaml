@@ -124,7 +124,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/products/findByValue:
+  /api/products/find-by-value:
     parameters:
       - $ref: '#/components/parameters/MaxValue'
       - $ref: '#/components/parameters/MinValue'
@@ -139,7 +139,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/products/findByStock:
+  /api/products/find-by-stock:
     parameters:
       - $ref: '#/components/parameters/Stock'
     get:
@@ -153,7 +153,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/products/findByCategory:
+  /api/products/find-by-Category:
     parameters:
       - $ref: '#/components/parameters/Category'
     get:
@@ -167,7 +167,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/admin/products/:
+  /api/admin/products:
     post:
       summary: Cadastra um novo produto
       tags:
@@ -240,7 +240,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/admin/products/discounts-category/:
+  /api/admin/products/discounts-category:
     patch:
       summary: Registra um desconto percentual para todos os produtos de uma categoria
       tags:
