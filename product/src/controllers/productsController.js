@@ -1,4 +1,5 @@
 import ProductService from '../services/productsService.js';
+import CategoryService from '../services/categoriesService.js';
 import validates from '../services/utils.js';
 import NotFoundError from '../errors/NotFoundError.js';
 
@@ -37,16 +38,25 @@ class ProductController {
     };
 
     static createProduct = async (req, res) => {
-        const { nome } = validates.paramsProduct(req.body);
+        const { nome, categoria } = validates.paramsProduct(req.body);
         const isExist = await ProductService.checkIsExistsProduct(nome);
         if (isExist) {
-            const message = 'Categoria já cadastrada!';
+            const message = 'Produto já cadastrado!';
             throw new NotFoundError(message);
         } else {
-            const status = 'ATIVA';
-            const newProduct = await ProductService.createProduct({ nome: nome, status: status });
-            res.status(201).send(newProduct.toJSON());
-        }
+            const isValideIdCategory = validates.paramsID(categoria);
+            const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
+            const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
+            const validateCategory = isValideIdCategory && isExistCategory && isActiveCategory;
+            if (validateCategory) {
+                const newProduct = await ProductService.createProduct(req.body);
+                res.status(201).send(newProduct.toJSON());
+            } else {
+                if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
+                if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
+                if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+            };
+        };
     };
 
     static updateProduct = async (req, res) => {
