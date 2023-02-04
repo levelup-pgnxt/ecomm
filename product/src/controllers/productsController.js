@@ -15,11 +15,11 @@ class ProductController {
         const isValideID = validates.paramsID(id);
 
         if (isValideID) {
-            const category = await ProductService.getProductById(id);
-            if (!category) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
+            const product = await ProductService.getProductById(id);
+            if (!product) {
+                res.status(404).send({ message: 'Produto não localizado!' });
             } else {
-                res.status(200).json(category);
+                res.status(200).json(product);
             };
         } else {
             res.status(400).send({ message: 'ID inválido!' });
