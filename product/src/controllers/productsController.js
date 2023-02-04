@@ -37,6 +37,26 @@ class ProductController {
         };
     };
 
+    static getProductsByCategoryId = async (req, res) => {
+        const { id } = req.params;
+        const isValideID = validates.paramsID(id);
+
+        if (isValideID) {
+            const isExistCategory = await CategoryService.checkIsExistsCategoryById(id);
+            if (isExistCategory) {
+                const products = await ProductService.getProductsByCategoryId(id);
+                if (!products) {
+                    res.status(404).send({ message: 'Produtos não localizados!' });
+                } else {
+                    res.status(200).json(products);
+                };
+            }
+            res.status(404).send({ message: 'Categoria não localizada!' });
+        } else {
+            res.status(400).send({ message: 'ID inválido!' });
+        }
+    };
+
     static createProduct = async (req, res) => {
         const { nome, categoria } = validates.paramsProduct(req.body);
         const isExist = await ProductService.checkIsExistsProduct(nome);

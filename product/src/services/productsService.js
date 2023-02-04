@@ -18,6 +18,12 @@ class ProductService {
         return category;
     };
 
+    static getProductsByCategoryId = async (id) => {
+        const category = await products.find({ categoria: { $eq: id }})
+            .populate('categoria', { _id: 0, nome: 1});
+        return category;
+    };
+
     static createProduct = async (data) => {
         const newProduct = new products(data);
         await newProduct.save();
