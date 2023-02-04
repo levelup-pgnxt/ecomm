@@ -153,7 +153,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/products/find-by-Category:
+  /api/products/find-by-category:
     parameters:
       - $ref: '#/components/parameters/Category'
     get:
@@ -241,6 +241,8 @@ paths:
         '500':
           $ref: '#/components/responses/500'
   /api/admin/products/discounts-category:
+    parameters:
+      - $ref: '#/components/parameters/Category'
     patch:
       summary: Registra um desconto percentual para todos os produtos de uma categoria
       tags:
