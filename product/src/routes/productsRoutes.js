@@ -10,6 +10,7 @@ const pathAdmin = '/admin/products/:id'
 router
     .get(path, productsController.getAllProducts)
     .get(`${path}/search`, productsController.getProductByName)
+    .get(`${path}/search-by-category/:id`, productsController.getProductsByCategoryId)
     .get(pathId, productsController.getProductById)
     .post(`/admin${path}`, productsController.createProduct)
     .put(pathAdmin, productsController.updateProduct)
