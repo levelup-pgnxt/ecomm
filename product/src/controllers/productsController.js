@@ -116,7 +116,7 @@ class ProductController {
             if (validateCategory) {
                 const updateProduct = await ProductService.updateProduct(id, dataProduct);
                 if (!updateProduct) {
-                    res.status(404).send({ message: 'Produto não localizado!' });    
+                    return res.status(404).send({ message: 'Produto não localizado!' });    
                 }
                 res.status(201).send(updateProduct.toJSON());
             } else {
