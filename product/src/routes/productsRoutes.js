@@ -13,7 +13,7 @@ router
     .get(pathId, productsController.getProductById)
     .post(`/admin${path}`, productsController.createProduct)
     .put(pathAdmin, productsController.updateProduct)
-    .patch(pathAdmin, productsController.activateDeactivateProduct)
+    // .patch(pathAdmin, productsController.activateDeactivateProduct)
     .delete(pathAdmin, productsController.deleteProductById)
 
 export default router;
