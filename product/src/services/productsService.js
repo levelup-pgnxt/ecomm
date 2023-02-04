@@ -7,21 +7,29 @@ class ProductService {
     };
 
     static getProductById = async (id) => {
-        const category = await products.findById(id)
+        const product = await products.findById(id)
             .populate('categoria', { _id: 0, nome: 1});
-        return category;
+        return product;
     };
 
     static getProductByName = async (name) => {
-        const category = await products.find({ nome: { $regex: name }})
+        const result = await products.find({ nome: { $regex: name }})
             .populate('categoria', { _id: 0, nome: 1});
-        return category;
+        return result;
     };
 
     static getProductsByCategoryId = async (id) => {
-        const category = await products.find({ categoria: { $eq: id }})
+        const result = await products.find({ categoria: { $eq: id }})
             .populate('categoria', { _id: 0, nome: 1});
-        return category;
+        return result;
+    };
+
+    static getProductsByValue = async (max, min) => {
+        const result = await products.find({ $and: [
+            { precoUnitario: { $gte: Number(min) }},
+            { precoUnitario: { $lte: Number(max) }}
+        ]}).populate('categoria', { _id: 0, nome: 1});
+        return result;
     };
 
     static createProduct = async (data) => {

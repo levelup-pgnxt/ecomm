@@ -37,6 +37,20 @@ class ProductController {
         };
     };
 
+    static getProductsByValue = async (req, res) => {
+        const { min, max } = validates.valuesMaxMin(req.query);
+        if (Number(min) > Number(max)) {
+            const message = 'Valor mínimo maior que valor máximo. Operação não permitida!';
+            throw new NotFoundError(message);
+        }
+        const result = await ProductService.getProductsByValue(max, min);
+        if (!result) {
+            res.status(404).send({ message: 'Produtos não localizados!' });
+        } else {
+            res.status(200).json(result);
+        };
+    };
+
     static getProductsByCategoryId = async (req, res) => {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
@@ -63,19 +77,18 @@ class ProductController {
         if (isExist) {
             const message = 'Produto já cadastrado!';
             throw new NotFoundError(message);
+        };
+        const isValideIdCategory = validates.paramsID(categoria);
+        const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
+        const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
+        const validateCategory = isValideIdCategory && isExistCategory && isActiveCategory;
+        if (validateCategory) {
+            const newProduct = await ProductService.createProduct(req.body);
+            res.status(201).send(newProduct.toJSON());
         } else {
-            const isValideIdCategory = validates.paramsID(categoria);
-            const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
-            const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
-            const validateCategory = isValideIdCategory && isExistCategory && isActiveCategory;
-            if (validateCategory) {
-                const newProduct = await ProductService.createProduct(req.body);
-                res.status(201).send(newProduct.toJSON());
-            } else {
-                if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
-                if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
-                if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
-            };
+            if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
+            if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
+            if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
         };
     };
 
