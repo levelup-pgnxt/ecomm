@@ -11,7 +11,7 @@ externalDocs:
 
 
 paths:
-  /api/users:
+  /api/admin/users:
     get:
       summary: Lista todos os usuários
       responses: 
