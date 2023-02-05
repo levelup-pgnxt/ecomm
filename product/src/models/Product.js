@@ -1,19 +1,33 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
-    {
-        id: {type: String},
-        nome: {type: String, required: true},
-        descricao: {type: String},
-        slug: {type: String, required: true},
-        precoUnitario: {type: Number, required: true},
-        qtdEmEstoque: {type: Number, required: true},
-        categoria: {type: String},
+  {
+    id: { type: String },
+    name: { type: String, required: true },
+    description: { type: String },
+    slug: {
+      type: String,
+      required: true,
+      match: /^[a-zA-Z0-9-]+$/
     },
-    {
-      versionKey: false
-    }
+    pricePerUnit: {
+      type: Number,
+      required: true,
+      min: 0
+    },
+    stockQtty: {
+      type: Number,
+      required: true,
+      min: 0,
+      max: 10000
+    },
+    category: { type: String }
+  },
+  {
+    versionKey: false
+  }
 );
+
 
 const products = mongoose.model("products", productSchema);
 
