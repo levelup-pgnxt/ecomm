@@ -38,6 +38,47 @@ class CategoryController {
             }
         });
     };
+
+    static updateCategory = (req, res) => {
+        const id = req.params.id;
+    
+        categories.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+            if(!err) {
+                res.status(200).send({message: 'Categoria atualizada com sucesso'});
+            } else {
+                res.status(500).send({message: err.message});
+            }
+        });
+    };
+
+    static deleteCategory = (req, res) => {
+        const id = req.params.id;
+    
+        categories.findByIdAndDelete(id, (err) => {
+            if(!err){
+                res.status(200).send({message: 'Categoria removida com sucesso'});
+            } else {
+                res.status(500).send({message: err.message});
+            }
+        });
+    };
+
+    static activateCategory = (req, res) => {
+        const id = req.params.id;
+        const user = req.user;
+
+        if (user.role !== 'admin') {
+            return res.status(401).send({ message: 'Unauthorized' });
+        }
+    
+        categories.findByIdAndUpdate(id, {$set: {'status': 'Ativa'}}, (err) => {
+            if(!err) {
+                res.status(200).send({message: 'Categoria ativada com sucesso'});
+            } else {
+                res.status(500).send({message: err.message});
+            }
+        });
+    };
     
      
 };
