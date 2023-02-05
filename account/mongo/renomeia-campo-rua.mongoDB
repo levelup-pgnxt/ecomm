@@ -1,0 +1,5 @@
+use('ecomm-account')
+
+db.users.updateMany({}, {
+  $rename: { 'enderecoEntrega.rua': 'enderecoEntrega.logragouro' }
+})
