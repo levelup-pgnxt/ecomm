@@ -229,7 +229,7 @@ paths:
           
           
           
-  /api/products/listByPrice:
+  /api/products/list-by-price:
     parameters:
     - name: max
       in: query
@@ -253,7 +253,7 @@ paths:
         404:
           description: Produtos não encontrados
           
-  /api/products/listByCategory:
+  /api/products/list-by-category:
     parameters:
     - name: category
       in: query
@@ -272,7 +272,7 @@ paths:
         404:
           description: Produtos dessa categoria não encontrados
 
-  /api/products/listByStock:
+  /api/products/list-by-stock:
     parameters:
     - name: stock
       in: query
