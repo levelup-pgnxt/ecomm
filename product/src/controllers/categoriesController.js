@@ -5,10 +5,9 @@ class CategoryController {
     static listCategories = (req, res) => {
         categories.find((err, categories) => {
             res.status(200).json(categories);
-        })
-    };
-
-    
+        });
+    }; 
+     
 };
 
 
