@@ -89,44 +89,41 @@ class ProductController {
             throw new NotFoundError(message);
         };
         const isValideIdCategory = validates.paramsID(categoria);
+        if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
+
         const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
+        if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
+
         const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
-        const validateCategory = isValideIdCategory && isExistCategory && isActiveCategory;
-        if (validateCategory) {
-            const newProduct = await ProductService.createProduct(req.body);
-            res.status(201).send(newProduct.toJSON());
-        } else {
-            if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
-            if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
-            if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
-        };
+        if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+
+        const newProduct = await ProductService.createProduct(req.body);
+        res.status(201).send(newProduct.toJSON());
     };
 
     static updateProduct = async (req, res) => {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
 
-        if (isValideID) {
-            const dataProduct = validates.paramsProduct(req.body);
-            const { categoria } = dataProduct;
-            const isValideIdCategory = validates.paramsID(categoria);
-            const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
-            const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
-            const validateCategory = isValideIdCategory && isExistCategory && isActiveCategory;
-            if (validateCategory) {
-                const updateProduct = await ProductService.updateProduct(id, dataProduct);
-                if (!updateProduct) {
-                    return res.status(404).send({ message: 'Produto não localizado!' });    
-                }
-                res.status(201).send(updateProduct.toJSON());
-            } else {
-                if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
-                if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
-                if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
-            }; 
-        } else {
-            res.status(400).send({ message: 'ID inválido!' });
+        if (!isValideID) return res.status(400).send({ message: 'ID inválido!' });
+
+        const dataProduct = validates.paramsProduct(req.body);
+        const { categoria } = dataProduct;
+
+        const isValideIdCategory = validates.paramsID(categoria);
+        if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
+
+        const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
+        if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
+
+        const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
+        if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+
+        const updateProduct = await ProductService.updateProduct(id, dataProduct);
+        if (!updateProduct) {
+            return res.status(404).send({ message: 'Produto não localizado!' });    
         }
+        res.status(201).send(updateProduct.toJSON());
     };
 
     static deleteProductById = async (req, res) => {
