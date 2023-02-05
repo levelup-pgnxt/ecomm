@@ -11,7 +11,7 @@ externalDocs:
 
 
 paths:
-  /api/accounts/{id}:
+  /api/users/{id}:
     parameters:
     - name: id
       in: path
@@ -32,7 +32,7 @@ paths:
         404:
           description: Pedido ou API não encontrados
           
-  /api/admin/accounts/{id}:
+  /api/admin/users/{id}:
     parameters:
     - name: id
       in: path
