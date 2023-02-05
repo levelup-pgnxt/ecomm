@@ -44,14 +44,8 @@ paths:
           description: Usuário não autorizado
         404:
           description: Categoria não encontrada
-          
-  /api/admin/categories/{id}:
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: integer
-      required: true
+
+  /api/admin/categories:
     post:
       security:
       - auth: []
@@ -72,6 +66,14 @@ paths:
           description: Usuário não autorizado
         404:
           description: API não encontrada
+          
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
     put:
       security:
       - auth: []
