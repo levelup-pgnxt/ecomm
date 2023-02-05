@@ -11,7 +11,7 @@ externalDocs:
 
 
 paths:
-  /api/accounts:
+  /api/users:
     get:
       summary: Lista todos os usuários
       responses: 
@@ -20,10 +20,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/accounts"
+                $ref: "#/components/schemas/users"
         404:
           description: Sem usuários cadastrados
-  /api/accounts/{id}:
+  /api/users/{id}:
     parameters:
     - name: id
       in: path
@@ -38,13 +38,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/account"
+                $ref: "#/components/schemas/user"
         401:
           description: Usuário não autorizado
         404:
           description: Usuário ou API não encontrados
           
-  /api/admin/accounts/{id}:
+  /api/admin/users/{id}:
     parameters:
     - name: id
       in: path
@@ -59,14 +59,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/account"
+              $ref: "#/components/schemas/user"
       responses:
         201:
           description: Usuário cadastrado com sucesso
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/account"
+                $ref: "#/components/schemas/user"
         401:
           description: Usuário não autorizado
         404:
@@ -79,7 +79,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/account"
+              $ref: "#/components/schemas/user"
       responses:
         201:
           description: Usuário atualizado
@@ -97,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/account"
+                $ref: "#/components/schemas/user"
         401:
           description: Usuário não autorizado
         404:
@@ -105,7 +105,7 @@ paths:
     
 components:
   schemas:
-    account:
+    user:
       type: object
       properties:
         id:
@@ -132,10 +132,10 @@ components:
             estado:
               type: string
         
-    accounts:
+    users:
         type: array
         items:
-          $ref: "#/components/schemas/account"
+          $ref: "#/components/schemas/user"
     
 
   securitySchemes:
