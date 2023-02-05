@@ -32,8 +32,6 @@ paths:
           $ref: '#/components/responses/User'
         '404':
           $ref: '#/components/responses/404'
-        '500':
-          $ref: '#/components/responses/500'
   /api/admin/users:
     get:
       summary: Resgata todas os usuários
