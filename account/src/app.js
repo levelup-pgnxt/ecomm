@@ -4,7 +4,7 @@ import routes from "./routes/index.js";
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 
-const swaggerDocument = YAML.load('./swagger/product.yaml');
+const swaggerDocument = YAML.load('./swagger/account.yaml');
 
 db.on("error", console.log.bind(console, 'Erro de conexão'));
 db.once("open", () => {
@@ -13,7 +13,7 @@ db.once("open", () => {
 
 const app = express();
 
-app.use('/product/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/account/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 routes(app);
 
