@@ -5,5 +5,6 @@ const router = express.Router();
 
 router
   .get("/categories", CategoryController.listCategories)
+  .post("/categories", CategoryController.insertCategory)
 
 export default router;   
