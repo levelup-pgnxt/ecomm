@@ -15,6 +15,6 @@ class NotFoundError extends Error {
         this.code = 404;
       }
     }
-  }
+}
   
-  export default NotFoundError;
+export default NotFoundError;
