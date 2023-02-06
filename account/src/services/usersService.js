@@ -29,7 +29,6 @@ class UserService {
 
     static deleteUserById = async (id) => {
         const result = await users.findByIdAndDelete(id);
-        console.log(result);
         return result;
     };
 
