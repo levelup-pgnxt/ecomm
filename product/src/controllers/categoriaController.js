@@ -5,7 +5,11 @@ class CategoriaController {
 
     static listarCategorias = (req, res) => {
         categorias.find((err, categorias) => {
+            if(!categorias) {
+                res.status(404).send({message: 'Categorias não encontradas'})
+            } else {
             res.status(200).json(categorias)
+            }
         })
     }
 
