@@ -20,18 +20,6 @@ servers:
 - url: https://www.ecomm.com/api/admin
   description: API plataforma ecomm administrador
 paths:
-  /api/users:
-    get:
-      summary: Resgata todas os usuários
-      tags:
-      - users
-      responses:
-        '200':
-          $ref: '#/components/responses/Users'
-        '404':
-          $ref: '#/components/responses/404'
-        '500':
-          $ref: '#/components/responses/500'
   /api/users/{id}:
     parameters:
       - $ref: '#/components/parameters/ID'
@@ -44,9 +32,18 @@ paths:
           $ref: '#/components/responses/User'
         '404':
           $ref: '#/components/responses/404'
+  /api/admin/users:
+    get:
+      summary: Resgata todas os usuários
+      tags:
+      - users
+      responses:
+        '200':
+          $ref: '#/components/responses/Users'
+        '404':
+          $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/admin/users:
     post:
       summary: Cadastra um novo usuário
       tags:

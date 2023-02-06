@@ -1,4 +1,23 @@
 {
+  "name": "ecomm",
+  "description": "Projeto de Ecommerce criando durante o programa LevelUp da Alura",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phvleite/ecomm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phvleite/ecomm/issues"
+  },
+  "homepage": "https://github.com/phvleite/ecomm#readme",
   "dependencies": {
     "chance": "^1.1.9"
   }

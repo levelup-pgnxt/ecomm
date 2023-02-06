@@ -124,7 +124,19 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/products/findByValue:
+  /api/products/search:
+    parameters:
+      - $ref: '#/components/parameters/ProductsName'
+    get:
+      summary: Recupera 1 ou mais produtos pelo nome solicitado
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/products/search-by-value:
     parameters:
       - $ref: '#/components/parameters/MaxValue'
       - $ref: '#/components/parameters/MinValue'
@@ -137,9 +149,7 @@ paths:
           $ref: '#/components/responses/Products'
         '404':
           $ref: '#/components/responses/404'
-        '500':
-          $ref: '#/components/responses/500'
-  /api/products/findByStock:
+  /api/products/search-by-stock:
     parameters:
       - $ref: '#/components/parameters/Stock'
     get:
@@ -153,11 +163,11 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/products/findByCategory:
+  /api/products/search-by-category/{id}:
     parameters:
-      - $ref: '#/components/parameters/Category'
+      - $ref: '#/components/parameters/ID'
     get:
-      summary: Recupera os produto de uma determinada categoria
+      summary: Recupera os produtos de uma determinada categoria
       tags:
       - products
       responses:
@@ -167,7 +177,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/admin/products/:
+  /api/admin/products:
     post:
       summary: Cadastra um novo produto
       tags:
@@ -240,7 +250,9 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/admin/products/discounts-category/:
+  /api/admin/products/discounts-category:
+    parameters:
+      - $ref: '#/components/parameters/Category'
     patch:
       summary: Registra um desconto percentual para todos os produtos de uma categoria
       tags:
@@ -420,4 +432,10 @@ components:
       in: query
       schema:
         type: integer
+      required: true
+    ProductsName:
+      name: products
+      in: query
+      schema:
+        type: string
       required: true
