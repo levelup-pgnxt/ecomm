@@ -1,6 +1,5 @@
 import express from 'express';
-// import categoriesRoutes from './categoriesRoutes.js';
-// import productsRoutes from './productsRoutes.js';
+import usersRoutes from './usersRoutes.js';
 
 const API = 'API Users Ecomm';
 
@@ -11,8 +10,7 @@ const routes = (app) => {
 
     app.use(
         express.json(),
-        // categoriesRoutes,
-        // productsRoutes,
+        usersRoutes,
     );
 };
 
