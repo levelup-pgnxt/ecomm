@@ -1,12 +1,12 @@
 {
   "name": "account",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Alura Ecomm",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "nodemon server.js",
-    "start": "node src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
