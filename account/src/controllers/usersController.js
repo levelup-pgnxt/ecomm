@@ -14,16 +14,16 @@ class UserController {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
 
-        if (isValideID) {
-            const category = await UserService.getUserById(id);
-            if (!category) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                res.status(200).json(category);
-            };
-        } else {
+        if (!isValideID) {
             res.status(400).send({ message: 'ID inválido!' });
         }
+
+        const user = await UserService.getUserById(id);
+        if (!user) {
+            res.status(404).send({ message: 'Usuário não localizado!' });
+        } else {
+            res.status(200).json(user);
+        };
     };
 
     static getUserByName = async (req, res) => {
@@ -31,7 +31,7 @@ class UserController {
         const searchName = new RegExp(`${users}.*`, 'igm');
         const result = await UserService.getUserByName(searchName);
         if (!result) {
-            res.status(404).send({ message: 'Categoria não localizada!' });
+            res.status(404).send({ message: 'Usuário não localizado!' });
         } else {
             res.status(200).json(result);
         };
@@ -74,53 +74,56 @@ class UserController {
     static updateUser = async (req, res) => {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
-
-        if (isValideID) {
-            const { nome } = validates.paramsUser(req.body);
-            const updateUser = await UserService.updateUser(id, nome);
-            if (!updateUser) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                res.status(201).send({ message: 'Categoria atualizada!' });
-            };
-        } else {
+        
+        if (!isValideID) {
             res.status(400).send({ message: 'ID inválido!' });
         }
-    };
 
-    static activateDeactivateUser = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
+        const { senha, cpf, endereco } = validates.paramsUser(req.body);
+        const { uf } = endereco;
 
-        if (isValideID) {
-            const dataUser = await UserService.getUserById(id);
-            if (!dataUser) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                let { status } = dataUser;
-                status === 'ATIVA' ? status = 'INATIVA' : status = 'ATIVA';
-                await UserService.activateDeactivateUser(id, status);
-                res.status(201).send({ message: `Status da categoria atualizado para "${status}"!` });
-            }
-        } else {
-            res.status(400).send({ message: 'ID inválido!' });
+        const isValidPass = validates.paramsPassword(senha);
+        if (!isValidPass) {
+            const message = 'Senha inválida!';
+            throw new NotFoundError(message);
         }
+
+        const isValidCPF = validates.paramsCPF(cpf);
+        if (!isValidCPF) {
+            const message = 'CPF inválido!';
+            throw new NotFoundError(message);
+        }
+
+        const isValidUF = validates.paramsUf(uf);
+        if (!isValidUF) {
+            const message = 'Estado da Federação inválido!';
+            throw new NotFoundError(message);
+        }
+
+        req.body.senha = md5(req.body.senha);
+
+        const updateUser = await UserService.updateUser(id, req.body);
+        if (!updateUser) {
+            res.status(404).send({ message: 'Usuário não localizado!' });
+        } else {
+            res.status(201).send({ message: 'Usuário atualizado!' });
+        };
     };
 
     static deleteUserById = async (req, res) => {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
 
-        if (isValideID) {
-            const deleteUser = await UserService.deleteUserById(id);
-            if (!deleteUser) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                res.status(204);
-            };
-        } else {
+        if (!isValideID) {
             res.status(400).send({ message: 'ID inválido!' });
         }
+
+        const deleteUser = await UserService.deleteUserById(id);
+        if (!deleteUser) {
+            res.status(404).send({ message: 'Usuário não localizado!' });
+        } else {
+            res.status(204);
+        };
     };
 };
 
