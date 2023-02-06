@@ -1,5 +1,8 @@
-FROM node
+FROM node:18
 WORKDIR /app
-COPY . .
+COPY package.json /app/
+COPY package-lock.json /app/
 RUN npm install
+COPY . .
+CMD npm test
 ENTRYPOINT npm start
