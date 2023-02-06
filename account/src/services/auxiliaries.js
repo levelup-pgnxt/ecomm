@@ -25,13 +25,13 @@ const validates = {
             'string.min': `'O campo "senha" deve ter no mínimo 8 caracteres!'`,
             'any.required': 'O campo "senha" é obrigatório!'
         }),
-        cpf: Joi.string().empty().required().pattern(/^[0-9]{11}$/).messages({
+        cpf: Joi.string().empty().required().pattern(/^\d{11}$/).messages({
             'string.base': 'O campo "cpf" deve ser do tipo string!',
             'string.empty': 'O campo "cpf" não deve ser vazio!',
             'string.pattern.base': 'O campo "cpf" deve possuir 11 números!',
             'any.required': 'O campo "cpf" é obrigatório!'
         }),
-        telefone: Joi.string().empty().required().pattern(/^[0-9]{10,13}$/).messages({
+        telefone: Joi.string().empty().required().pattern(/^\d{10,13}$/).messages({
             'string.base': 'O campo "telefone" deve ser do tipo string!',
             'string.empty': 'O campo "telefone" não deve ser vazio!',
             'string.pattern.base': 'O campo "telefone" deve possuir 1O ou 13 números!',
@@ -79,7 +79,7 @@ const validates = {
                 'string.pattern.base': 'O campo "uf" deve possuir duas letras maiúsculas!',
                 'any.required': 'O campo "uf" é obrigatório!'
             }),
-            cep: Joi.string().empty().required().pattern(/^[0-9]{8}$/).messages({
+            cep: Joi.string().empty().required().pattern(/^\d{8}$/).messages({
                 'string.base': 'O campo "cep" deve ser do tipo string!',
                 'string.empty': 'O campo "cep" não deve ser vazio!',
                 'string.pattern.base': 'O campo "cep" deve conter 8 números!',
@@ -89,14 +89,16 @@ const validates = {
     })),
 
     paramsPassword(pass) {
-        const regexString = new RegExp(/[a-z]/i);
+        const regexStringLower = new RegExp(/[a-z]/);
+        const regexStringUpper = new RegExp(/[A-Z]/);
         const regexNumber = new RegExp(/\d/);
         const regexSpecial = new RegExp(/[@$%#&*!?\.+-]/);
-        const hasString = regexString.test(pass);
+        const hasStringLower = regexStringLower.test(pass);
+        const hasStringUpper = regexStringUpper.test(pass);
         const hasNumber = regexNumber.test(pass);
         const hasSpecial = regexSpecial.test(pass);
 
-        const validatePass = hasString && hasNumber && hasSpecial;
+        const validatePass = hasStringLower && hasStringUpper && hasNumber && hasSpecial;
         return validatePass;
     },
 
@@ -107,7 +109,6 @@ const validates = {
     paramsCPF(cpf) {
         let Soma = 0;
         let Resto = 0;
-        Soma = 0;
         if (cpf === "00000000000") return false;
         
         for (let i = 1; i <= 9; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
@@ -121,10 +122,10 @@ const validates = {
 
         Resto = (Soma * 10) % 11;
         
-        if ((Resto == 10) || (Resto == 11))  Resto = 0;
+        if ((Resto === 10) || (Resto === 11))  Resto = 0;
 
-        if (Resto != parseInt(cpf.substring(10, 11))) return false;
-        return true;        
+        if (Resto !== parseInt(cpf.substring(10, 11))) return false;
+        return true;
     },
 };
 
