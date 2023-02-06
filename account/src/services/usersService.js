@@ -7,13 +7,13 @@ class UserService {
     };
 
     static getUserById = async (id) => {
-        const category = await users.findById(id);
-        return category;
+        const user = await users.findById(id);
+        return user;
     };
 
     static getUserByName = async (name) => {
-        const category = await users.find({ nome: { $regex: name }});
-        return category;
+        const user = await users.find({ nome: { $regex: name }});
+        return user;
     };
 
     static createUser = async (data) => {
@@ -22,13 +22,14 @@ class UserService {
         return newUser;
     };
 
-    static updateUser = async (id, nome) => {
-        const result = await users.findByIdAndUpdate(id, { $set: { nome: nome } });
+    static updateUser = async (id, data) => {
+        const result = await users.findByIdAndUpdate(id, { $set: data }, { new: true });
         return result;
     };
 
     static deleteUserById = async (id) => {
         const result = await users.findByIdAndDelete(id);
+        console.log(result);
         return result;
     };
 
