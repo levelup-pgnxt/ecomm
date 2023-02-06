@@ -76,7 +76,11 @@ class CategoryController {
                 res.status(404).send({ message: 'Categoria não localizada!' });
             } else {
                 let { status } = dataCategory;
-                status === 'ATIVA' ? status = 'INATIVA' : status = 'ATIVA';
+                if (status === 'ATIVA') {
+                    status = 'INATIVA';
+                } else {
+                    status = 'ATIVA';
+                }
                 await CategoryService.activateDeactivateCategory(id, status);
                 res.status(201).send({ message: `Status da categoria atualizado para "${status}"!` });
             }
