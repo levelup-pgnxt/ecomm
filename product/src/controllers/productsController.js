@@ -135,7 +135,7 @@ class ProductController {
             if (!deleteProduct) {
                 res.status(404).send({ message: 'Categoria não localizada!' });
             } else {
-                res.status(204);
+                res.status(204).send();
             };
         } else {
             res.status(400).send({ message: 'ID inválido!' });
