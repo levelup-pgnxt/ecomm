@@ -1,4 +1,4 @@
-// regra de negócio -> validação de dados
+// regra de negócio -> validação de estrutura
 
 import mongoose from "mongoose";
 
