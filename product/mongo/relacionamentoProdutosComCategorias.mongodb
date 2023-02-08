@@ -1,8 +1,7 @@
 use('ecomm-product');
 db.products.find({}).forEach((product) => {
     const eachCateg = db.categories.find(
-        { nomeCategoria: product.categoria },
-        { _id: 0 }
+        { nomeCategoria: product.categoria }
     ).toArray()[0];
 
     product.categoria = eachCateg;
