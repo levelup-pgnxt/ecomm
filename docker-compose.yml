@@ -4,7 +4,7 @@ services:
     build: ./product
     container_name: ecomm-product
     ports:
-      - "3002:3002"
+      - "3003:3003"
 
   account:
     build: ./account
