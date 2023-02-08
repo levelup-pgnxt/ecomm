@@ -1,5 +1,5 @@
 import products from "../models/Products.js";
-import categories from "../models/Categories.js";
+import mongoose from "mongoose";
 
 function validationName(name) {
     let regex = /^\D.../gm
@@ -21,15 +21,14 @@ function validationQuantidadeEstoque(estoque) {
     }
     return true
 }
-// async function validationCategoryId(id) {
-//     let cat = await categories.findById(id)
-//     if (cat == null) {
-//         return false
-//     }
-//     return true
-// }
 
-//mongoose.Types.ObjectId.isValid(id)
+function validationId(id) {
+    let i = mongoose.Types.ObjectId.isValid(id)
+    if (i)  
+        return true;
+    return false;
+}
+
 class ProductController {
 
 
@@ -58,7 +57,8 @@ class ProductController {
         let v2 = validationPrecoUnitario(product.precoUnitario)
         let v3 = validationQuantidadeEstoque(product.quantidadeEmEstoque)
         let v4 = validationSlug(product.slug)
-        
+        let v5 = validationId(product.categoria.id)
+
         if (v1 == false) {
             res.status(400).send({message: `Não passou na ValidationName`})
         } else if (v2 == false) {
@@ -67,6 +67,8 @@ class ProductController {
             res.status(400).send({message: `Não passou na ValidationQuantidadeEstoque`})
         } else if (v4 == false) {
             res.status(400).send({message: `Não passou na ValidationSlug`})
+        } else if (v5 == false) {
+            res.status(400).send({message: `Não passou na ValidationId`})
         } else {
             product.save((err) => {
                 if (err) {
@@ -78,13 +80,14 @@ class ProductController {
         }
     }
 
-    static updateProduct = async (req, res) => {
+    static updateProduct = (req, res) => {
         let id = req.params.id;
         const product = new products(req.body);
         let v1 = validationName(product.nomeProduto)
         let v2 = validationPrecoUnitario(product.precoUnitario)
         let v3 = validationQuantidadeEstoque(product.quantidadeEmEstoque)
         let v4 = validationSlug(product.slug)
+        let v5 = validationId(product.categoria.id)
         
         if (v1 == false) {
             res.status(400).send({message: `Não passou na ValidationName`})
@@ -94,6 +97,8 @@ class ProductController {
             res.status(400).send({message: `Não passou na ValidationQuantidadeEstoque`})
         } else if (v4 == false) {
             res.status(400).send({message: `Não passou na ValidationSlug`})
+        } else if (v5 == false) {
+            res.status(400).send({message: `Não passou na ValidationId`})
         } else {
             products.findByIdAndUpdate(id, {$set: req.body}, (err) => {
                 if (err) {
