@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-mongoose.connect("mongodb+srv://admin:123@cluster0.ovjlpse.mongodb.net/ecomm");
+mongoose.connect('mongodb://admin:secret@mongodb:27017/ecomm-product?authSource=admin');
 
 let db = mongoose.connection;
 
