@@ -3,10 +3,14 @@ services:
   product:
     container_name: ecomm-product
     build: ./product
+    ports:
+      -"3001:3001"
 
   account:
     container_name: ecomm-account
     build: ./account
+    ports:
+      -"3002:3002"
 
   mongo:
     container_name: mongo-alura
