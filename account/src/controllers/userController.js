@@ -83,14 +83,32 @@ class UserController {
 
     static updateUser = (req, res) => {
         const id = req.params.id;
-        users.findByIdAndUpdate(id, {$set: req.body}, (err) => {
-            if(err) {
-                res.status(500).send({message: err.message})
-            } else {
-                res.status(200).send({message: `User updated sucessfully`})
-            }
-        })
+        let User = new users(req.body);
+        if (validationName(User.nomeCategoria) == false) {
+            res.status(400).send({message: `Name validation failed`})
+        } else if (validationEmail(User.email) == false) {
+            res.status(400).send({message: `Email validation failed`})
+        } else if (validationPassword(User.senha) == false) {
+            res.status(400).send({message: `Password validation failed`})
+        } else if (validationCpf(User.cpf) == false) {
+            res.status(400).send({message: `Cpf validation failed`})
+        } else if (validationCep(User.endereco.cep) == false) {
+            res.status(400).send({message: `Cep validation failed`})
+        } else if (validationFone(User.telefone) == false) {
+            res.status(400).send({message: `PhoneNumber validation failed`})
+        } else if (validationState(User.endereco.estado) == false) {
+            res.status(400).send({message: `State validation failed`})
+        } else {
+            users.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+                if(err) {
+                    res.status(500).send({message: err.message})
+                } else {
+                    res.status(200).send({message: `User updated sucessfully`})
+                }
+            })
+        }
     }
+    
 
     static deleteUser = (req, res) => {
         const { id } = req.params
