@@ -1,0 +1,235 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Ecomm Accounts API",
+    "description": "Essa é uma API criada para o projeto **Ecomm**. \nO Projeto é um ecommerce baseado no Mercado Livre e demais ecommerces.\n\nEssa API é responsável pelas requisições nos usuários do **Ecomm**",
+    "version": "0.0.1",
+    "contact": {
+      "name": "Matheus Leme",
+      "email": "matheus.santos@pagonxt.com",
+      "url": "https://github.com/LemeLHP"
+    },
+    "license": {
+      "name": "Licença Pública",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  },
+  "paths": {
+    "/api/admin/users": {
+      "post": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "summary": "Cria um novo usuário.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      },
+      "get": {
+        "summary": "Recupera todas as informações de todos os usuários.",
+        "responses": {
+          "200": {
+            "description": "Successo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recupera um usuário pelo ID.",
+        "responses": {
+          "200": {
+            "description": "Sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "summary": "Atualiza os usuários pelo ID.",
+        "description": "Atualiza todas as informações dos usuários.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "summary": "Deleta um usuário pelo ID.",
+        "responses": {
+          "200": {
+            "description": "Usuário deletado com sucesso."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "userEmail": {
+            "type": "string"
+          },
+          "userPassword": {
+            "type": "string"
+          },
+          "userCpf": {
+            "type": "string"
+          },
+          "userPhone": {
+            "type": "string"
+          },
+          "userAdress": {
+            "type": "object",
+            "properties": {
+              "streetAddress": {
+                "type": "string"
+              },
+              "numberAddress": {
+                "type": "string"
+              },
+              "complementAddress": {
+                "type": "string"
+              },
+              "cepAdress": {
+                "type": "string"
+              },
+              "cityAddress": {
+                "type": "string"
+              },
+              "stateAddress": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/User"
+        }
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Usuário não autorizado.",
+        "content": {
+          "application/json": {
+            "example": "Unauthorized"
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Não encontrado.",
+        "content": {
+          "application/json": {
+            "example": "Not Found"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "auth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
