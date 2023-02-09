@@ -4,13 +4,13 @@ services:
     container_name: ecomm-product
     build: ./product
     ports:
-      -"3001:3001"
+      - 3001:3001
 
   account:
     container_name: ecomm-account
     build: ./account
     ports:
-      -"3002:3002"
+      - 3002:3002
 
   mongo:
     container_name: mongo-alura
@@ -25,5 +25,18 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
 
+  mysql:
+    container_name: mysql-ecomm
+    image: mysql
+    restart: always
+    volumes:
+      - mysql-ecomm-volume:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+
 volumes:
   db-mongo-alura:
+  mysql-ecomm-volume:
