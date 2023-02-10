@@ -1,4 +1,5 @@
-// import express from 'express';
+const express = require('express');
+const paymentsRoute = require('./paymentsRoutes');
 
 const API = 'API Finance';
 
@@ -7,11 +8,10 @@ const routes = (app) => {
         res.status(200).send({ titulo: API });
     });
 
-    // app.use(
-    //     express.json(),
-    //     categoriesRoutes,
-    //     productsRoutes,
-    // );
+    app.use(
+        express.json(),
+        paymentsRoute,
+    );
 };
 
 module.exports = routes;
