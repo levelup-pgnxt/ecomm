@@ -6,7 +6,7 @@ class Services {
     }
 
     async createRecord(data) {
-        return db[this.modelName].create(data);
+        return await db[this.modelName].create(data);
     }
 };
 
