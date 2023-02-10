@@ -14,11 +14,45 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Payments.init({
-    valor: DataTypes.DECIMAL,
-    nome: DataTypes.STRING,
-    numeroCartao: DataTypes.INTEGER,
-    expiracaoCartao: DataTypes.STRING,
-    cvvCartao: DataTypes.INTEGER
+    valor: {
+      type: DataTypes.DECIMAL(10,2),
+      notNull: true,
+      validate: {
+        funcaoValidadora: function(valor){
+          if(valor <= 0) throw new Error('O valor deve ser maior que 0')
+        }
+      }
+    },
+    nome: {
+      type: DataTypes.STRING,
+      notNull: true
+    },
+    numeroCartao: {
+      type: DataTypes.INTEGER,
+      notNull: true,
+      isCreditCard: true
+    },
+    expiracaoCartao: {
+      type: DataTypes.STRING,
+      notNull: true,
+      validate: {
+        dataExpiracaoCartao(data) {
+          if(!/^\d{4}-\d{2}$/.test(data)) {
+            throw new Error('O formato da data de expiração do cartão é yyyy-MM')
+          }
+        }
+      }
+    },
+    cvvCartao: {
+      type: DataTypes.INTEGER,
+      notNull: true,
+      len: [3]
+    },
+    status: {
+      type: DataTypes.STRING,
+      notNull: true,
+      isIn: [["CRIADO", "CONFIRMADO", "CANCELADO"]]
+    }
   }, {
     sequelize,
     modelName: 'Payments',
