@@ -41,23 +41,9 @@ class UserController {
         const { email, senha, cpf, endereco } = validates.paramsUser(req.body);
         const { uf } = endereco;
 
-        const isValidPass = validates.paramsPassword(senha);
-        if (!isValidPass) {
-            const message = 'Senha inválida!';
-            throw new NotFoundError(message);
-        }
-
-        const isValidCPF = validates.paramsCPF(cpf);
-        if (!isValidCPF) {
-            const message = 'CPF inválido!';
-            throw new NotFoundError(message);
-        }
-
-        const isValidUF = validates.paramsUf(uf);
-        if (!isValidUF) {
-            const message = 'Estado da Federação inválido!';
-            throw new NotFoundError(message);
-        }
+        validates.paramsPassword(senha);
+        validates.paramsCPF(cpf);
+        validates.paramsUf(uf);
 
         const isExist = await UserService.checkIsExistsUser(email);
         if (isExist) {

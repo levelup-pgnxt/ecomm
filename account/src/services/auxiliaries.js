@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import Joi from 'joi';
 import runSchema from './validator.js';
 import UF from './unidadesFederacao.js';
+import NotFoundError from '../errors/NotFoundError.js';
 
 const validates = {
     paramsID: (id) => mongoose.Types.ObjectId.isValid(id),
@@ -89,44 +90,78 @@ const validates = {
     })),
 
     paramsPassword(pass) {
-        const regexStringLower = new RegExp(/[a-z]/);
-        const regexStringUpper = new RegExp(/[A-Z]/);
-        const regexNumber = new RegExp(/\d/);
-        const regexSpecial = new RegExp(/[@$%#&*!?\.+-]/);
-        const hasStringLower = regexStringLower.test(pass);
-        const hasStringUpper = regexStringUpper.test(pass);
-        const hasNumber = regexNumber.test(pass);
-        const hasSpecial = regexSpecial.test(pass);
+        const regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
+        const hasPassword = regexPassword.test(pass);
+        if (!hasPassword) {
+            const regexStringLower = new RegExp(/[a-z]/);
+            const hasStringLower = regexStringLower.test(pass);
+            if (!hasStringLower) {
+                const message = 'Senha deve possuir pelo menos 1 caracter minúsculo!';
+                throw new NotFoundError(message);
+            }
+    
+            const regexStringUpper = new RegExp(/[A-Z]/);
+            const hasStringUpper = regexStringUpper.test(pass);
+            if (!hasStringUpper) {
+                const message = 'Senha deve possuir pelo menos 1 caracter maiúsculo!';
+                throw new NotFoundError(message);
+            }
 
-        const validatePass = hasStringLower && hasStringUpper && hasNumber && hasSpecial;
-        return validatePass;
+            const regexNumber = new RegExp(/\d/);
+            const hasNumber = regexNumber.test(pass);
+            if (!hasNumber) {
+                const message = 'Senha deve possuir pelo menos 1 número!';
+                throw new NotFoundError(message);
+            }
+
+            const regexSpecial = new RegExp(/[@$%#&*!?\.+-]/);
+            const hasSpecial = regexSpecial.test(pass);
+            if (!hasSpecial) {
+                const message = 'Senha deve possuir pelo menos 1 caracter especial "@$%#&*!?.+-"!';
+                throw new NotFoundError(message);
+            }
+        };
     },
 
     paramsUf(uf) {
-        return UF.includes(uf);
+        const isValidUF = UF.includes(uf);
+        if (!isValidUF) {
+            const message = 'Estado da Federação inválido!';
+            throw new NotFoundError(message);
+        }
     },
 
     paramsCPF(cpf) {
-        let Soma = 0;
-        let Resto = 0;
-        if (cpf === "00000000000") return false;
-        
-        for (let i = 1; i <= 9; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
-        Resto = (Soma * 10) % 11;
-        
-        if ((Resto === 10) || (Resto === 11))  Resto = 0;
-        if (Resto != parseInt(cpf.substring(9, 10))) return false;
-        
-        Soma = 0;
-        for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+        const validateCPF = (cpf) => {
+            let Resto = 0;
+            if (cpf === "00000000000") return false;
+            
+            Resto = somaCPF(cpf, 11);            
 
-        Resto = (Soma * 10) % 11;
-        
-        if ((Resto === 10) || (Resto === 11))  Resto = 0;
+            if ((Resto === 10) || (Resto === 11))  Resto = 0;
+            if (Resto != parseInt(cpf.substring(9, 10))) return false;
+            
+            Resto = somaCPF(cpf, 12);
 
-        if (Resto !== parseInt(cpf.substring(10, 11))) return false;
-        return true;
+            if ((Resto === 10) || (Resto === 11))  Resto = 0;
+    
+            if (Resto !== parseInt(cpf.substring(10, 11))) return false;
+    
+            return true;
+        };
+        const isValidCPF = validateCPF(cpf);
+        if (!isValidCPF) {
+            const message = 'CPF inválido!';
+            throw new NotFoundError(message);
+        }
     },
+};
+
+const somaCPF = (cpf, dig) => {
+    let Soma = 0;
+    for (let i = 1; i <= dig - 2; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (dig - i);
+    const Resto = (Soma * 10) % 11;
+    return Resto;
 };
 
 export default validates;

@@ -5,6 +5,10 @@ const MESSAGE_ERROR = {
     'Senha inválida!': 400,
     'Estado da Federação inválido!': 400,
     'CPF inválido!': 400,
+    'Senha deve possuir pelo menos 1 caracter minúsculo!': 400,
+    'Senha deve possuir pelo menos 1 caracter maiúsculo!': 400,
+    'Senha deve possuir pelo menos 1 número!': 400,
+    'Senha deve possuir pelo menos 1 caracter especial "@$%#&*!?.+-"!': 400,
 };
 
 class NotFoundError extends Error {
