@@ -2,18 +2,28 @@ version: "3.9"
 services:
   product-container:
     container_name: product-ecomm
-    build: ./product/ 
+    build: ./product/
+    ports:
+      - 3001:3001
     volumes:
       - ./:/app-product
     environment:
       - PORT=3001
+      - DB_HOST=mongo-database
+    depends_on:
+      - mongo-database
   account-container:
     container_name: account-ecomm
     build: ./account/
+    ports:
+      - 3002:3002
     volumes:
       - ./:/app-account
     environment:
       - PORT=3002
+      - DB_HOST=mongo-database
+    depends_on:
+      - mongo-database
   mongo-database:
     container_name: 'mongo-ecomm'
     image: mongo:5
