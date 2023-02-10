@@ -16,6 +16,11 @@ class Services {
     async criaRegistro(dados) {
         return database[this.nomeDoModelo].create(dados)
     }
+
+    async atualizaRegistro(dadosAtualizados, id, transacao = {}){
+        return database[this.nomeDoModelo]
+            .update(dadosAtualizados, { where: { id: id }}, transacao )
+    }
 }
 
 module.exports = Services;
