@@ -90,7 +90,7 @@ const validates = {
     })),
 
     paramsPassword(pass) {
-        const regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
+        const regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)(?=.*?[#?!@$%^&*-]).{8,}$/);
         const hasPassword = regexPassword.test(pass);
         if (!hasPassword) {
             const regexStringLower = new RegExp(/[a-z]/);
