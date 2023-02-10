@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       notNull: true
     },
     numeroCartao: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       notNull: true,
       isCreditCard: true
     },

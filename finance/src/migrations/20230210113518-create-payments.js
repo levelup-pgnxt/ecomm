@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       numeroCartao: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       expiracaoCartao: {
         type: Sequelize.STRING
