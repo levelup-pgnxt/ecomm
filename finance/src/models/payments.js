@@ -51,7 +51,10 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       type: DataTypes.STRING,
       notNull: true,
-      isIn: [["CRIADO", "CONFIRMADO", "CANCELADO"]]
+      isIn: {
+        args: [["CRIADO", "CONFIRMADO", "CANCELADO"]],
+        msg: 'Dado do tipo status inválido'
+      }
     }
   }, {
     sequelize,
