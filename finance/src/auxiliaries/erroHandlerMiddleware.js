@@ -12,4 +12,4 @@ const errorHandlerMiddleware = (err, _req, res, _next) => {
     }
 };
   
-export default errorHandlerMiddleware;
+module.exports = errorHandlerMiddleware;
