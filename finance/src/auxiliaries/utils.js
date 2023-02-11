@@ -8,7 +8,7 @@ const validates = {
             'number.greater': 'O campo "valor" deve ser maior que zero!',
             'any.required': 'O campo "valor" é obrigatório!'
         }),
-        name: Joi.string().min(3).empty().required().pattern(/^[A-Za-z]+$/).messages({
+        name: Joi.string().min(3).empty().required().pattern(/^[A-Za-z\s]+$/).messages({
             'string.base': 'O campo "nome" deve ser do tipo texto!',
             'string.empty': 'O campo "nome" não deve ser vazio!',
             'string.min': 'O campo "nome" deve ter no mínimo 3 caracteres!',
@@ -23,7 +23,7 @@ const validates = {
             'string.creditCard': 'O campo deve conter um número de cartão válido!',
             'any.required': 'O campo "número do cartão" é obrigatório!'
         }),
-        expiration: Joi.string().empty().required().pattern(/^([0-1][0-2])\/([2][0]\d{2})$/).messages({
+        expiration: Joi.string().empty().required().pattern(/^([0-1]\d)\/(20\d{2})$/).messages({
             'string.base': 'O campo "expiração" deve ser do tipo texto!',
             'string.empty': 'O campo "expiração" não deve ser vazio!',
             'string.pattern.base': 'O campo "expiração" deve possuir MM/AAAA (Mês/Ano)!',
