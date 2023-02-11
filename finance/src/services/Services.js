@@ -8,6 +8,10 @@ class Services {
     async createRecord(data) {
         return await db[this.modelName].create(data);
     }
+
+    async getRecordByPk(id) {
+        return await db[this.modelName].findByPk(id);
+    }
 };
 
 module.exports = Services;
