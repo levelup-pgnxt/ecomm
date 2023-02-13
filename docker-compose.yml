@@ -23,7 +23,7 @@ services:
     volumes:
       - /data/db:/data/db
   mysql:
-    container_name: msql-ecomm
+    container_name: mysql-ecomm
     image: mysql
     restart: always
     environment:
