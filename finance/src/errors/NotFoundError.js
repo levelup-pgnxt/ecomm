@@ -2,13 +2,6 @@ const MESSAGE_ERROR = {
     'Categoria já cadastrada!': 409,
     'Produto já cadastrado!': 409,
     'Valor mínimo maior que valor máximo. Operação não permitida!': 405,
-    'Senha inválida!': 400,
-    'Estado da Federação inválido!': 400,
-    'CPF inválido!': 400,
-    'Senha deve possuir pelo menos 1 caracter minúsculo!': 400,
-    'Senha deve possuir pelo menos 1 caracter maiúsculo!': 400,
-    'Senha deve possuir pelo menos 1 número!': 400,
-    'Senha deve possuir pelo menos 1 caracter especial "@$%#&*!?.+-"!': 400,
 };
 
 class NotFoundError extends Error {
