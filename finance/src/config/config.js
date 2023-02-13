@@ -1,0 +1,15 @@
+require('dotenv').config();
+
+const config = {
+  username: process.env.MYSQL_USER,
+  password: null,
+  database: process.env.MYSQL_DATABASE,
+  host: process.env.MYSQL_HOST,
+  dialect: 'mysql',
+};
+
+module.exports = {
+  development: config,
+  test: config,
+  production: config,
+};
