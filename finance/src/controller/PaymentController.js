@@ -41,17 +41,51 @@ class PaymentsController {
 
         if (novoPayment.status === undefined) {
             const novoPaymentCriado = await paymentsServices.criaRegistro(novoPayment, novoPayment.status = "CRIADO")
+            const links = [
+                {
+                  "rel": "self",
+                  "method": "GET",
+                  "href": `http://localhost:3003/admin/payments/${novoPaymentCriado.id}`
+                },
+                {
+                  "rel": "CONFIRMAR",
+                  "method": "PATCH",
+                  "href": `http://localhost:3003/admin/payments/${novoPaymentCriado.id}/confirmado`
+                },
+                {
+                  "rel": "CANCELAR",
+                  "method": "PATCH",
+                  "href": `http://localhost:3003/admin/payments/${novoPaymentCriado.id}/cancelado`
+                }
+              ]
             return res.status(201)
                 .location(`/payments/${novoPaymentCriado.id}`)
-                .send({ id: novoPaymentCriado.id, status: novoPaymentCriado.status })
+                .send({ id: novoPaymentCriado.id, status: novoPaymentCriado.status, links: links })
         } else if (novoPayment.status != "CRIADO") {
             return res.status(400).send({ message: "O status correto para criação é CRIADO" })
         } else {
             try {
                 const novoPaymentCriado = await paymentsServices.criaRegistro(novoPayment)
+                const links = [
+                    {
+                      "rel": "self",
+                      "method": "GET",
+                      "href": `http://localhost:3003/admin/payments/${novoPaymentCriado.id}`
+                    },
+                    {
+                      "rel": "CONFIRMAR",
+                      "method": "PATCH",
+                      "href": `http://localhost:3003/admin/payments/${novoPaymentCriado.id}/confirmado`
+                    },
+                    {
+                      "rel": "CANCELAR",
+                      "method": "PATCH",
+                      "href": `http://localhost:3003/admin/payments/${novoPaymentCriado.id}/cancelado`
+                    }
+                  ]
                 return res.status(201)
                     .location(`/payments/${novoPaymentCriado.id}`)
-                    .send({ id: novoPaymentCriado.id, status: novoPaymentCriado.status })
+                    .send({ id: novoPaymentCriado.id, status: novoPaymentCriado.status, links: links })
             } catch (error) {
                 return res.status(500).json(error.message)
             }
