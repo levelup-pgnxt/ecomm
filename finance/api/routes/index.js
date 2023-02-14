@@ -1,6 +1,5 @@
-import payments from './paymentsRoute';
+//import payments from './paymentsRoute';
 
 export default app => {
-  app.use(bodyParser.json());
-  app.get('/', (req, res) => res.send('Olá'));
+  app.get('/', (req, res) => res.send('Ola'));
 };

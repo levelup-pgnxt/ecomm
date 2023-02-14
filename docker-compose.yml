@@ -28,6 +28,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: ecomm-finance
     ports:
       - 3306:3306
     volumes:
