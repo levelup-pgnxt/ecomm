@@ -4,5 +4,5 @@ COPY package.json /app/
 COPY package-lock.json /app/
 RUN npm install
 COPY . .
-CMD npm test
-ENTRYPOINT npm start
+EXPOSE 3001
+ENTRYPOINT ["npm", "start"]
