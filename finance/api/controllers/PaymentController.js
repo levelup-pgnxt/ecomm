@@ -6,7 +6,7 @@ class PaymentController{
         const newPayment = req.body;
         try{
             const newPaymentCreated = await database.Payments.create(newPayment);
-            return res.status(201).json({Id: newPaymentCreated.id, Status: newPaymentCreated.status});
+            return res.location(`/payments/${newPaymentCreated.id}`).status(201).json({Id: newPaymentCreated.id, Status: newPaymentCreated.status});
         }catch (error){
             return res.status(500).json(error.message);
         }
@@ -20,7 +20,14 @@ class PaymentController{
                     id: Number(id)
                 }
             });
-            return res.status(200).json(requestedPayment.id, requestedPayment.status); //terminar de inserir o que falta do retorno da requisição
+            return res.status(200).json({
+                Id: requestedPayment.id, 
+                Status: requestedPayment.status,
+                ExpirationDate: requestedPayment.expirationDate,
+                CardNumber: requestedPayment.cardNumber,
+                CardHolder: requestedPayment.nameCard,
+                MonetaryValue: requestedPayment.monetaryValue
+            }); 
         } catch (error){
             return res.status(500).json(error.message);
         }
