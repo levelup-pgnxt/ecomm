@@ -4,16 +4,18 @@ import categoriesController from '../controllers/categoriesController.js';
 const router = express.Router();
 
 const path = '/categories';
-const pathId = '/categories/:id';
-const pathAdmin = '/admin/categories/:id'
+const pathId = `${path}/:id`;
+const pathAdminId = `/admin${path}/:id`;
+const pathAdmin = `/admin${path}`;
+const pathSearch = `${path}/search`
 
 router
     .get(path, categoriesController.getAllCategories)
-    .get(`${path}/search`, categoriesController.getCategoryByName)
+    .get(pathSearch, categoriesController.getCategoryByName)
     .get(pathId, categoriesController.getCategoryById)
-    .post(`/admin${path}`, categoriesController.createCategory)
-    .put(pathAdmin , categoriesController.updateCategory)
-    .patch(pathAdmin, categoriesController.activateDeactivateCategory)
-    .delete(pathAdmin, categoriesController.deleteCategoryById)
+    .post(pathAdmin, categoriesController.createCategory)
+    .put(pathAdminId , categoriesController.updateCategory)
+    .patch(pathAdminId, categoriesController.activateDeactivateCategory)
+    .delete(pathAdminId, categoriesController.deleteCategoryById)
 
 export default router;
