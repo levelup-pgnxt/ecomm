@@ -13,12 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       Payments.hasOne(models.Invoices, {
         foreignKey: 'paymentId'
       })
-      Payments.belongsTo(models.Invoices, {
-        foreignKey: {
-          name: 'invoiceId',
-          unique: true
-        }
-      })
     }
   }
   Payments.init({

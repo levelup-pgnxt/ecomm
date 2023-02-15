@@ -14,7 +14,8 @@ class Services {
       }
 
     async criaRegistro(dados) {
-        return database[this.nomeDoModelo].create(dados)
+        return database[this.nomeDoModelo]
+            .create(dados)
     }
 
     async atualizaRegistro(dadosAtualizados, id, transacao = {}){

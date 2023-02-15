@@ -10,13 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Invoices.hasOne(models.Payments, {
-        foreignKey: 'invoiceId'
-      })
       Invoices.belongsTo(models.Payments, {
         foreignKey: {
-          name: 'paymentId',
-          unique: true
+          name: 'paymentId'
         }
       })
     }
