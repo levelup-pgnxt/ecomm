@@ -1,0 +1,466 @@
+[{
+  "_id": {
+    "$oid": "63c875bf7d151005f1624491"
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1674081727563"
+    }
+  },
+  "enderecoEntrega": {
+    "rua": "Rua João Martins da Silva Filho",
+    "numero": "230",
+    "complemento": "Apto 801",
+    "bairro": "Alto Boqueirão",
+    "cidade": "Curitiba",
+    "uf": "PR",
+    "cep": "81720-342"
+  },
+  "itens": [
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d3985"
+      },
+      "nome": "Monitor Dell 27\"",
+      "precoUnitario": {
+        "$numberDecimal": "1889.00"
+      },
+      "desconto": {
+        "$numberDecimal": "0"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "0.00"
+      },
+      "subTotal": {
+        "$numberDecimal": "1889.00"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "1889.00"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d398d"
+      },
+      "nome": "Central multimidia",
+      "precoUnitario": {
+        "$numberDecimal": "711.18"
+      },
+      "desconto": {
+        "$numberDecimal": "0"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "0.00"
+      },
+      "subTotal": {
+        "$numberDecimal": "711.18"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "711.18"
+      }
+    }
+  ],
+  "nome": "Túlio Yoshimura",
+  "qtdeTotalItens": 2,
+  "userId": {
+    "$oid": "63c5ca11d8b003c583732c91"
+  },
+  "valorTotal": {
+    "$numberDecimal": "2600.18"
+  },
+  "valorTotalDescontos": {
+    "$numberDecimal": "0.00"
+  },
+  "valorTotalLiquido": {
+    "$numberDecimal": "2600.18"
+  }
+},{
+  "_id": {
+    "$oid": "63c8780f7d151005f1624cd6"
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1674082319263"
+    }
+  },
+  "enderecoEntrega": {
+    "rua": "Quadra 511 Conjunto 11",
+    "numero": "88",
+    "bairro": "Recanto das Emas",
+    "cidade": "Brasília",
+    "uf": "DF",
+    "cep": "72660-333"
+  },
+  "itens": [
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d3981"
+      },
+      "nome": "Sofá 3 lugares",
+      "precoUnitario": {
+        "$numberDecimal": "2500.00"
+      },
+      "desconto": {
+        "$numberDecimal": "250.00"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "250.00"
+      },
+      "subTotal": {
+        "$numberDecimal": "2500.00"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "2250.00"
+      }
+    }
+  ],
+  "nome": "Alice Gonçalves",
+  "qtdeTotalItens": 1,
+  "userId": {
+    "$oid": "63c5ca11d8b003c583732c93"
+  },
+  "valorTotal": {
+    "$numberDecimal": "2500.00"
+  },
+  "valorTotalDescontos": {
+    "$numberDecimal": "250.00"
+  },
+  "valorTotalLiquido": {
+    "$numberDecimal": "2250.00"
+  }
+},{
+  "_id": {
+    "$oid": "63c879c77d151005f16250dd"
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1674082759940"
+    }
+  },
+  "enderecoEntrega": {
+    "rua": "Rua Guedes Nogueira",
+    "numero": "529",
+    "bairro": "Pitanguinha",
+    "cidade": "Maceió",
+    "uf": "AL",
+    "cep": "57052-372"
+  },
+  "itens": [
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d398f"
+      },
+      "nome": "Galaxy Tab S8",
+      "precoUnitario": {
+        "$numberDecimal": "5939.10"
+      },
+      "desconto": {
+        "$numberDecimal": "0"
+      },
+      "qtdeItem": 2,
+      "valorDescontos": {
+        "$numberDecimal": "0.00"
+      },
+      "subTotal": {
+        "$numberDecimal": "11878.20"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "11878.20"
+      }
+    }
+  ],
+  "nome": "Renato Mantovani",
+  "qtdeTotalItens": 2,
+  "userId": {
+    "$oid": "63c5ca11d8b003c583732c94"
+  },
+  "valorTotal": {
+    "$numberDecimal": "11878.20"
+  },
+  "valorTotalDescontos": {
+    "$numberDecimal": "0.00"
+  },
+  "valorTotalLiquido": {
+    "$numberDecimal": "11878.20"
+  }
+},{
+  "_id": {
+    "$oid": "63c87bdf7d151005f1625583"
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1674083295856"
+    }
+  },
+  "enderecoEntrega": {
+    "rua": "Rua Júlio de Castilhos 711",
+    "numero": "230",
+    "complemento": "Apto 502",
+    "bairro": "Centro",
+    "cidade": "Osório",
+    "uf": "RS",
+    "cep": "95520-975"
+  },
+  "itens": [
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d3982"
+      },
+      "nome": "Clean Architecture",
+      "precoUnitario": {
+        "$numberDecimal": "102.90"
+      },
+      "desconto": {
+        "$numberDecimal": "10.2900"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "10.29"
+      },
+      "subTotal": {
+        "$numberDecimal": "102.90"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "92.61"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d3986"
+      },
+      "nome": "Implementing Domain-Driven Design",
+      "precoUnitario": {
+        "$numberDecimal": "144.07"
+      },
+      "desconto": {
+        "$numberDecimal": "14.4070"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "14.41"
+      },
+      "subTotal": {
+        "$numberDecimal": "144.07"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "129.66"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d3988"
+      },
+      "nome": "Clean Code",
+      "precoUnitario": {
+        "$numberDecimal": "95.17"
+      },
+      "desconto": {
+        "$numberDecimal": "9.5170"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "9.52"
+      },
+      "subTotal": {
+        "$numberDecimal": "95.17"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "85.65"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d398b"
+      },
+      "nome": "Refactoring Improving the Design of Existing Code",
+      "precoUnitario": {
+        "$numberDecimal": "173.90"
+      },
+      "desconto": {
+        "$numberDecimal": "17.3900"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "17.39"
+      },
+      "subTotal": {
+        "$numberDecimal": "173.90"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "156.51"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d398e"
+      },
+      "nome": "Building Microservices",
+      "precoUnitario": {
+        "$numberDecimal": "300.28"
+      },
+      "desconto": {
+        "$numberDecimal": "30.0280"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "30.03"
+      },
+      "subTotal": {
+        "$numberDecimal": "300.28"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "270.25"
+      }
+    }
+  ],
+  "nome": "Mariana Hamada",
+  "qtdeTotalItens": 5,
+  "userId": {
+    "$oid": "63c5ca11d8b003c583732c92"
+  },
+  "valorTotal": {
+    "$numberDecimal": "816.32"
+  },
+  "valorTotalDescontos": {
+    "$numberDecimal": "81.64"
+  },
+  "valorTotalLiquido": {
+    "$numberDecimal": "734.68"
+  }
+},{
+  "_id": {
+    "$oid": "63c87f057d151005f1625b04"
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1674084101958"
+    }
+  },
+  "enderecoEntrega": {
+    "rua": "Rua Júlio de Castilhos 711",
+    "numero": "230",
+    "complemento": "Apto 502",
+    "bairro": "Centro",
+    "cidade": "Osório",
+    "uf": "RS",
+    "cep": "95520-975"
+  },
+  "itens": [
+    {
+      "_id": {
+        "$oid": "63c1ac77f26fe8fee69d3984"
+      },
+      "nome": "iPhone 13 Pro",
+      "precoUnitario": {
+        "$numberDecimal": "9176.00"
+      },
+      "desconto": {
+        "$numberDecimal": "0"
+      },
+      "qtdeItem": 1,
+      "valorDescontos": {
+        "$numberDecimal": "0.00"
+      },
+      "subTotal": {
+        "$numberDecimal": "9176.00"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "9176.00"
+      }
+    }
+  ],
+  "nome": "Mariana Hamada",
+  "qtdeTotalItens": 1,
+  "userId": {
+    "$oid": "63c5ca11d8b003c583732c92"
+  },
+  "valorTotal": {
+    "$numberDecimal": "9176.00"
+  },
+  "valorTotalDescontos": {
+    "$numberDecimal": "0.00"
+  },
+  "valorTotalLiquido": {
+    "$numberDecimal": "9176.00"
+  }
+},{
+  "_id": {
+    "$oid": "63c880507d151005f1625f87"
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1674084432365"
+    }
+  },
+  "enderecoEntrega": {
+    "rua": "Rua Guedes Nogueira",
+    "numero": "529",
+    "bairro": "Pitanguinha",
+    "cidade": "Maceió",
+    "uf": "AL",
+    "cep": "57052-372"
+  },
+  "itens": [
+    {
+      "_id": {
+        "$oid": "63c806d6c5d2d456bbe411fe"
+      },
+      "nome": "Cabo HDMI 2.0 - 4k",
+      "precoUnitario": {
+        "$numberDecimal": "34.99"
+      },
+      "desconto": {
+        "$numberDecimal": "0"
+      },
+      "qtdeItem": 3,
+      "valorDescontos": {
+        "$numberDecimal": "0.00"
+      },
+      "subTotal": {
+        "$numberDecimal": "104.97"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "104.97"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "63c806d6c5d2d456bbe411ff"
+      },
+      "nome": "Camiseta Masculina Fitness Tech 2.0",
+      "precoUnitario": {
+        "$numberDecimal": "99.99"
+      },
+      "desconto": {
+        "$numberDecimal": "19.99"
+      },
+      "qtdeItem": 5,
+      "valorDescontos": {
+        "$numberDecimal": "99.95"
+      },
+      "subTotal": {
+        "$numberDecimal": "499.95"
+      },
+      "subTotalLiquido": {
+        "$numberDecimal": "400.00"
+      }
+    }
+  ],
+  "nome": "Renato Mantovani",
+  "qtdeTotalItens": 8,
+  "userId": {
+    "$oid": "63c5ca11d8b003c583732c94"
+  },
+  "valorTotal": {
+    "$numberDecimal": "604.92"
+  },
+  "valorTotalDescontos": {
+    "$numberDecimal": "99.95"
+  },
+  "valorTotalLiquido": {
+    "$numberDecimal": "504.97"
+  }
+}]

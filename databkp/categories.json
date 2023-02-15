@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0eee"
+  },
+  "nome": "INFORMÁTICA",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0eef"
+  },
+  "nome": "BELEZA",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0ef0"
+  },
+  "nome": "CELULARES",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0ef1"
+  },
+  "nome": "MÓVEIS",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0ef2"
+  },
+  "nome": "LUXO",
+  "status": "INATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0ef3"
+  },
+  "nome": "ESPORTE",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0ef4"
+  },
+  "nome": "AUTOMOTIVA",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63bc6ed7b0e9faa4cdfa0ef5"
+  },
+  "nome": "LIVROS",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63dc77ca4ad15dc2adf4199f"
+  },
+  "nome": "CAMA, MESA E BANHO",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63dd8be23138b0c3320e26fe"
+  },
+  "nome": "UTILIDADES DOMÉSTICAS",
+  "status": "ATIVA"
+},{
+  "_id": {
+    "$oid": "63dd925c8988fc9d6d4465d8"
+  },
+  "nome": "GAMES",
+  "status": "ATIVA"
+}]
