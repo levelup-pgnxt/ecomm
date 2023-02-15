@@ -1,11 +1,11 @@
-import express from 'express';
-import routes from './routes/index.js';
+const express = require('express')
+const routes = require('./routes')
 
 const app = express();
-const port = 3306;
+const port = 3001;
 
 routes(app);
 
 app.listen(port, () => console.log(`Servidor escutando em http://localhost:${port}`));
 
-export default app;
+module.exports = app

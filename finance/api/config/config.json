@@ -2,8 +2,8 @@
   "development": {
     "username": "root",
     "password": "secret",
-    "database": "ecomm_finance",
-    "host": "127.0.0.1",
+    "database": "ecomm-finance",
+    "host": "mysql",
     "dialect": "mysql"
   },
   "test": {

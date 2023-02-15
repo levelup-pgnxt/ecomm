@@ -3,5 +3,5 @@ WORKDIR /finance
 COPY . .
 RUN npm config set strict-ssl false
 RUN npm install
-EXPOSE 3306
+EXPOSE 3001
 ENTRYPOINT npm start

@@ -1,5 +1,8 @@
-//import payments from './paymentsRoute';
+const bodyParser = require('body-parser');
+const payments = require('./paymentsRoute')
 
-export default app => {
-  app.get('/', (req, res) => res.send('Ola'));
-};
+
+module.exports = app => {
+  app.use(bodyParser.json())
+  app.use(payments)
+}
