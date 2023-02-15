@@ -4,15 +4,17 @@ import usersController from '../controllers/usersController.js';
 const router = express.Router();
 
 const path = '/users';
-const pathId = '/users/:id';
-const pathAdmin = '/admin/users/:id'
+const pathId = `${path}/:id`;
+const pathAdmin = `/admin${path}`
+const pathAdminId = `/admin${path}/:id`
+const pathAdminSearch = `/admin${path}/search`
 
 router
-    .get(`/admin${path}`, usersController.getAllUsers)
-    .get(`/admin${path}/search`, usersController.getUserByName)
+    .get(pathAdmin, usersController.getAllUsers)
+    .get(pathAdminSearch, usersController.getUserByName)
     .get(pathId, usersController.getUserById)
-    .post(`/admin${path}`, usersController.createUser)
-    .put(pathAdmin , usersController.updateUser)
-    .delete(pathAdmin, usersController.deleteUserById)
+    .post(pathAdmin, usersController.createUser)
+    .put(pathAdminId , usersController.updateUser)
+    .delete(pathAdminId, usersController.deleteUserById)
 
 export default router;
