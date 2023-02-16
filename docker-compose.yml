@@ -3,11 +3,20 @@ services:
   product:
     build: ./product
     container_name: ecomm-product
+    ports:
+      - 3001:3001
   account:
     build: ./account
     container_name: ecomm-account
+    ports:
+      - 3002:3002
+  finance:
+    build: ./finance
+    container_name: ecomm-finance
+    ports:
+      - 3004:3004
   mongo:
-    image: mongo
+    image: mongo:5
     container_name: mongo-ecomm
     restart: always
     ports:
@@ -15,3 +24,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - mongodb-ecomm:/var/lib/mongodb
+  mysql:
+    image: mysql:8
+    container_name: mysql-ecomm
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - mysqldb-ecomm:/var/lib/mysql
+
+volumes:
+  mongodb-ecomm:
+  mysqldb-ecomm:
