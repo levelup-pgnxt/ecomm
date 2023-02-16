@@ -6,7 +6,36 @@ class PaymentController{
         const newPayment = req.body;
         try{
             const newPaymentCreated = await database.Payments.create(newPayment);
-            return res.location(`/payments/${newPaymentCreated.id}`).status(201).json({Id: newPaymentCreated.id, Status: newPaymentCreated.status});
+            const created = { "status":"CRIADO" };
+
+            await database.Payments.update(created, {
+                where:{
+                    id:Number(newPaymentCreated.id)
+                }
+            });
+
+            return res.location(`/payments/${newPaymentCreated.id}`).status(201).json(
+                {
+                    Id: newPaymentCreated.id, 
+                    Status: newPaymentCreated.status,
+                    Links: [
+                        {
+                            href: `/payments/${newPaymentCreated.id}`,
+                            rel: "self",
+                            method : "GET"
+                        },
+                        {
+                            href: `/payments/cancel/${newPaymentCreated.id}`,
+                            rel: "cancel",
+                            method : "POST"
+                        },
+                        {
+                            href: `/payments/confirm/${newPaymentCreated.id}`,
+                            rel: "confirm",
+                            method : "POST"
+                        }
+                    ]
+                });
         }catch (error){
             return res.status(500).json(error.message);
         }
@@ -14,19 +43,48 @@ class PaymentController{
 
     static async getPaymentById(req, res){
         const { id } = req.params;
+        var links = [];
         try{
             const requestedPayment = await database.Payments.findOne({
                 where: {
                     id: Number(id)
                 }
             });
+            if (requestedPayment.status == "CRIADO"){
+                links = [
+                    {
+                        href: `/payments/${requestedPayment.id}`,
+                        rel: "self",
+                        method : "GET"
+                    },
+                    {
+                        href: `/payments/confirm/${requestedPayment.id}`,
+                        rel: "confirm",
+                        method : "GET"
+                    },
+                    {
+                        href: `/payments/cancel/${requestedPayment.id}`,
+                        rel: "cancel",
+                        method : "GET"
+                    }
+                ]
+            } else {
+                links = [
+                    {
+                        href: `/payments/${requestedPayment.id}`,
+                        rel: "self",
+                        method : "GET"
+                    }
+                ]
+            }
             return res.status(200).json({
                 Id: requestedPayment.id, 
                 Status: requestedPayment.status,
                 ExpirationDate: requestedPayment.expirationDate,
                 CardNumber: requestedPayment.cardNumber,
                 CardHolder: requestedPayment.nameCard,
-                MonetaryValue: requestedPayment.monetaryValue
+                MonetaryValue: requestedPayment.monetaryValue,
+                Links: links
             }); 
         } catch (error){
             return res.status(500).json(error.message);
