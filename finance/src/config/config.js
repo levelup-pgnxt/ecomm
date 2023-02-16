@@ -1,11 +1,11 @@
 require('dotenv').config();
 
 const config = {
-  HOST: process.env.MYSQL_HOST,
-  USER: process.env.MYSQL_USER,
-  PASSWORD: process.env.MYSQL_PASSWORD,
-  ROOT_PASSWORD: process.env.MYSQL_ROOT_PASSWORD,
-  MYSQL: process.env.MYSQL_NAME,
+  host: process.env.MYSQL_HOST,
+  username: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  root_password: process.env.MYSQL_ROOT_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
   port: process.env.MYSQL_PORT,
   dialect: 'mysql',
   pool: {
