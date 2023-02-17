@@ -28,6 +28,8 @@ services:
   product:
     container_name: ecomm-product
     build: ./product
+    volumes:
+      - ./product/:/app/ecomm-product
     ports:
       - 3001:3001
     depends_on:
@@ -36,6 +38,8 @@ services:
   account:
     container_name: ecomm-account
     build: ./account
+    volumes:
+      - ./account/:/app/ecomm-account
     ports:
       - 3002:3002
     depends_on:
@@ -44,10 +48,22 @@ services:
   finance:
     container_name: ecomm-finance
     build: ./finance
+    volumes:
+      - ./finance/:/app/ecomm-finance
     ports:
       - 3003:3003
     depends_on:
       - mysql
+
+  order:
+    container_name: ecomm-order
+    build: ./order
+    volumes:
+      - ./order/:/app/ecomm-order
+    ports:
+      - 3004:3004
+    depends_on:
+      - mongodb
 
 volumes:
   db-mongo-alura:
