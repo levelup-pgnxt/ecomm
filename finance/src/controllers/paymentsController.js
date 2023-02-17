@@ -28,6 +28,26 @@ const PaymentsController = {
     } catch (error) {
       return res.status(500).json(error.message);
     }
+  },
+
+  updateStatus: async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+      await db.Payments.update({
+        status
+      }, {
+        where: { id: Number(id) }
+      });
+      const updatedPayment = await db.Payments.findOne({
+        where: { id: Number(id) },
+        attributes: { exclude: ['cvv'] }
+      });
+
+      return res.status(200).json(updatedPayment);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
   }
 };
 
