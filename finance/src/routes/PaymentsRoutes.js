@@ -6,8 +6,7 @@ const router = Router()
 router
     .get('/admin/payments', PaymentsController.pegaTodosOsPayments)
     .get('/admin/payments/:id', PaymentsController.pegaUmPayment)
-    .post('/admin/payments', PaymentsController.criaPayment)
-    .patch('/admin/payments/:id/confirmado', PaymentsController.confirmaPayment)
-    .patch('/admin/payments/:id/cancelado', PaymentsController.cancelaPayment)
-
+    .post('/payments', PaymentsController.criaPayment)
+    .patch('/admin/payments/:id', PaymentsController.atualizaStatus)
+    
 module.exports = router

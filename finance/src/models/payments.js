@@ -20,9 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(10,2),
       notNull: true,
       validate: {
-        funcaoValidadora: function(valor){
-          if(valor <= 0) throw new Error('O valor deve ser maior que 0')
-        }
+        min: 0
       }
     },
     nome: {
