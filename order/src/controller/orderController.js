@@ -1,5 +1,6 @@
 import orders from '../models/Order.js';
 import { STATUS_REALIZADO, STATUS_PAGO } from '../constantes.js'
+import { fetchAccount, fetchPayment } from '../fetch.js'
 
 class OrderController {
 
@@ -8,8 +9,8 @@ class OrderController {
         order.status = STATUS_REALIZADO
 
         order.save((err) => {
-            if(err) {
-                res.status(500).send({message: err.message})
+            if (err) {
+                res.status(500).send({ message: err.message })
             } else {
                 res.status(201).send(order.toJSON())
             }
@@ -18,19 +19,27 @@ class OrderController {
 
     static confirmaOrder = async (req, res) => {
         const id = req.params.id
-        // const order = await orders.findById(id)
-        
-        orders.findByIdAndUpdate(id, {status: STATUS_PAGO}, (err, order) => {
-            if(err) {
-                res.status(500).send({message: err.message})
-            } else if(!order) {
-                res.status(404).send({message: 'Order não encontrada.'})
+        const { paymentId }  = req.body;
+
+        orders.findByIdAndUpdate(id, { status: STATUS_PAGO }, async (err, order) => {
+            if (err) {
+                res.status(500).send({ message: err.message })
+            } else if (!order) {
+                res.status(404).send({ message: 'Order não encontrada.' })
             } else {
-                res.status(200).send({message: 'Order confirmada.'})
+                res.status(200).send({ message: 'Order confirmada.' })
             }
         })
 
-        // const cliente = await fetch(`http://localhost:3002/api/admin/accounts`)
+        orders.findById(id, async (err, order) => {
+            if (err) {
+                res.status(500).send({ message: err.message });
+            } else {
+                const { name, cpf, address } = await fetchAccount(order.clienteId);
+                const payload = { name, cpf, address, itens: order.itens, paymentId};
+                await fetchPayment(payload, paymentId);
+            }
+        });
     }
 }
 
