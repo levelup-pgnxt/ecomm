@@ -6,7 +6,7 @@ class PaymentsServices extends Services {
         super('Payment')
     }
 
-    async paymentConfirmedCanceled(id, situation) {
+    async updatePaymentStatus(id, situation) {
         return db[this.modelName].update(
             { status: situation },
             { where: { id: id }
