@@ -5,5 +5,5 @@ const router = express.Router();
 
 router
     .post('/api/order', OrderController.criarOrder)
-    .patch('/api/order/:id/confirma', OrderController.confirmaOrder)
+    .patch('/api/order/:id', OrderController.confirmaOrder)
 export default router;
