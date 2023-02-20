@@ -1,10 +1,11 @@
 const { PaymentsServices } = require('../services');
 const paymentsServices = new PaymentsServices()
-const validates = require('../auxiliaries/utils');
+const paymentsValidates = require('../auxiliaries/paymentsValidates');
+const STATUS = require('../auxiliaries/constant');
 
 class PaymentController {
     static createPayment = async (req, res) => {
-        const data = { ...validates.paramsPayment(req.body), status: 'CRIADO' };
+        const data = { ...paymentsValidates.paramsPayment(req.body), status: STATUS };
         const newPayment = await paymentsServices.createRecord(data);
         const { id, status } = newPayment;
         res.status(200).json({ id, status });
@@ -18,21 +19,21 @@ class PaymentController {
         res.status(200).json(payment);
     };
 
-    static paymentConfirmed = async (req, res) => {
+    static confirmPayment = async (req, res) => {
         const { id } = req.params;
         const { status } = await paymentsServices.getRecordByPk(Number(id));
-        if (status !== 'CRIADO') return res.status(400).json({ message: `Pagamento com status: "${status}", alteração não permitida!` })
+        if (status !== STATUS) return res.status(400).json({ message: `Pagamento com status: "${status}", alteração não permitida!` })
         const situation = 'CONFIRMADO';
-        await paymentsServices.paymentConfirmedCanceled(id, situation);
+        await paymentsServices.updatePaymentStatus(id, situation);
         res.status(200).json({ message: 'Pagamento confirmado!'});
     };
 
-    static paymentCanceled = async (req, res) => {
+    static cancelPayment = async (req, res) => {
         const { id } = req.params;
         const { status } = await paymentsServices.getRecordByPk(Number(id));
-        if (status !== 'CRIADO') return res.status(400).json({ message: `Pagamento com status: "${status}", alteração não permitida!` })
+        if (status !== STATUS) return res.status(400).json({ message: `Pagamento com status: "${status}", alteração não permitida!` })
         const situation = 'CANCELADO';
-        await paymentsServices.paymentConfirmedCanceled(id, situation);
+        await paymentsServices.updatePaymentStatus(id, situation);
         res.status(200).json({ message: 'Pagamento cancelado!'});
     };
 }
