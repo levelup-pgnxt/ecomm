@@ -1,5 +1,6 @@
 import categorias from "../models/Categoria.js";
 import validacaoCategoria from "../validations/categoriaValidations.js";
+import { STATUS_ATIVA } from "../constantes.js"
 
 class CategoriaController {
 
@@ -81,7 +82,7 @@ class CategoriaController {
     static ativaCategoria = (req, res) => {
         const id = req.params.id
 
-        categorias.findByIdAndUpdate(id, {$set: {status: "ATIVA"}}, (err, categorias) => {
+        categorias.findByIdAndUpdate(id, {$set: {status: STATUS_ATIVA}}, (err, categorias) => {
             if(err) {
                 res.status(500).send({message: err.message})
             } else if (!categorias) {

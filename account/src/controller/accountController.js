@@ -4,7 +4,11 @@ class AccountController {
 
     static listarAccounts = (req, res) => {
         accounts.find((err, accounts) => {
-            res.status(200).json(accounts)
+            if(err) {
+                res.status(500).send({message: err.message});
+            } else {
+                res.status(200).json(accounts)
+            }
         })
     }
 
