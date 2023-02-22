@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       valor: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
       },
       nome: {
         type: Sequelize.STRING

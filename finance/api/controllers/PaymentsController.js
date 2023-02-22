@@ -1,6 +1,6 @@
 const dataBase = require('../models')
 
-class DadosController{
+class PaymentsController{
     static async pegaTodosOsDados(req, res){
         try{
             const pegaTodosOsDados = await dataBase.dbFinance.findAll()
@@ -22,7 +22,7 @@ class DadosController{
             return res.status(200).json(pegaUmDado)  
 
         } catch (erro) {
-            return res.status(500).json(error.message)
+            return res.status(404).json(error.message)
 
         }
     }
@@ -39,7 +39,7 @@ class DadosController{
         }
     }
 
-    static async setarStatus(req, res){
+  static async setarStatusAdmin(req, res){
         const statusPagamento = req.body
         const { id } = req.params
         try{
@@ -53,7 +53,40 @@ class DadosController{
         }
     }
 
+    static async alterarStatus(req, res){
+        const statusPagamento = req.body
+        const { id } = req.params
+        try{           
+            
+            const {status} = await dataBase.dbFinance.findOne({ 
+                where: { 
+                    id: Number(id) 
+                }
+            })
+
+            
+            if (status === 'CONFIRMADO'|| status === 'CANCELADO') {
+                return res.status(405).json({ message: 'o status não pode ser alterado!' });
+            }else{
+                await dataBase.dbFinance.update(statusPagamento, { where: { id: Number(id)}} )
+                const pagamentoTotal = await dataBase.dbFinance.findOne({ 
+                    where: { 
+                        id: Number(id) 
+                    },
+                    attributes: [`id`, `valor`, `status`, `createdAt`, `updatedAt`]
+                })
+
+                return res.status(200).json(pagamentoTotal) 
+            }
+
+        } catch (erro) {
+            return res.status(500).json({message: `${erro.message} - id do pagamento não encontrado`})
+
+        }
+    }
+
+    
 }
 
 
-module.exports = DadosController
+module.exports = PaymentsController

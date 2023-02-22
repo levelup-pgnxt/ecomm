@@ -1,12 +1,12 @@
 const { Router } = require('express')
-const DadosController = require('../controllers/DadosController.js')
+const PaymentsController = require('../controllers/PaymentsController.js')
 
 const router = Router()
 
-router.get('/dbFinances', DadosController.pegaTodosOsDados)
-router.get('/dbFinances/:id', DadosController.pegaUmDado)
-router.post('/dbFinances', DadosController.criarDado)
-router.put('/dbFinances/:id', DadosController.setarStatus)
-
+router.get('/payments', PaymentsController.pegaTodosOsDados)
+router.get('/payments/:id', PaymentsController.pegaUmDado)
+router.post('/payments', PaymentsController.criarDado)
+router.patch('/payments/:id', PaymentsController.setarStatusAdmin)//USADO PARA REESCREVER O STATUS DE QUALQUER PAGAMENTO EM QUALQUER ESTADO
+router.put('/payments/:id', PaymentsController.alterarStatus)
 
 module.exports = router
