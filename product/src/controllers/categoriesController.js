@@ -55,6 +55,11 @@ class CategoryController {
 
         if (isValideID) {
             const { nome } = validates.paramsCategory(req.body);
+            const isExist = await CategoryService.checkIsExistsCategory(nome);
+            if (isExist) {
+                const message = 'Categoria já cadastrada!';
+                throw new NotFoundError(message);
+            };
             const updateCategory = await CategoryService.updateCategory(id, nome);
             if (!updateCategory) {
                 res.status(404).send({ message: 'Categoria não localizada!' });
@@ -66,7 +71,7 @@ class CategoryController {
         }
     };
 
-    static activateDeactivateCategory = async (req, res) => {
+    static changeStatusCategory = async (req, res) => {
         const { id } = req.params;
         const isValideID = validates.paramsID(id);
 
@@ -81,7 +86,7 @@ class CategoryController {
                 } else {
                     status = 'ATIVA';
                 }
-                await CategoryService.activateDeactivateCategory(id, status);
+                await CategoryService.changeStatusCategory(id, status);
                 res.status(201).send({ message: `Status da categoria atualizado para "${status}"!` });
             }
         } else {
