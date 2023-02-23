@@ -7,8 +7,10 @@
     "scripts": {
         "dev": "nodemon server.js",
         "start": "node server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+        "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+        "test:coverage": "node --trace-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+        },
     "author": "Wanderson Macêdo",
     "license": "MIT",
     "dependencies": {
@@ -19,6 +21,7 @@
         "mongoose": "^6.9.0"
     },
     "devDependencies": {
-        "nodemon": "^2.0.20"
+        "nodemon": "^2.0.20",
+        "supertest": "^6.3.3"
     }
 }
