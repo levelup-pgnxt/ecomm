@@ -28,8 +28,22 @@ class PaymentController {
         }
     }
 
+    static async getPaymentById (req, res) {
+        let { id } = req.params
+        try{
+            const pay = await database.Payments.findOne({
+                attributes: ['id', 'value', 'name', 'number', 'expiration', 'status', 'createdAt', 'updatedAt'],
+                where: {id: Number(id)}
+            })
+            
+            return res.status(200).header({location: `/payments/${id}`}).json(pay)
+        } catch (error) {
+            res.status(500).json({message: `erro no getById ${error}`})
+        }
+    }
+
     static createPayment (req, res) {
-        const pay = req.body
+        let pay = req.body
         if (!pay.status)
             pay.status = 'CREATED'
         if (validationNumbers(pay.number) == false) {
@@ -49,6 +63,7 @@ class PaymentController {
             }
         }
     }
+
 }
 
 module.exports = PaymentController
