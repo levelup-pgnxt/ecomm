@@ -27,7 +27,7 @@ class CategoryService {
         return result;
     };
 
-    static activateDeactivateCategory = async (id, newStatus) => {
+    static changeStatusCategory = async (id, newStatus) => {
         const result = await categories.findByIdAndUpdate(id, { $set: { status: newStatus }});
         return result;
     };
