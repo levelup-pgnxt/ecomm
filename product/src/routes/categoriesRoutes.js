@@ -15,7 +15,15 @@ router
     .get(pathId, categoriesController.getCategoryById)
     .post(pathAdmin, categoriesController.createCategory)
     .put(pathAdminId , categoriesController.updateCategory)
-    .patch(pathAdminId, categoriesController.activateDeactivateCategory)
+    .patch(pathAdminId, categoriesController.changeStatusCategory)
     .delete(pathAdminId, categoriesController.deleteCategoryById)
 
 export default router;
+
+// OK .get(path, categoriesController.getAllCategories)
+// OK .get(pathSearch, categoriesController.getCategoryByName)
+// OK .get(pathId, categoriesController.getCategoryById)
+// OK .post(pathAdmin, categoriesController.createCategory)
+// OK .put(pathAdminId , categoriesController.updateCategory)
+// .patch(pathAdminId, categoriesController.changeStatusCategory)
+// OK .delete(pathAdminId, categoriesController.deleteCategoryById)
