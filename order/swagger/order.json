@@ -1,0 +1,159 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de pedidos",
+    "version": "0.0.1",
+    "license": {
+      "name": "Licença: GPLv3",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  },
+  "externalDocs": {
+    "description": "Documentação burocrática",
+    "url": "https://mockapi.io"
+  },
+  "paths": {
+    "/api/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Encontra o pedido",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          },
+          "404": {
+            "description": "Pedido ou API não encontrados"
+          }
+        }
+      }
+    },
+    "/api/admin/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        }
+      ],
+      "post": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "summary": "Cria novo pedido",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pedido cadastrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          },
+          "404": {
+            "description": "pedido ou API não encontrados"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "idCliente": {
+            "type": "string"
+          },
+          "enderecoEntrega": {
+            "type": "object",
+            "properties": {
+              "rua": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "string"
+              },
+              "complemento": {
+                "type": "string"
+              },
+              "cep": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "estado": {
+                "type": "string"
+              }
+            }
+          },
+          "itens": {
+            "type": "object",
+            "properties": {
+              "idProduto": {
+                "type": "string"
+              },
+              "qtd": {
+                "type": "integer"
+              },
+              "desconto": {
+                "type": "number"
+              },
+              "precoUnitarioCompra": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "auth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

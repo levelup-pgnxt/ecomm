@@ -9,7 +9,6 @@ const routes = (app) => {
     })
 
     app.use(
-        express.json(),
         categories,
         products
     )

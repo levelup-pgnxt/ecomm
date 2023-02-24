@@ -15,3 +15,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
+  
+  mysql:
+    container_name: mysql-ecomm
+    image: mysql
+    restart: always
+    volumes:
+      - ecomm-mysql-volume:/var/lib/mysql
+    ports: 
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: secret
+  
+volumes:
+  ecomm-mysql-volume:
+    external: true
