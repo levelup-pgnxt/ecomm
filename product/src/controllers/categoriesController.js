@@ -62,12 +62,13 @@ class CategoryController {
             };
             const updateCategory = await CategoryService.updateCategory(id, nome);
             if (!updateCategory) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                res.status(201).send({ message: 'Categoria atualizada!' });
-            };
+                const message = 'Categoria não localizada!';
+                throw new NotFoundError(message);
+            }
+            res.status(201).send({ message: 'Categoria atualizada!' });
         } else {
-            res.status(400).send({ message: 'ID inválido!' });
+            const message = 'ID inválido!';
+            throw new NotFoundError(message);
         }
     };
 
@@ -101,12 +102,13 @@ class CategoryController {
         if (isValideID) {
             const deleteCategory = await CategoryService.deleteCategoryById(id);
             if (!deleteCategory) {
-                res.status(404).send({ message: 'Categoria não localizada!' });
-            } else {
-                res.status(204).send();
+                const message = 'Categoria não localizada!';
+                throw new NotFoundError(message);
             };
+            res.status(204).send();
         } else {
-            res.status(400).send({ message: 'ID inválido!' });
+            const message = 'ID inválido!';
+            throw new NotFoundError(message);
         }
     };
 };
