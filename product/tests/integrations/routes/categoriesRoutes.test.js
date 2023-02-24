@@ -1,6 +1,6 @@
 import request from 'supertest';
 import {
-    describe, expect, it, jest
+    describe, expect, it
 } from '@jest/globals';
 import app from '../../../src/app.js';
 
@@ -18,7 +18,7 @@ afterEach(() => {
 
 let ID;
 const NAME_NEW_CATEGORY = { nome: 'BRINQUEDOS' };
-const UPDATE_NAME_CATEGORY = { nome: 'JOGOS BRINQUEDOS' };
+const UPDATE_NAME_CATEGORY = { nome: 'JOGOS E BRINQUEDOS' };
 const ID_INEXISTENTE = '66f76b0e43aca56279315fae'
 const QUERY_SEARCH = 'C';
 
@@ -130,11 +130,29 @@ describe('CATEGORIES ROUTES', () => {
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O campo "nome" é obrigatório!');
         });
+
+        it('should return status code 404 if passed a non-existent id', async () => {
+            const response = await request(app)
+                .put(`/admin/categories/${ID_INEXISTENTE}`)
+                .send(NAME_NEW_CATEGORY);
+
+            expect(response.status).toEqual(404);
+            expect(response.body.message)
+                .toEqual('Categoria não localizada!');
+        });
+
+        it('should return status code 400 if passed an invalid id', async () => {
+            const response = await request(app).put('/admin/categories/123');
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message)
+                .toEqual('ID inválido!');
+        });
     });
 
     describe('PATCH /admin/categories/id', () => {
         it('must change category status', async () => {
-            let response = await request(app).get(`/categories/${ID}`);
+            const response = await request(app).get(`/categories/${ID}`);
             let { status } = response.body;
             if (status === 'ATIVA') {
                 status = 'INATIVA';
@@ -149,13 +167,45 @@ describe('CATEGORIES ROUTES', () => {
             expect(respChangeStatus.body.message)
                 .toEqual(`Status da categoria atualizado para "${status}"!`);
         });
+
+        it('should not change category status if code not found', async () => {
+            const response = await request(app).get(`/categories/${ID_INEXISTENTE}`);
+
+            expect(response.status).toEqual(404);
+            expect(response.body.message)
+                .toEqual('Categoria não localizada!');
+        });
+
+        it('should return status code 400 if passed an invalid id', async () => {
+            const response = await request(app).get('/categories/123');
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message)
+                .toEqual('ID inválido!');
+        });
     });
 
     describe('DELETE /admin/categories/id', () => {
-        it('should return code 404 when deleting a category', async () => {
+        it('should return code 204 when deleting a category', async () => {
             const response = await request(app).delete(`/admin/categories/${ID}`);
 
             expect(response.status).toEqual(204);
+        });
+
+        it('should return status code 404 if passed a non-existent id', async () => {
+            const response = await request(app).delete(`/admin/categories/${ID_INEXISTENTE}`);
+
+            expect(response.status).toEqual(404);
+            expect(response.body.message)
+                .toEqual('Categoria não localizada!');
+        });
+
+        it('should return status code 400 if passed an invalid id', async () => {
+            const response = await request(app).delete('/admin/categories/123');
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message)
+                .toEqual('ID inválido!');
         });
     });
 });
