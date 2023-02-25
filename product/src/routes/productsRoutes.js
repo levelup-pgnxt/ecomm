@@ -24,3 +24,13 @@ router
     .delete(pathAdminProductsByID, productsController.deleteProductById)
 
 export default router;
+
+// ok .get(path, productsController.getAllProducts)
+// .get(pathSearch, productsController.getProductByName)
+// .get(pathSearchByValue, productsController.getProductsByValue)
+// .get(pathSearchByStock, productsController.getProductsByStock)
+// .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
+// .get(pathId, productsController.getProductById)
+// .post(pathAdminProducts, productsController.createProduct)
+// .put(pathAdminProductsByID, productsController.updateProduct)
+// .delete(pathAdminProductsByID, productsController.deleteProductById)
