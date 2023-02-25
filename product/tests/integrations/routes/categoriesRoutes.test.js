@@ -7,9 +7,7 @@ import app from '../../../src/app.js';
 let server;
 beforeEach(() => {
     const PORT = 3003;
-    server = app.listen(PORT, () => {
-        console.log(`rodando na porta: ${PORT}`)
-    });
+    server = app.listen(PORT);
 });
 
 afterEach(() => {
