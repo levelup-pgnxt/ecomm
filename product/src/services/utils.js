@@ -28,14 +28,14 @@ const validates = {
         descricao: Joi.string().min(limit).empty().required().pattern(/^[A-Z].+/).messages({
             'string.base': 'O campo "descrição" deve ser do tipo texto!',
             'string.empty': 'O campo "descrição" não deve ser vazio!',
-            'string.min': `'O campo "descrição" deve ter no mínimo ${limit} caracteres!'`,
+            'string.min': `O campo "descrição" deve ter no mínimo ${limit} caracteres!`,
             'string.pattern.base': 'O campo "descrição" deve iniciar por uma letra maiúscula!',
             'any.required': 'O campo "descrição" é obrigatório!'
         }),
-        slug: Joi.string().min(limit).empty().required().pattern(/^[A-Za-z0-9-\S]+$/).messages({
+        slug: Joi.string().min(limit).empty().required().pattern(/^[A-Za-z0-9-]+$/).messages({
             'string.base': 'O campo "slug" deve ser do tipo texto!',
             'string.empty': 'O campo "slug" não deve ser vazio!',
-            'string.min': `'O campo "slug" deve ter no mínimo ${limit} caracteres!'`,
+            'string.min': `O campo "slug" deve ter no mínimo ${limit} caracteres!`,
             'string.pattern.base': 'O campo "slug" deve conter apenas letras(maiúsculas ou minúsculas), números ou hífens!',
             'any.required': 'O campo "slug" é obrigatório!'
         }),
