@@ -88,7 +88,7 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.body.message).toEqual('O campo "nome" não deve ser vazio!');
         });
 
-        it('should return status code 400 when passed a name with less than 3 characters', async () => {
+        it('should return status code 422 when passed a name with less than 3 characters', async () => {
             const response = await request(app)
                 .post('/admin/products')
                 .send(DATATEST[7]);
@@ -113,6 +113,96 @@ describe('PRODUCTS ROUTES', () => {
 
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O campo "nome" é obrigatório!');
+        });
+
+        it('should return status code 400 when passed a non-text type for the description', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[10]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "descrição" deve ser do tipo texto!');
+        });
+
+        it('should return status code 400 when passed empty field for the description', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[11]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "descrição" não deve ser vazio!');
+        });
+
+        it('should return status code 422 when passed the description with less than 3 characters', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[12]);
+
+            expect(response.status).toEqual(422);
+            expect(response.body.message).toEqual('O campo "descrição" deve ter no mínimo 3 caracteres!');
+        });
+
+        it('should return status code 400 when passed the description that does not start with a capital letter', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[13]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "descrição" deve iniciar por uma letra maiúscula!');
+        });
+
+        it('should return status code 400 when not passed the description', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[14]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "descrição" é obrigatório!');
+        });
+
+        it('should return status code 400 when passed a non-text type for to slug', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[15]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "slug" deve ser do tipo texto!');
+        });
+
+        it('should return status code 400 when passed empty field for to slug', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[16]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "slug" não deve ser vazio!');
+        });
+
+        it('should return status code 422 when passed the slug with less than 3 characters', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[17]);
+
+            expect(response.status).toEqual(422);
+            expect(response.body.message).toEqual('O campo "slug" deve ter no mínimo 3 caracteres!');
+        });
+
+        it('should return status code 400 when passed the slug that does not start with a capital letter', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[18]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "slug" deve conter apenas letras(maiúsculas ou minúsculas), números ou hífens!');
+        });
+
+        it('should return status code 400 when not passed the slug', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[19]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "slug" é obrigatório!');
         });
 
         it('should return status code 400 when passing invalid id for category', async () => {
