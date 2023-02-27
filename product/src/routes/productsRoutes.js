@@ -31,6 +31,6 @@ export default router;
 // .get(pathSearchByStock, productsController.getProductsByStock)
 // .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
 // .get(pathId, productsController.getProductById)
-// .post(pathAdminProducts, productsController.createProduct)
+// em andamento .post(pathAdminProducts, productsController.createProduct)
 // .put(pathAdminProductsByID, productsController.updateProduct)
-// .delete(pathAdminProductsByID, productsController.deleteProductById)
+// ok .delete(pathAdminProductsByID, productsController.deleteProductById)
