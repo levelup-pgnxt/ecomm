@@ -7,7 +7,7 @@ import DATATEST from '../../datatests/datatestes.js';
 
 let server;
 beforeEach(() => {
-    const PORT = 3003;
+    const PORT = 3000;
     server = app.listen(PORT);
 });
 
@@ -65,6 +65,51 @@ describe('PRODUCTS ROUTES', () => {
             const response = await request(app)
                 .post('/admin/products')
                 .send({});
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "nome" é obrigatório!');
+        });
+
+        it('should return status code 400 when passed a non-text type for the name', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[5]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "nome" deve ser do tipo texto!');
+        });
+
+        it('should return status code 400 when passed empty field for name', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[6]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "nome" não deve ser vazio!');
+        });
+
+        it('should return status code 400 when passed a name with less than 3 characters', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[7]);
+
+            expect(response.status).toEqual(422);
+            expect(response.body.message).toEqual('O campo "nome" deve ter no mínimo 3 caracteres!');
+        });
+
+        it('should return status code 400 when passed a name that does not start with a capital letter', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[8]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "nome" deve iniciar por uma letra maiúscula!');
+        });
+
+        it('should return status code 400 when not passed a name', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[9]);
 
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O campo "nome" é obrigatório!');
