@@ -111,7 +111,7 @@ class ProductController {
         const { categoria } = dataProduct;
 
         const isValideIdCategory = validates.paramsID(categoria);
-        if (!isValideIdCategory) return res.status(400).send({ message: 'ID inválido!' });
+        if (!isValideIdCategory) return res.status(400).send({ message: 'ID categoria inválido!' });
 
         const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
         if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
