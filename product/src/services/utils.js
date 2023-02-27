@@ -21,7 +21,7 @@ const validates = {
         nome: Joi.string().min(limit).empty().required().pattern(/^[A-Z].+/).messages({
             'string.base': 'O campo "nome" deve ser do tipo texto!',
             'string.empty': 'O campo "nome" não deve ser vazio!',
-            'string.min': `'O campo "nome" deve ter no mínimo ${limit} caracteres!'`,
+            'string.min': `O campo "nome" deve ter no mínimo ${limit} caracteres!`,
             'string.pattern.base': 'O campo "nome" deve iniciar por uma letra maiúscula!',
             'any.required': 'O campo "nome" é obrigatório!'
         }),
