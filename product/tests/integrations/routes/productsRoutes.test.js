@@ -16,6 +16,7 @@ afterEach(() => {
 });
 
 let ID;
+let newCategory;
 
 const ID_INEXISTENTE = '66f76b0e43aca56279315fae'
 const QUERY_SEARCH = 'C';
@@ -205,24 +206,6 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.body.message).toEqual('O campo "slug" é obrigatório!');
         });
 
-        it('should return status code 400 when passing invalid id for category', async () => {
-            const response = await request(app)
-                .post('/admin/products')
-                .send(DATATEST[2]);
-
-            expect(response.status).toEqual(400);
-            expect(response.body.message).toEqual('ID categoria inválido!');
-        });
-
-        it('should return status code 400 when passing a non-existent category', async () => {
-            const response = await request(app)
-                .post('/admin/products')
-                .send(DATATEST[3]);
-
-            expect(response.status).toEqual(400);
-            expect(response.body.message).toEqual('Categoria não localizada!');
-        });
-
         it('must be of numeric type', async () => {
             const response = await request(app)
                 .post('/admin/products')
@@ -284,6 +267,69 @@ describe('PRODUCTS ROUTES', () => {
 
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O campo "estoque" é obrigatório!');
+        });
+
+        it('should return status code 400 when passing invalid id for category', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[2]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('ID categoria inválido!');
+        });
+
+        it('should return status code 400 when passing a non-existent category', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[3]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('Categoria não localizada!');
+        });
+
+        it('should return status code 400 when passing a non-string type to category', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[27]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "categoria" deve ser do tipo texto!');
+        });
+
+        it('should return status code 400 when passing an empty field to category', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[28]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "categoria" não deve ser vazio!');
+        });
+
+        it('should return status code 400 when not passing the category field', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[29]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "categoria" é obrigatório!');
+        });
+
+        it('should return status code 400 when passing an inactive category', async () => {
+            const responseCategory = await request(app)
+                .post('/admin/categories')
+                .send(DATATEST[30])
+
+            newCategory = responseCategory.body;
+            await request(app)
+                .patch(`/admin/categories/${newCategory._id}`)
+                .send('INATIVA');
+
+             const response = await request(app)
+                .post('/admin/products')
+                .send({ ...DATATEST[31], categoria: newCategory._id });
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('Categoria Inativa!');
         });
     });
 
@@ -404,8 +450,9 @@ describe('PRODUCTS ROUTES', () => {
     // });
 
     describe('DELETE /admin/products/id', () => {
-        it('should return code 204 when deleting a category', async () => {
+        it('should return code 204 when deleting a product', async () => {
             const response = await request(app).delete(`/admin/products/${ID}`);
+            await request(app).delete(`/admin/categories/${newCategory._id}`);
 
             expect(response.status).toEqual(204);
         });
