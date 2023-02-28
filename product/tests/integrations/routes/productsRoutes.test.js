@@ -333,23 +333,29 @@ describe('PRODUCTS ROUTES', () => {
         });
     });
 
-    // describe('GET /products/id', () => {
-    //     it('should return the selected category', async () => {
-    //         const response = await request(app).get(`/products/${ID}`);
+    describe('GET /products/id', () => {
+        it('should return the selected product', async () => {
+            const response = await request(app).get(`/products/${ID}`);
+            const categoria = response.body.categoria;
             
-    //         expect(response.status).toEqual(200);
-    //         expect(response.body).toHaveProperty('nome');
-    //         expect(response.body).toHaveProperty('status');
-    //         expect(response.body.nome).toEqual(NAME_NEW_CATEGORY.nome);
-    //     });
+            expect(response.status).toEqual(200);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('nome');
+            expect(response.body).toHaveProperty('descricao');
+            expect(response.body).toHaveProperty('slug');
+            expect(response.body).toHaveProperty('precoUnitario');
+            expect(response.body).toHaveProperty('estoque');
+            expect(response.body).toHaveProperty('categoria');
+            expect(response.body).toStrictEqual({ ...DATATEST[0], _id: ID, categoria });
+        });
         
-    //     it('should return "category not found" when passing a code that does not exist', async () => {
-    //         const response = await request(app).get(`/products/${ID_INEXISTENTE}`);
+        it('should return "product not found" when passing a code that does not exist', async () => {
+            const response = await request(app).get(`/products/${ID_INEXISTENTE}`);
             
-    //         expect(response.body.message).toEqual('Categoria não localizada!');
-    //         expect(response.status).toEqual(404);
-    //     });
-    // });
+            expect(response.body.message).toEqual('Produto não localizado!');
+            expect(response.status).toEqual(404);
+        });
+    });
     
     // describe('GET /products/search', () => {
     //     it('should return a list of products with names that have the requested expression', async () => {
@@ -362,7 +368,7 @@ describe('PRODUCTS ROUTES', () => {
     // });
     
     // describe('PUT /admin/products/id', () => {
-    //     it('must change category name', async () => {
+    //     it('must change product name', async () => {
     //         const response = await request(app)
     //             .put(`/admin/products/${ID}`)
     //             .send(UPDATE_NAME_CATEGORY);
@@ -377,7 +383,7 @@ describe('PRODUCTS ROUTES', () => {
     //         expect(updatedCategory.nome).toEqual(UPDATE_NAME_CATEGORY.nome)
     //     });
 
-    //     it('must check if the category already exist', async () => {
+    //     it('must check if the product already exist', async () => {
     //         const response = await request(app)
     //             .put(`/admin/products/${ID}`)
     //             .send(UPDATE_NAME_CATEGORY);
@@ -386,7 +392,7 @@ describe('PRODUCTS ROUTES', () => {
     //         expect(response.body.message).toEqual('Categoria já cadastrada!');
     //     });
 
-    //     it('must not change category name when passing an empty record', async () => {
+    //     it('must not change product name when passing an empty record', async () => {
     //         const response = await request(app)
     //             .put(`/admin/products/${ID}`)
     //             .send({});
@@ -415,7 +421,7 @@ describe('PRODUCTS ROUTES', () => {
     // });
 
     // describe('PATCH /admin/products/id', () => {
-    //     it('must change category status', async () => {
+    //     it('must change product status', async () => {
     //         const response = await request(app).get(`/products/${ID}`);
     //         let { status } = response.body;
     //         if (status === 'ATIVA') {
@@ -432,7 +438,7 @@ describe('PRODUCTS ROUTES', () => {
     //             .toEqual(`Status da categoria atualizado para "${status}"!`);
     //     });
 
-    //     it('should not change category status if code not found', async () => {
+    //     it('should not change product status if code not found', async () => {
     //         const response = await request(app).get(`/products/${ID_INEXISTENTE}`);
 
     //         expect(response.status).toEqual(404);
