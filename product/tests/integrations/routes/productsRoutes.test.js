@@ -222,6 +222,34 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('Categoria não localizada!');
         });
+
+
+        it('must be of numeric type', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[20]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "preço unitário" deve ser do tipo numérico!');
+        });
+
+        it('the value must be greater than zero', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[21]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "preço unitário" deve ser maior que zero!');
+        });
+
+        it('should return status code 400 when passing, do not pass the unit value field', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[22]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "preço unitário" é obrigatório!');
+        });
     });
 
     // describe('GET /products/id', () => {
