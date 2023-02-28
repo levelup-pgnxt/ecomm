@@ -156,6 +156,29 @@ const DATATEST = [
         estoque: 27,
         categoria: "63dd8be23138b0c3320e26fe"
     },
+    {
+        nome: "Multiprocessador KitchenAid KJA03B 240W empire red 127V",
+        descricao: "Este multiprocessador permitirá que você otimize o espaço e o tempo de preparação de seus pratos favoritos.",
+        slug: "multiprocessador",
+        precoUnitario: "abc",
+        estoque: 27,
+        categoria: "63dd8be23138b0c3320e26fe"
+    },
+    {
+        nome: "Multiprocessador KitchenAid KJA03B 240W empire red 127V",
+        descricao: "Este multiprocessador permitirá que você otimize o espaço e o tempo de preparação de seus pratos favoritos.",
+        slug: "multiprocessador",
+        precoUnitario: 0,
+        estoque: 27,
+        categoria: "63dd8be23138b0c3320e26fe"
+    },
+    {
+        nome: "Multiprocessador KitchenAid KJA03B 240W empire red 127V",
+        descricao: "Este multiprocessador permitirá que você otimize o espaço e o tempo de preparação de seus pratos favoritos.",
+        slug: "multiprocessador",
+        estoque: 27,
+        categoria: "63dd8be23138b0c3320e26fe"
+    },
 ];
 
 /*
@@ -179,5 +202,8 @@ const DATATEST = [
     *17 - Campo Slug deve ter no mínmo 3 caracteres
     *18 - Campo Slug deve possuir apenas letras ou números
     *19 - Campo Slug é obrigatório
+    20 - Campo Preço Unitário deve ser do tipo numérico
+    21 - Campo Preço Unitário deve ser maior que zero
+    22 - Campo Preço Unitário é obrigatório
 */
 export default DATATEST;
