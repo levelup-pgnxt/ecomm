@@ -210,6 +210,39 @@ const DATATEST = [
         precoUnitario: 577,
         categoria: "63dd8be23138b0c3320e26fe"
     },
+    {
+        nome: "Multiprocessador KitchenAid KJA09B 250W empire red 110V",
+        descricao: "Você poderá resolver seus almoços e jantares em poucos passos e sem limitações. Amassa a mistura de seus biscoitos ou pães caseiros e vive a aventura de ter uma padaria em casa.",
+        slug: "multiprocessador",
+        precoUnitario: 1136.72,
+        estoque: 2,
+        categoria: 1234567890
+    },
+    {
+        nome: "Multiprocessador KitchenAid KJA09B 250W empire red 110V",
+        descricao: "Você poderá resolver seus almoços e jantares em poucos passos e sem limitações. Amassa a mistura de seus biscoitos ou pães caseiros e vive a aventura de ter uma padaria em casa.",
+        slug: "multiprocessador",
+        precoUnitario: 1136.72,
+        estoque: 2,
+        categoria: ''
+    },
+    {
+        nome: "Multiprocessador KitchenAid KJA09B 250W empire red 110V",
+        descricao: "Você poderá resolver seus almoços e jantares em poucos passos e sem limitações. Amassa a mistura de seus biscoitos ou pães caseiros e vive a aventura de ter uma padaria em casa.",
+        slug: "multiprocessador",
+        precoUnitario: 1136.72,
+        estoque: 2,
+    },
+    {
+        nome: "LIMPEZA",
+    },
+    {
+        nome: "Sabão líquido Omo Lavagem Perfeita Pro galão 7 L",
+        descricao: "Lavagem Perfeita Pro.",
+        slug: "supermercado-limpeza",
+        precoUnitario: 82.82,
+        estoque: 200,
+    },
 ];
 
 /*
@@ -236,9 +269,15 @@ const DATATEST = [
     *20 - Campo Preço Unitário deve ser do tipo numérico
     *21 - Campo Preço Unitário deve ser maior que zero
     *22 - Campo Preço Unitário é obrigatório
-    23 - Campo Estoque deve ser do tipo numérico
-    24 - Campo Estoque deve ser maior que zero
-    25 - Campo Estoque deve ser menor que 10.000 (dez mil)
-    26 - Campo Estoque é obrigatório
+    *23 - Campo Estoque deve ser do tipo numérico
+    *24 - Campo Estoque deve ser maior que zero
+    *25 - Campo Estoque deve ser menor que 10.000 (dez mil)
+    *26 - Campo Estoque é obrigatório
+    *27 - Campo categoria deve ser do tipo string
+    *28 - Campo categoria não deve ser vazia
+    *29 - Campo categoria deve ser obrigatório
+    *30 - Nova categoria / para tornar inativa para o teste
+    *31 - Novo produto para teste com categoria inativa
 */
+
 export default DATATEST;
