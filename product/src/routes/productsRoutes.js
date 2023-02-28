@@ -26,11 +26,11 @@ router
 export default router;
 
 // ok .get(path, productsController.getAllProducts)
-// .get(pathSearch, productsController.getProductByName)
+// em andamento .get(pathSearch, productsController.getProductByName)
 // .get(pathSearchByValue, productsController.getProductsByValue)
 // .get(pathSearchByStock, productsController.getProductsByStock)
 // .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
-// .get(pathId, productsController.getProductById)
-// em andamento .post(pathAdminProducts, productsController.createProduct)
+// ok .get(pathId, productsController.getProductById)
+// ok .post(pathAdminProducts, productsController.createProduct)
 // .put(pathAdminProductsByID, productsController.updateProduct)
 // ok .delete(pathAdminProductsByID, productsController.deleteProductById)
