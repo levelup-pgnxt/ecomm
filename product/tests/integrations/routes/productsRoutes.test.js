@@ -19,7 +19,7 @@ let ID;
 let newCategory;
 
 const ID_INEXISTENTE = '66f76b0e43aca56279315fae'
-const QUERY_SEARCH = 'C';
+const QUERY_SEARCH = 'Note';
 
 describe('PRODUCTS ROUTES', () => {
     describe('GET /products', () => {
@@ -357,15 +357,15 @@ describe('PRODUCTS ROUTES', () => {
         });
     });
     
-    // describe('GET /products/search', () => {
-    //     it('should return a list of products with names that have the requested expression', async () => {
-    //         const response = await request(app)
-    //         .get(`/products/search?products=${QUERY_SEARCH}`);
+    describe('GET /products/search', () => {
+        it('should return a list of products with names that have the requested expression', async () => {
+            const response = await request(app)
+            .get(`/products/search?products=${QUERY_SEARCH}`);
             
-    //         expect(response.status).toEqual(200);
-    //         expect(response.body).toBeInstanceOf(Array);
-    //     });
-    // });
+            expect(response.status).toEqual(200);
+            expect(response.body).toBeInstanceOf(Array);
+        });
+    });
     
     // describe('PUT /admin/products/id', () => {
     //     it('must change product name', async () => {
@@ -413,41 +413,6 @@ describe('PRODUCTS ROUTES', () => {
 
     //     it('should return status code 400 if passed an invalid id', async () => {
     //         const response = await request(app).put('/admin/products/123');
-
-    //         expect(response.status).toEqual(400);
-    //         expect(response.body.message)
-    //             .toEqual('ID inválido!');
-    //     });
-    // });
-
-    // describe('PATCH /admin/products/id', () => {
-    //     it('must change product status', async () => {
-    //         const response = await request(app).get(`/products/${ID}`);
-    //         let { status } = response.body;
-    //         if (status === 'ATIVA') {
-    //             status = 'INATIVA';
-    //         } else {
-    //             status = 'ATIVA';
-    //         };
-    //         const respChangeStatus = await request(app)
-    //             .patch(`/admin/products/${ID}`)
-    //             .send(status);
-
-    //         expect(respChangeStatus.status).toEqual(201);
-    //         expect(respChangeStatus.body.message)
-    //             .toEqual(`Status da categoria atualizado para "${status}"!`);
-    //     });
-
-    //     it('should not change product status if code not found', async () => {
-    //         const response = await request(app).get(`/products/${ID_INEXISTENTE}`);
-
-    //         expect(response.status).toEqual(404);
-    //         expect(response.body.message)
-    //             .toEqual('Categoria não localizada!');
-    //     });
-
-    //     it('should return status code 400 if passed an invalid id', async () => {
-    //         const response = await request(app).get('/products/123');
 
     //         expect(response.status).toEqual(400);
     //         expect(response.body.message)
