@@ -223,7 +223,6 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.body.message).toEqual('Categoria não localizada!');
         });
 
-
         it('must be of numeric type', async () => {
             const response = await request(app)
                 .post('/admin/products')
@@ -242,13 +241,49 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.body.message).toEqual('O campo "preço unitário" deve ser maior que zero!');
         });
 
-        it('should return status code 400 when passing, do not pass the unit value field', async () => {
+        it('should return status code 400 when not passing the unit price field', async () => {
             const response = await request(app)
                 .post('/admin/products')
                 .send(DATATEST[22]);
 
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O campo "preço unitário" é obrigatório!');
+        });
+
+        it('must be of numeric type', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[23]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "estoque" deve ser do tipo numérico!');
+        });
+
+        it('Inventory value must be greater than zero', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[24]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "estoque" deve ser maior que zero!');
+        });
+
+        it('Inventory value must be less than ten thousand', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[25]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "estoque" deve ser menor que 10.000!');
+        });
+
+        it('should return status code 400 when not passing the stock field', async () => {
+            const response = await request(app)
+                .post('/admin/products')
+                .send(DATATEST[26]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O campo "estoque" é obrigatório!');
         });
     });
 
