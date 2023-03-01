@@ -3,6 +3,7 @@ const MESSAGE_ERROR = {
     'Produto já cadastrado!': 409,
     'Valor mínimo maior que valor máximo. Operação não permitida!': 405,
     'ID inválido!': 400,
+    'Objeto vazio, sem propriedades!': 400,
 };
 
 class NotFoundError extends Error {
