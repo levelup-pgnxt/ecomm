@@ -68,7 +68,7 @@ describe('PRODUCTS ROUTES', () => {
                 .send({});
 
             expect(response.status).toEqual(400);
-            expect(response.body.message).toEqual('O campo "nome" é obrigatório!');
+            expect(response.body.message).toEqual('Objeto vazio, sem propriedades!');
         });
 
         it('should return status code 400 when passed a non-text type for the name', async () => {
@@ -367,58 +367,59 @@ describe('PRODUCTS ROUTES', () => {
         });
     });
     
-    // describe('PUT /admin/products/id', () => {
-    //     it('must change product name', async () => {
-    //         const response = await request(app)
-    //             .put(`/admin/products/${ID}`)
-    //             .send(UPDATE_NAME_CATEGORY);
+    describe('PUT /admin/products/id', () => {
+        it.each([
+            ['nome', { nome: DATATEST[1].nome }],
+            ['descrição', { descricao: DATATEST[1].descricao }],
+            ['preço unitário', { precoUnitario: DATATEST[1].precoUnitario }],
+            ['estoque', { estoque: DATATEST[1].estoque }],
+        ])('must change field %s', async (key, params) => {
+            const requisicao = { request };
+            const spy = jest.spyOn(requisicao, 'request');
+            await requisicao.request(app)
+                .put(`/admin/products/${ID}`)
+                .send(params)
+                .expect(204);
 
-    //         const responseAfterUpdate = await request(app).get(`/products/${ID}`);
-    //         const updatedCategory = responseAfterUpdate.body;
-                
-    //         expect(response.status).toEqual(201);
-    //         expect(updatedCategory).toBeInstanceOf(Object);
-    //         expect(updatedCategory).toHaveProperty('nome');
-    //         expect(updatedCategory).toHaveProperty('status');
-    //         expect(updatedCategory.nome).toEqual(UPDATE_NAME_CATEGORY.nome)
-    //     });
+            expect(spy).toHaveBeenCalled();
+        });
 
-    //     it('must check if the product already exist', async () => {
-    //         const response = await request(app)
-    //             .put(`/admin/products/${ID}`)
-    //             .send(UPDATE_NAME_CATEGORY);
+        it('must check if the product already exist', async () => {
+            const response = await request(app)
+                .put(`/admin/products/${ID}`)
+                .send(DATATEST[1]);
 
-    //         expect(response.status).toEqual(409);
-    //         expect(response.body.message).toEqual('Categoria já cadastrada!');
-    //     });
+            expect(response.status).toEqual(409);
+            expect(response.body.message).toEqual('Produto já cadastrado!');
+        });
 
-    //     it('must not change product name when passing an empty record', async () => {
-    //         const response = await request(app)
-    //             .put(`/admin/products/${ID}`)
-    //             .send({});
+        it('must not change product name when passing an empty record', async () => {
+            const response = await request(app)
+                .put(`/admin/products/${ID}`)
+                .send({});
 
-    //         expect(response.status).toEqual(400);
-    //         expect(response.body.message).toEqual('O campo "nome" é obrigatório!');
-    //     });
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('Objeto vazio, sem propriedades!');
+        });
 
-    //     it('should return status code 404 if passed a non-existent id', async () => {
-    //         const response = await request(app)
-    //             .put(`/admin/products/${ID_INEXISTENTE}`)
-    //             .send(NAME_NEW_CATEGORY);
+        it('should return status code 404 if passed a non-existent id', async () => {
+            const response = await request(app)
+                .put(`/admin/products/${ID_INEXISTENTE}`)
+                .send(DATATEST[0]);
 
-    //         expect(response.status).toEqual(404);
-    //         expect(response.body.message)
-    //             .toEqual('Categoria não localizada!');
-    //     });
+            expect(response.status).toEqual(404);
+            expect(response.body.message)
+                .toEqual('Produto não localizado!');
+        });
 
-    //     it('should return status code 400 if passed an invalid id', async () => {
-    //         const response = await request(app).put('/admin/products/123');
+        it('should return status code 400 if passed an invalid id', async () => {
+            const response = await request(app).put('/admin/products/123');
 
-    //         expect(response.status).toEqual(400);
-    //         expect(response.body.message)
-    //             .toEqual('ID inválido!');
-    //     });
-    // });
+            expect(response.status).toEqual(400);
+            expect(response.body.message)
+                .toEqual('ID inválido!');
+        });
+    });
 
     describe('DELETE /admin/products/id', () => {
         it('should return code 204 when deleting a product', async () => {
