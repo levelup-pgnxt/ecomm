@@ -59,7 +59,7 @@ class CategoriaController {
                 } else if(!categorias){
                     res.status(404).send({message: 'Categoria não encontrada.'})
                 } else {
-                    res.status(200).send({message: 'Categoria atualizada com sucesso.'})
+                    res.status(204).send({message: 'Categoria atualizada com sucesso.'})
                 }
             })
         }
