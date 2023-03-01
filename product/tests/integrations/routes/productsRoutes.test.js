@@ -367,6 +367,86 @@ describe('PRODUCTS ROUTES', () => {
         });
     });
     
+    describe('GET /products/search-by-value', () => {
+        it('must have a list of products with unit prices between the requested values', async () => {
+            const MAX = 10000;
+            const MIN = 2500;
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+            
+            expect(response.status).toEqual(200);
+            expect(response.body).toBeInstanceOf(Array);
+        });
+
+        it('should return status code 405 when passing min value greater than max value', async () => {
+            const MAX = 2500;
+            const MIN = 10000;
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+            
+            expect(response.status).toEqual(405);
+            expect(response.body.message).toEqual('Valor mínimo maior que valor máximo. Operação não permitida!');
+        });
+
+        it('should should return status code 400 when passing a non-numeric type for the maximum value', async () => {
+            const MAX = 'abc';
+            const MIN = 10000;
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O "valor máximo" deve ser do tipo numérico!');
+        });
+
+        it('should should return status code 400 when passing a non-numeric type for the minimum value', async () => {
+            const MAX = 10000;
+            const MIN = 'abc';
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O "valor mínimo" deve ser do tipo numérico!');
+        });
+    
+        it('should return status code 400 when passing the maximum value less than or equal to zero', async () => {
+            const MAX = 0;
+            const MIN = 2500;
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O "valor máximo" deve ser maior que zero!');
+        });
+    
+        it('should return status code 400 when passing the minimum value less than or equal to zero', async () => {
+            const MAX = 10000;
+            const MIN = -2500;
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O "valor mínimo" deve ser maior que zero!');
+        });
+
+        it('should return status code 400 when not passing the maximum value', async () => {
+            const MIN = -2500;
+            const response = await request(app)
+            .get(`/products/search-by-value?min=${MIN}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O "valor máximo" é obrigatório!');
+        });
+    
+        it('should return status code 400 when not passing the minimum value', async () => {
+            const MAX = 10000;
+            const response = await request(app)
+            .get(`/products/search-by-value?max=${MAX}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O "valor mínimo" é obrigatório!');
+        });
+    });
+
     describe('PUT /admin/products/id', () => {
         it.each([
             ['nome', { nome: DATATEST[1].nome }],
@@ -393,7 +473,7 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.body.message).toEqual('Produto já cadastrado!');
         });
 
-        it('must not change product name when passing an empty record', async () => {
+        it('must not change any product field when passing an empty object', async () => {
             const response = await request(app)
                 .put(`/admin/products/${ID}`)
                 .send({});
