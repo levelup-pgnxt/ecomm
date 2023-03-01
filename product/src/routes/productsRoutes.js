@@ -27,8 +27,8 @@ export default router;
 
 // ok .get(path, productsController.getAllProducts)
 // ok .get(pathSearch, productsController.getProductByName)
-// .get(pathSearchByValue, productsController.getProductsByValue)
-// .get(pathSearchByStock, productsController.getProductsByStock)
+// ok .get(pathSearchByValue, productsController.getProductsByValue)
+// em andamento .get(pathSearchByStock, productsController.getProductsByStock)
 // .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
 // ok .get(pathId, productsController.getProductById)
 // ok .post(pathAdminProducts, productsController.createProduct)
