@@ -117,7 +117,7 @@ class ProductController {
             const message = 'Objeto vazio, sem propriedades!';
             throw new NotFoundError(message);
         }
-        const dataProduct = validates.paramsUpadateProduct(req.body);
+        const dataProduct = validates.paramsUpdateProduct(req.body);
         const { nome, categoria } = dataProduct;
 
         if (nome) {

@@ -60,7 +60,7 @@ const validates = {
         }),
     })),
 
-    paramsUpadateProduct: runSchema(Joi.object().keys({
+    paramsUpdateProduct: runSchema(Joi.object().keys({
         nome: Joi.string().min(limit).empty().pattern(/^[A-Z].+/).messages({
             'string.base': 'O campo "nome" deve ser do tipo texto!',
             'string.empty': 'O campo "nome" não deve ser vazio!',
