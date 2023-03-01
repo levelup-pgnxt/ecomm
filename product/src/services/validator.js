@@ -2,10 +2,7 @@ const runSchema = (schema) => (data) => {
     const { error, value } = schema.validate(data);
   
     if (error) {
-      let msg = error.details[0].message;
-      if (msg.substr(1, 1) === '[') {
-        msg = msg.replace(msg.substr(1, 4), '');
-      }
+      const msg = error.details[0].message;
       error.message = msg;
       error.type = error.details[0].type;
       throw error;
