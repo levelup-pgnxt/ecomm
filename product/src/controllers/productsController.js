@@ -82,6 +82,11 @@ class ProductController {
     };
 
     static createProduct = async (req, res) => {
+        const keys = Object.keys(req.body);
+        if (keys.length === 0) {
+            const message = 'Objeto vazio, sem propriedades!';
+            throw new NotFoundError(message);
+        }
         const { nome, categoria } = validates.paramsProduct(req.body);
         const isExist = await ProductService.checkIsExistsProduct(nome);
         if (isExist) {
@@ -107,23 +112,38 @@ class ProductController {
 
         if (!isValideID) return res.status(400).send({ message: 'ID inválido!' });
 
-        const dataProduct = validates.paramsProduct(req.body);
-        const { categoria } = dataProduct;
+        const keys = Object.keys(req.body);
+        if (keys.length === 0) {
+            const message = 'Objeto vazio, sem propriedades!';
+            throw new NotFoundError(message);
+        }
+        const dataProduct = validates.paramsUpadateProduct(req.body);
+        const { nome, categoria } = dataProduct;
 
-        const isValideIdCategory = validates.paramsID(categoria);
-        if (!isValideIdCategory) return res.status(400).send({ message: 'ID categoria inválido!' });
+        if (nome) {
+            const isExist = await ProductService.checkIsExistsProduct(nome);
+            if (isExist) {
+                const message = 'Produto já cadastrado!';
+                throw new NotFoundError(message);
+            };
+        };
 
-        const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
-        if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
-
-        const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
-        if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+        if (categoria) {
+            const isValideIdCategory = validates.paramsID(categoria);
+            if (!isValideIdCategory) return res.status(400).send({ message: 'ID categoria inválido!' });
+    
+            const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
+            if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
+    
+            const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
+            if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+        };
 
         const updateProduct = await ProductService.updateProduct(id, dataProduct);
         if (!updateProduct) {
             return res.status(404).send({ message: 'Produto não localizado!' });    
         }
-        res.status(201).send(updateProduct.toJSON());
+        res.status(204).send(updateProduct.toJSON());
     };
 
     static deleteProductById = async (req, res) => {
