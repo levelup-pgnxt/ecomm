@@ -99,22 +99,22 @@ const validates = {
 
     valuesMaxMin: runSchema(Joi.object().keys({
         max: Joi.number().precision(2).greater(0).required().messages({
-            'number.base': 'O campo "máximo" deve ser do tipo numérico!',
-            'number.greater': 'O campo "máximo" deve ser maior que zero!',
-            'any.required': 'O campo "máximo" é obrigatório!'
+            'number.base': 'O "valor máximo" deve ser do tipo numérico!',
+            'number.greater': 'O "valor máximo" deve ser maior que zero!',
+            'any.required': 'O "valor máximo" é obrigatório!'
         }),
         min: Joi.number().precision(2).greater(0).required().messages({
-            'number.base': 'O campo "mínimo" deve ser do tipo numérico!',
-            'number.greater': 'O campo "mínimo" deve ser maior que zero!',
-            'any.required': 'O campo "mínimo" é obrigatório!'
+            'number.base': 'O "valor mínimo" deve ser do tipo numérico!',
+            'number.greater': 'O "valor mínimo" deve ser maior que zero!',
+            'any.required': 'O "valor mínimo" é obrigatório!'
         }),
     })),
 
     valueStock: runSchema(Joi.object().keys({
         stock: Joi.number().integer().greater(0).required().messages({
-            'number.base': 'O campo "estoque" deve ser do tipo numérico!',
-            'number.greater': 'O campo "estoque" deve ser maior que zero!',
-            'any.required': 'O campo "estoque" é obrigatório!'
+            'number.base': 'O valor do "estoque" deve ser do tipo numérico!',
+            'number.greater': 'O valor do "estoque" deve ser maior que zero!',
+            'any.required': 'O valor do "estoque" é obrigatório!'
         }),
     })),
 };
