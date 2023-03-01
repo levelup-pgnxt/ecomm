@@ -1,6 +1,8 @@
 import app from '../../app.js';
 import request from 'supertest';
-import { response } from 'express';
+import {
+    describe, expect, it, jest,
+  } from '@jest/globals';
 
 describe('GET em /api/produtos', () => {
     it('Deve retornar uma lista de produtos', async () => {
@@ -35,6 +37,33 @@ describe('POST em /api/admin/produtos', () => {
     });
 });
 
+describe('GET em /api/produtos/id', () => {
+    it('Deve retornar um produto específico', async () => {
+        await request(app)
+            .get(`/api/produtos/${idResposta}`)
+            .expect(200)
+    })
+})
+
+describe('PUT em /api/admin/produtos/id', () => {
+    test.each([
+        ['nome', {nome: 'Novo Nome do Produto de Teste'}],
+        ['descricao', {descricao: 'Nova Descricao do Produto de Teste'}],
+        ['slug', {slug: 'Nova Slug do Produto de Teste'}],
+        ['precoUnitario', {precoUnitario: 123456}],
+        ['quantidadeEmEstoque', {quantidadeEmEstoque: 10}],
+        ['categoria', {categoria: {nome: 'LIVROS', idCategoria: '63e0e4d4dd85b8c7425f9276'}}],
+    ])('Deve alterar o campo %s', async (chave, param) => {
+        const requisicao = { request };
+        const spy = jest.spyOn(requisicao, 'request');
+        await requisicao.request(app)
+            .put(`/api/admin/produtos/${idResposta}`)
+            .send(param)
+            .expect(204);
+        
+        expect(spy).toHaveBeenCalled();
+    })
+})
 
 describe('DELETE em /api/admin/produtos/id', () => {
     it('Deletar o produto adicionado', async () => {

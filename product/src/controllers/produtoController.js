@@ -44,7 +44,7 @@ class ProdutoController {
             } else if(!produto){
                 res.status(404).send({message: 'Produto não encontrado.'})
             } else {
-                res.status(200).send({message: 'Produto atualizado com sucesso.'})
+                res.status(204).send({message: 'Produto atualizado com sucesso.'})
             }
         })
     }
