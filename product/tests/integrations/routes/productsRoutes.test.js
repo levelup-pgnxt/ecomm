@@ -7,7 +7,7 @@ import DATATEST from '../../datatests/datatestes.js';
 
 let server;
 beforeEach(() => {
-    const PORT = 3000;
+    const PORT = 3003;
     server = app.listen(PORT);
 });
 
@@ -481,6 +481,33 @@ describe('PRODUCTS ROUTES', () => {
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O valor do "estoque" é obrigatório!');
+        });
+    });
+
+    describe('GET /products/search-by-category/:id', () => {
+        it('should return a list of products from the requested category', async () => {
+            const categoryID = DATATEST[0].categoria;
+            const response = await request(app)
+                .get(`/products/search-by-category/${categoryID}`);
+            
+            expect(response.status).toEqual(200);
+            expect(response.body).toBeInstanceOf(Array);
+        });
+
+        it('should return status code 400 when passing an invalid category ID', async () => {
+            const response = await request(app)
+                .get(`/products/search-by-category/123456`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('ID inválido!');
+        });
+
+        it('should return status code 404 when passing the ID of a category that does not exist', async () => {
+            const response = await request(app)
+                .get(`/products/search-by-category/${ID_INEXISTENTE}`);
+            
+            expect(response.status).toEqual(404);
+            expect(response.body.message).toEqual('Categoria não localizada!');
         });
     });
 
