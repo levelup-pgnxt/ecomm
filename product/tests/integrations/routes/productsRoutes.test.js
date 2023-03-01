@@ -360,7 +360,7 @@ describe('PRODUCTS ROUTES', () => {
     describe('GET /products/search', () => {
         it('should return a list of products with names that have the requested expression', async () => {
             const response = await request(app)
-            .get(`/products/search?products=${QUERY_SEARCH}`);
+                .get(`/products/search?products=${QUERY_SEARCH}`);
             
             expect(response.status).toEqual(200);
             expect(response.body).toBeInstanceOf(Array);
@@ -372,7 +372,7 @@ describe('PRODUCTS ROUTES', () => {
             const MAX = 10000;
             const MIN = 2500;
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+                .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
             
             expect(response.status).toEqual(200);
             expect(response.body).toBeInstanceOf(Array);
@@ -382,7 +382,7 @@ describe('PRODUCTS ROUTES', () => {
             const MAX = 2500;
             const MIN = 10000;
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+                .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
             
             expect(response.status).toEqual(405);
             expect(response.body.message).toEqual('Valor mínimo maior que valor máximo. Operação não permitida!');
@@ -392,7 +392,7 @@ describe('PRODUCTS ROUTES', () => {
             const MAX = 'abc';
             const MIN = 10000;
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+                .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O "valor máximo" deve ser do tipo numérico!');
@@ -402,7 +402,7 @@ describe('PRODUCTS ROUTES', () => {
             const MAX = 10000;
             const MIN = 'abc';
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+                .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O "valor mínimo" deve ser do tipo numérico!');
@@ -412,7 +412,7 @@ describe('PRODUCTS ROUTES', () => {
             const MAX = 0;
             const MIN = 2500;
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+                .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O "valor máximo" deve ser maior que zero!');
@@ -422,7 +422,7 @@ describe('PRODUCTS ROUTES', () => {
             const MAX = 10000;
             const MIN = -2500;
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
+                .get(`/products/search-by-value?max=${MAX}&min=${MIN}`);
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O "valor mínimo" deve ser maior que zero!');
@@ -431,7 +431,7 @@ describe('PRODUCTS ROUTES', () => {
         it('should return status code 400 when not passing the maximum value', async () => {
             const MIN = -2500;
             const response = await request(app)
-            .get(`/products/search-by-value?min=${MIN}`);
+                .get(`/products/search-by-value?min=${MIN}`);
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O "valor máximo" é obrigatório!');
@@ -440,10 +440,47 @@ describe('PRODUCTS ROUTES', () => {
         it('should return status code 400 when not passing the minimum value', async () => {
             const MAX = 10000;
             const response = await request(app)
-            .get(`/products/search-by-value?max=${MAX}`);
+                .get(`/products/search-by-value?max=${MAX}`);
             
             expect(response.status).toEqual(400);
             expect(response.body.message).toEqual('O "valor mínimo" é obrigatório!');
+        });
+    });
+
+    describe('GET /products/search-by-stock', () => {
+        it('should return a list of products with a stock value greater than the requested value', async () => {
+            const stock = 10;
+            const response = await request(app)
+                .get(`/products/search-by-stock?stock=${stock}`);
+            
+            expect(response.status).toEqual(200);
+            expect(response.body).toBeInstanceOf(Array);
+        });
+
+        it('should return status code 400 when passing a non-number type for the stock value', async () => {
+            const stock = 'abc';
+            const response = await request(app)
+                .get(`/products/search-by-stock?stock=${stock}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O valor do "estoque" deve ser do tipo numérico!');
+        });
+  
+        it('should return status code 400 when passing inventory value less than or equal to zero', async () => {
+            const stock = -10;
+            const response = await request(app)
+                .get(`/products/search-by-stock?stock=${stock}`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O valor do "estoque" deve ser maior que zero!');
+        });
+    
+        it('should return status code 400 when not passing the stock value', async () => {
+            const response = await request(app)
+                .get(`/products/search-by-stock?`);
+            
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('O valor do "estoque" é obrigatório!');
         });
     });
 
