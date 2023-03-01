@@ -29,11 +29,7 @@ class CategoryController {
         const { categories } = req.query;
         const searchName = new RegExp(`${categories}.*`, 'igm');
         const result = await CategoryService.getCategoryByName(searchName);
-        if (!result) {
-            res.status(404).send({ message: 'Categoria não localizada!' });
-        } else {
-            res.status(200).json(result);
-        };
+        res.status(200).json(result);
     };
 
     static createCategory = async (req, res) => {
