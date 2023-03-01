@@ -83,8 +83,15 @@ describe('CATEGORIES ROUTES', () => {
             expect(response.body.message).toEqual('Categoria não localizada!');
             expect(response.status).toEqual(404);
         });
+
+        it('should return status code 400 when passing an invalid category ID', async () => {
+            const response = await request(app).get(`/categories/1234567890`);
+            
+            expect(response.body.message).toEqual('ID inválido!');
+            expect(response.status).toEqual(400);
+        });
     });
-    
+
     describe('GET /categories/search', () => {
         it('should return a list of categories with names that have the requested expression', async () => {
             const response = await request(app)
@@ -150,24 +157,35 @@ describe('CATEGORIES ROUTES', () => {
 
     describe('PATCH /admin/categories/id', () => {
         it('must change category status', async () => {
-            const response = await request(app).get(`/categories/${ID}`);
+            let response = await request(app).get(`/categories/${ID}`);
             let { status } = response.body;
+            const statusA = status;
             if (status === 'ATIVA') {
                 status = 'INATIVA';
             } else {
                 status = 'ATIVA';
             };
-            const respChangeStatus = await request(app)
-                .patch(`/admin/categories/${ID}`)
-                .send(status);
+            let respChangeStatus = await request(app)
+                .patch(`/admin/categories/${ID}`);
 
+            response = await request(app).get(`/categories/${ID}`);
+            const statusB = response.body.status;
             expect(respChangeStatus.status).toEqual(201);
             expect(respChangeStatus.body.message)
                 .toEqual(`Status da categoria atualizado para "${status}"!`);
+            expect(statusB).not.toEqual(statusA);
+
+            await request(app).patch(`/admin/categories/${ID}`);
+
+            response = await request(app).get(`/categories/${ID}`);
+            const statusC = response.body.status;
+
+            expect(statusC).not.toEqual(statusB);
+            expect(statusC).toEqual(statusA);
         });
 
         it('should not change category status if code not found', async () => {
-            const response = await request(app).get(`/categories/${ID_INEXISTENTE}`);
+            const response = await request(app).patch(`/admin/categories/${ID_INEXISTENTE}`);
 
             expect(response.status).toEqual(404);
             expect(response.body.message)
@@ -175,7 +193,7 @@ describe('CATEGORIES ROUTES', () => {
         });
 
         it('should return status code 400 if passed an invalid id', async () => {
-            const response = await request(app).get('/categories/123');
+            const response = await request(app).patch('/admin/categories/123');
 
             expect(response.status).toEqual(400);
             expect(response.body.message)
