@@ -355,6 +355,13 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.body.message).toEqual('Produto não localizado!');
             expect(response.status).toEqual(404);
         });
+
+        it('should return status code 400 when passing an invalid product ID', async () => {
+            const response = await request(app).get(`/products/1234567890`);
+            
+            expect(response.body.message).toEqual('ID inválido!');
+            expect(response.status).toEqual(400);
+        });
     });
     
     describe('GET /products/search', () => {
@@ -562,6 +569,35 @@ describe('PRODUCTS ROUTES', () => {
             expect(response.status).toEqual(400);
             expect(response.body.message)
                 .toEqual('ID inválido!');
+        });
+
+        it('should return status code 400 if passed a non-existent category id', async () => {
+            const response = await request(app)
+                .put(`/admin/products/${ID}`)
+                .send(DATATEST[33]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message)
+                .toEqual('Categoria não localizada!');
+        });
+
+        it('should return status code 400 if passed an invalid category id', async () => {
+            const response = await request(app)
+                .put(`/admin/products/${ID}`)
+                .send(DATATEST[32]);
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message)
+                .toEqual('ID categoria inválido!');
+        });
+
+        it('should return status code 400 when passing an inactive category', async () => {
+            const response = await request(app)
+                .put(`/admin/products/${ID}`)
+                .send({ categoria: newCategory._id });
+
+            expect(response.status).toEqual(400);
+            expect(response.body.message).toEqual('Categoria Inativa!');
         });
     });
 
