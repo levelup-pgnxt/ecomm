@@ -30,11 +30,7 @@ class ProductController {
         const { products } = req.query;
         const searchName = new RegExp(`${products}.*`, 'igm');
         const result = await ProductService.getProductByName(searchName);
-        if (!result) {
-            res.status(404).send({ message: 'Produto não localizado!' });
-        } else {
-            res.status(200).json(result);
-        };
+        res.status(200).json(result);
     };
 
     static getProductsByValue = async (req, res) => {
@@ -44,21 +40,13 @@ class ProductController {
             throw new NotFoundError(message);
         }
         const result = await ProductService.getProductsByValue(max, min);
-        if (!result) {
-            res.status(404).send({ message: 'Produtos não localizados!' });
-        } else {
-            res.status(200).json(result);
-        };
+        res.status(200).json(result);
     };
 
     static getProductsByStock = async (req, res) => {
         const { stock } = validates.valueStock(req.query);
         const result = await ProductService.getProductsByStock(stock);
-        if (!result) {
-            res.status(404).send({ message: 'Produtos não localizados!' });
-        } else {
-            res.status(200).json(result);
-        };
+        res.status(200).json(result);
     };
 
     static getProductsByCategoryId = async (req, res) => {
@@ -69,11 +57,7 @@ class ProductController {
             const isExistCategory = await CategoryService.checkIsExistsCategoryById(id);
             if (isExistCategory) {
                 const products = await ProductService.getProductsByCategoryId(id);
-                if (!products) {
-                    res.status(404).send({ message: 'Produtos não localizados!' });
-                } else {
-                    res.status(200).json(products);
-                };
+                res.status(200).json(products);
             }
             res.status(404).send({ message: 'Categoria não localizada!' });
         } else {
