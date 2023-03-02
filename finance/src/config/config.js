@@ -6,20 +6,7 @@ const config = {
   database: 'ecomm-finance',
   host: '127.0.0.1',
   dialect: 'mysql',
-  operatorAliases: false
-  // host: process.env.MYSQL_HOST,
-  // username: process.env.MYSQL_USER,
-  // password: process.env.MYSQL_PASSWORD,
-  // root_password: process.env.MYSQL_ROOT_PASSWORD,
-  // database: process.env.MYSQL_DATABASE,
-  // port: process.env.MYSQL_PORT,
-  // dialect: 'mysql',
-  // pool: {
-  //   max: 5,
-  //   min: 0,
-  //   acquire: 30000,
-  //   idle: 10000
-  // }
+  operatorAliases: false,
 };
 
 module.exports = {
