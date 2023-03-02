@@ -243,6 +243,12 @@ const DATATEST = [
         precoUnitario: 82.82,
         estoque: 200,
     },
+    {
+        categoria: "0123456789"
+    },
+    {
+        categoria: "66dd8be23138b0c3320e26fe"
+    },
 ];
 
 /*
@@ -278,6 +284,8 @@ const DATATEST = [
     *29 - Campo categoria deve ser obrigatório
     *30 - Nova categoria / para tornar inativa para o teste
     *31 - Novo produto para teste com categoria inativa
+    *32 - Código categoria inválido
+    *33 - Código categoria inexistente
 */
 
 export default DATATEST;
