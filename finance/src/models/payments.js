@@ -1,7 +1,8 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Payments extends Model {
     /**
@@ -11,51 +12,51 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Payments.hasOne(models.Invoices, {
-        foreignKey: 'paymentId'
-      })
+        foreignKey: 'paymentId',
+      });
     }
   }
   Payments.init({
     valor: {
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL(10, 2),
       notNull: true,
       validate: {
-        min: 0
-      }
+        min: 0,
+      },
     },
     nome: {
       type: DataTypes.STRING,
-      notNull: true
+      notNull: true,
     },
     numeroCartao: {
       type: DataTypes.STRING,
       notNull: true,
-      isCreditCard: true
+      isCreditCard: true,
     },
     expiracaoCartao: {
       type: DataTypes.STRING,
       notNull: true,
       validate: {
         dataExpiracaoCartao(data) {
-          if(!/^\d{4}-\d{2}$/.test(data)) {
-            throw new Error('O formato da data de expiração do cartão é yyyy-MM')
+          if (!/^\d{4}-\d{2}$/.test(data)) {
+            throw new Error('O formato da data de expiração do cartão é yyyy-MM');
           }
-        }
-      }
+        },
+      },
     },
     cvvCartao: {
       type: DataTypes.INTEGER,
       notNull: true,
-      len: [3]
+      len: [3],
     },
     status: {
       type: DataTypes.STRING,
       notNull: true,
       isIn: {
-        args: [["CRIADO", "CONFIRMADO", "CANCELADO"]],
-        msg: 'Dado do tipo status inválido'
-      }
-    }
+        args: [['CRIADO', 'CONFIRMADO', 'CANCELADO']],
+        msg: 'Dado do tipo status inválido',
+      },
+    },
   }, {
     sequelize,
     modelName: 'Payments',

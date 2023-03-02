@@ -1,11 +1,9 @@
-const Services = require('./Services')
-const database = require('../models')
+const Services = require('./Services');
 
 class InvoicesServices extends Services {
-    constructor(){
-        super('Invoices')
-    }
-
+  constructor() {
+    super('Invoices');
+  }
 }
 
-module.exports = InvoicesServices
+module.exports = InvoicesServices;
