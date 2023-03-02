@@ -4,20 +4,14 @@ class PaymentController {
   static async createPayment(req, res) {
     const newPayment = req.body;
     try {
+      newPayment.status = 'CRIADO';
       const newPaymentCreated = await database.Payments.create(newPayment);
-      const created = { status: 'CRIADO' };
-
-      await database.Payments.update(created, {
-        where: {
-          id: Number(newPaymentCreated.id),
-        },
-      });
 
       return res.location(`/payments/${newPaymentCreated.id}`).status(201).json(
         {
-          Id: newPaymentCreated.id,
-          Status: newPaymentCreated.status,
-          Links: [
+          id: newPaymentCreated.id,
+          status: newPaymentCreated.status,
+          links: [
             {
               href: `/payments/${newPaymentCreated.id}`,
               rel: 'self',
@@ -116,7 +110,7 @@ class PaymentController {
             id: Number(id),
           },
         });
-        return res.status(201).json(cancelledPayment);
+        return res.status(200).json(cancelledPayment);
       }
       return res.status(409).json('O pedido não pode ser cancelado.');
     } catch (error) {
@@ -140,7 +134,7 @@ class PaymentController {
             id: Number(id),
           },
         });
-        return res.status(201).json(confirmedPayment);
+        return res.status(200).json(confirmedPayment);
       }
       return res.status(409).json('O pedido não pode ser confirmado.');
     } catch (error) {

@@ -1,6 +1,6 @@
 const request = require('supertest');
 const {
-  afterEach, beforeEach, describe, it,
+  beforeEach, afterEach, describe, it,
 } = require('@jest/globals');
 const app = require('../src/index.js');
 
@@ -36,8 +36,12 @@ describe('POST in /payments', () => {
         nameCard: 'TestPayment',
         monetaryValue: 123.12,
       })
+      .set('Accept', 'application/json')
+      .expect('content-type', /json/)
       .expect(201);
+
     paymentId = res.body.id;
+    console.log('testando', paymentId);
   });
   it('Should not add an empty payment', async () => {
     await request(app)
@@ -51,15 +55,26 @@ describe('GET in /payments/:id', () => {
   it('Should return a payment by id', async () => {
     await request(app)
       .get(`/payments/${paymentId}`)
+      .set('Accept', 'application/json')
+      .expect('content-type', /json/)
       .expect(200);
   });
 });
 
-describe('PUT in /payments/:id', () => {
+describe('PUT in /payments/cancel/:id', () => {
   it('Should cancel the payment', async () => {
     await request(app)
-      .put(`/payments/${paymentId}`)
+      .put(`/payments/cancel/${paymentId}`)
       .send({ status: 'CANCELADO' })
       .expect(200);
+  });
+});
+
+describe('PUT in /payments/confirm/:id', () => {
+  it('Should not confirm a canceled payment', async () => {
+    await request(app)
+      .put(`/payments/confirm/${paymentId}`)
+      .send({ status: 'CONFIRMADO' })
+      .expect(409);
   });
 });
