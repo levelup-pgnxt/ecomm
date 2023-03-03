@@ -34,8 +34,7 @@ const accountSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        // eslint-disable-next-line no-useless-escape
-        validator: (email) => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email),
+        validator: (email) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email),
         message: 'O e-mail precisa ser válido.',
       },
     },
@@ -57,7 +56,7 @@ const accountSchema = new mongoose.Schema(
     phone: {
       type: Number,
       validate: {
-        validator: (telefone) => /^\d{10, 13}$/.test(telefone),
+        validator: (telefone) => /^\d{10,13}$/.test(telefone),
         message: 'O telefone deve ter de 10 à 13 digitos apenas numéricos.',
       },
     },
