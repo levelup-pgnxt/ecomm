@@ -45,7 +45,7 @@ class AccountController {
       } else if (!account) {
         res.status(404).send({ message: 'Account não encontrada.' });
       } else {
-        res.status(200).send({ message: 'Account atualizada com sucesso.' });
+        res.status(204).send({ message: 'Account atualizada com sucesso.' });
       }
     });
   };
