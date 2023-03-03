@@ -1,9 +1,11 @@
 const request = require('supertest');
-const { describe, expect, it } = require('@jest/globals');
+const { describe, expect, it, jest } = require('@jest/globals');
 
 const DATATEST = require('./datatests/datatests');
 const STATUS = require('../src/auxiliaries/constant');
 const app = require('../src/app');
+
+jest.useRealTimers();
 
 let ID;
 
@@ -32,7 +34,9 @@ describe('PAYMENTS ROUTES', () => {
   // });
 
   describe('POST /payments', () => {
-    test('must register a new payment', async () => {
+    it('must register a new payment', async () => {
+      // jest.useFakeTimers('legacy');
+      jest.setTimeout(10 * 1000);
       const response = await request(app)
         .post('/payments')
         .send({ ...DATATEST[0], status: STATUS[0] });
