@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import STATUS_CONFIRMADO from './constantes.js';
+import status from './constantes.js';
 
 export const fetchAccount = async (id) => {
   const cliente = await fetch(`http://account:3002/api/admin/accounts/${id}`);
@@ -13,7 +13,7 @@ export const fetchPayment = async (payload, id) => {
   const response = await fetch(`http://finance:3003/admin/payments/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({
-      status: STATUS_CONFIRMADO,
+      status: status.STATUS_CONFIRMADO,
       descricao,
     }),
     headers: {

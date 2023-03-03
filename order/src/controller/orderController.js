@@ -35,7 +35,7 @@ class OrderController {
       } else {
         const { name, cpf, address } = await fetchAccount(order.clienteId);
         const payload = {
-          name, cpf, address, itens: order.itens, paymentId,
+          name, cpf, address, itens: order.itens,
         };
         await fetchPayment(payload, paymentId);
       }

@@ -3,4 +3,4 @@ WORKDIR /app/ecomm-order
 COPY . .
 RUN npm install
 EXPOSE 3004
-ENTRYPOINT npm start
+ENTRYPOINT npm run dev
