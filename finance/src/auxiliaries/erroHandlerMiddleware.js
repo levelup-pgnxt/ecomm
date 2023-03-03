@@ -1,4 +1,4 @@
-const errorHandlerMiddleware = (err, _req, res) => {
+const errorHandlerMiddleware = (err, _req, res, _next) => {
   const {
     name, message, type, code,
   } = err;

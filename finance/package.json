@@ -5,14 +5,17 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon src/index",
-    "start": "node src/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "dev": "nodemon server",
+    "start": "node server",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --no-cache --verbose",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --verbose",
+    "test:coverage": "node --trace-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --verbose --coverage"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@jest/globals": "^29.4.3",
     "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

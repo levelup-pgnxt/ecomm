@@ -1,5 +1,6 @@
-const express = require('express');
 const paymentsRoute = require('./paymentsRoutes');
+const errorHandlerMiddleware = require('../auxiliaries/erroHandlerMiddleware');
+
 
 const API = 'API Finance';
 
@@ -9,7 +10,7 @@ const routes = (app) => {
   });
 
   app.use(
-    express.json(),
+    errorHandlerMiddleware,
     paymentsRoute,
   );
 };
