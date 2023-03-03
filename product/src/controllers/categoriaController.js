@@ -80,15 +80,20 @@ class CategoriaController {
   static ativaCategoria = (req, res) => {
     const { id } = req.params;
 
-    Categorias.findByIdAndUpdate(id, { $set: { status: STATUS_ATIVA } }, (err, categorias) => {
-      if (err) {
-        res.status(500).send({ message: err.message });
-      } else if (!categorias) {
-        res.status(404).send({ message: 'Categoria não encontrada.' });
-      } else {
-        res.status(200).json(categorias);
-      }
-    });
+    Categorias.findByIdAndUpdate(
+      id,
+      { $set: { status: STATUS_ATIVA } },
+      { new: true },
+      (err, categorias) => {
+        if (err) {
+          res.status(500).send({ message: err.message });
+        } else if (!categorias) {
+          res.status(404).send({ message: 'Categoria não encontrada.' });
+        } else {
+          res.status(200).json(categorias);
+        }
+      },
+    );
   };
 }
 
