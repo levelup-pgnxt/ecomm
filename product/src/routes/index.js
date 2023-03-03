@@ -1,19 +1,19 @@
-import express from "express";
-import categories from "./categoriesRoutes.js"
-import products from "./productsRoutes.js"
+import express from 'express';
+import categories from './categoriesRoutes';
+import products from './productsRoutes';
 
 const routes = (app) => {
-  app.route('/').get((req, res) => {
-    res.status(200).send({titulo: "API do ecommerce"})
-  })
+  app.route('/').get((_req, res) => {
+    res.status(200).send({ titulo: 'API do ecommerce' });
+  });
 
   app.use(
     express.json(),
     categories,
-    products
-  )
-}
+    products,
+  );
+};
 
-export default routes
+export default routes;
 
-//"inicio" da api quando não é solicitado nada
+// "inicio" da api quando não é solicitado nada
