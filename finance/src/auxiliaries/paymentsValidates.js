@@ -11,11 +11,11 @@ const paymentsValidates = {
     name: Joi.string().min(3).empty().required()
       .pattern(/^[A-Za-z\s]+$/)
       .messages({
-        'string.base': 'O campo "nome" deve ser do tipo texto!',
-        'string.empty': 'O campo "nome" não deve ser vazio!',
-        'string.min': 'O campo "nome" deve ter no mínimo 3 caracteres!',
-        'string.pattern.base': 'O campo "nome" deve possuir apenas letras!',
-        'any.required': 'O campo "nome" é obrigatório!',
+        'string.base': 'O campo "name" deve ser do tipo texto!',
+        'string.empty': 'O campo "name" não deve ser vazio!',
+        'string.min': 'O campo "name" deve ter no mínimo 3 caracteres!',
+        'string.pattern.base': 'O campo "name" deve possuir apenas letras!',
+        'any.required': 'O campo "name" é obrigatório!',
       }),
     number: Joi.string().creditCard().empty().required()
       .pattern(/^\d{16}$/)

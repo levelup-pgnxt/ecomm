@@ -1,10 +1,10 @@
 const DATATEST = [
   {
     value: 2916.43,
-    name: 'AMERICAN EXPRESS',
-    number: '340205810531040',
-    expiration: '05/2029',
-    cvv: '6403',
+    name: 'VISA',
+    number: '4924018644250794',
+    expiration: '08/2028',
+    cvv: '258',
   },
 ];
 

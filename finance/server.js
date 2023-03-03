@@ -1,3 +1,4 @@
+require('express-async-errors');
 const app = require('./src/app');
 
 const PORT = 3002;

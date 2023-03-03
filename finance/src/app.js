@@ -1,10 +1,10 @@
-require('express-async-errors');
 const express = require('express');
 const routes = require('./routes');
+const errorHandlerMiddleware = require('../src/auxiliaries/erroHandlerMiddleware');
 
 const app = express();
 
-app.use(express.json());
+app.use(errorHandlerMiddleware, express.json());
 routes(app);
 
 module.exports = app;

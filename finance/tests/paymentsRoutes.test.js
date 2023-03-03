@@ -9,7 +9,7 @@ let ID;
 
 let server;
 beforeEach(() => {
-  const PORT = 4000;
+  const PORT = 3002;
   server = app.listen(PORT, () => console.log(
     `Servidor está rodando em http://localhost:${PORT}`,
   ));
@@ -32,9 +32,7 @@ describe('PAYMENTS ROUTES', () => {
   // });
 
   describe('POST /payments', () => {
-    it('must register a new payment', async () => {
-      console.log(DATATEST[0]);
-      console.log(STATUS[0]);
+    test('must register a new payment', async () => {
       const response = await request(app)
         .post('/payments')
         .send({ ...DATATEST[0], status: STATUS[0] });
@@ -44,7 +42,7 @@ describe('PAYMENTS ROUTES', () => {
       const newPayment = response.body;
       ID = newPayment.id;
 
-      // expect(response.status).toEqual(201);
+      expect(response.status).toEqual(201);
       expect(newPayment).toBeInstanceOf(Object);
       expect(newPayment).toHaveProperty('value');
       expect(newPayment).toHaveProperty('name');
@@ -53,8 +51,7 @@ describe('PAYMENTS ROUTES', () => {
       expect(newPayment).toHaveProperty('cvv');
       expect(newPayment).toHaveProperty('status');
       expect(newPayment.status).toEqual(DATATEST[0]);
-      done();
-    });
+    }, 30000);
 
     // it('must check if the category already exist', async () => {
     //   const response = await request(app)
