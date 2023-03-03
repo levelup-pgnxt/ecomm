@@ -1,9 +1,21 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-underscore-dangle */
 import request from 'supertest';
 import {
+  afterAll,
+  beforeAll,
   describe, expect, it, jest,
 } from '@jest/globals';
+import mongoose from 'mongoose';
 import app from '../../app.js';
+
+beforeAll(async () => {
+  await mongoose.connect('mongodb://admin:secret@mongodb:27017/ecomm-product-test?authSource=admin');
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
 describe('GET em /api/categories', () => {
   it('Deve retornar uma lista de categorias', async () => {

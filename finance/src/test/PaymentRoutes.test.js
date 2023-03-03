@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const request = require('supertest');
 const { describe, it } = require('@jest/globals');
 const app = require('../app.js');
