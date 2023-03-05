@@ -1,15 +1,19 @@
 const errorHandlerMiddleware = (err, _req, res, _next) => {
-    const { name, message, type, code } = err;
+  const {
+    name, message, type, code,
+  } = err;
 
-    if (type && type.substring(6) === '.min') {
-      return res.status(422).json({ message });
-    }
+  console.log(err);
   
-    switch (name) {
-      case 'ValidationError': res.status(400).json({ message }); break;
-      case 'NotFoundError': res.status(code).json({ message }); break;
-      default: console.warn(err); res.sendStatus(500);
-    }
+  if (type && type.substring(6) === '.min') {
+    res.status(422).json({ message });
+  }
+  console.log(name);
+  switch (name) {
+    case 'ValidationError': res.status(400).json({ message }); break;
+    case 'NotFoundError': res.status(code).json({ message }); break;
+    default: console.warn(err); res.sendStatus(500);
+  }
 };
-  
+
 module.exports = errorHandlerMiddleware;

@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable no-unused-vars */
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -7,43 +7,43 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       value: {
         type: Sequelize.FLOAT,
-        allowNull: false
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       number: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       expiration: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       cvv: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Payments');
-  }
+  },
 };

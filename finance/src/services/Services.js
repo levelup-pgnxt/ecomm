@@ -1,17 +1,19 @@
 const db = require('../models');
 
 class Services {
-    constructor(modelName) {
-        this.modelName = modelName;
-    }
+  constructor(modelName) {
+    this.modelName = modelName;
+  }
 
-    async createRecord(data) {
-        return await db[this.modelName].create(data);
-    }
+  async createRecord(data) {
+    const result = await db[this.modelName].create(data);
+    return result;
+  }
 
-    async getRecordByPk(id) {
-        return await db[this.modelName].findByPk(id);
-    }
-};
+  async getRecordByPk(id) {
+    const result = await db[this.modelName].findByPk(id);
+    return result;
+  }
+}
 
 module.exports = Services;

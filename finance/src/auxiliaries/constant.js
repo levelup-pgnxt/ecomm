@@ -1,3 +1,3 @@
-const STATUS = 'CRIADO';
+const STATUS = ['CREATED', 'CONFIRMED', 'CANCELED'];
 
 module.exports = STATUS;

@@ -1,7 +1,12 @@
+/* eslint-disable strict */
+/* eslint-disable no-unused-vars */
+
 'use strict';
+
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Payment extends Model {
     /**
@@ -19,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     number: DataTypes.STRING,
     expiration: DataTypes.STRING,
     cvv: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Payment',

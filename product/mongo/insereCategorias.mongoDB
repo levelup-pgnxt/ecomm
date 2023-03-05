@@ -1,12 +1,38 @@
 use('ecomm');
 
 db.categories.insertMany([
-    { nome: 'INFORMÁTICA', status: 'ATIVA' },
-    { nome: 'BELEZA', status: 'INATIVA' },
-    { nome: 'CELULARES', status: 'ATIVA' },
-    { nome: 'MÓVEIS', status: 'ATIVA' },
-    { nome: 'LUXO', status: 'INATIVA' },
-    { nome: 'ESPORTE', status: 'INATIVA' },
-    { nome: 'AUTOMOTIVA', status: 'ATIVA' },
-    { nome: 'LIVROS', status: 'ATIVA' } 
+    {
+        "nome": "INFORMÁTICA",
+        "status": "ATIVA"
+    },{
+        "nome": "BELEZA",
+        "status": "ATIVA"
+    },{
+        "nome": "CELULARES",
+        "status": "ATIVA"
+    },{
+        "nome": "MÓVEIS",
+        "status": "ATIVA"
+    },{
+        "nome": "LUXO",
+        "status": "INATIVA"
+    },{
+        "nome": "ESPORTE",
+        "status": "ATIVA"
+    },{
+        "nome": "AUTOMOTIVA",
+        "status": "ATIVA"
+    },{
+        "nome": "LIVROS",
+        "status": "ATIVA"
+    },{
+        "nome": "CAMA, MESA E BANHO",
+        "status": "ATIVA"
+    },{
+        "nome": "UTILIDADES DOMÉSTICAS",
+        "status": "ATIVA"
+    },{
+        "nome": "GAMES",
+        "status": "ATIVA"
+    }
 ]);
