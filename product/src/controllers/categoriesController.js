@@ -3,9 +3,13 @@ import categories from "../models/categories.js";
 class categoriesController {
 
   static listarCategories = (req, res) => {
-    categories.find((err, Categories) => {
-      res.status(200).json(Categories)
-  })
+    categories.find((err, categories) => {
+      if(err) {
+        res.status(400).send({message: `${err.message} - Informações não encontradas.`})
+      } else {
+        res.status(200).send(categories);
+      }
+    })
   }
 
   static inserirCategories = (req, res) => {
@@ -71,7 +75,7 @@ static excluirCategories = (req, res) => {
 
   categories.findByIdAndDelete(id, (err) => {
     if(!err){
-      res.status(200).send({message: 'Categoria removida com sucesso'})
+      res.status(204).send({message: 'Categoria removida com sucesso'})
     } else {
       res.status(500).send({message: err.message})
     }

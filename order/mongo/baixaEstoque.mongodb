@@ -1,17 +1,21 @@
-use("ecomm-product");
 
 //crie uma ordem de compra pegando as informações do isac 2 (nome ide e endereço)
 
 //de baixa na produto com a quantidade x 
 
+
+var qtdPedido = 2
+
+use("ecomm-product");
+
 db.products.findOneAndUpdate({
-    modelo:"Galaxy Tab S8",
-    quantidade:{
-            $gt: 0
-        }
-    },{
-        $inc:{
-            quantidade:-1
-        }
-    
+    "produto": "Galaxy Tab S8",
+    "quantidade":{
+        $gt:qtdPedido
+    }
+},{
+    $inc:{
+        quantidade:-qtdPedido
+
+    }
 })
