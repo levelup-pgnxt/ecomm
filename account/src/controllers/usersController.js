@@ -1,102 +1,104 @@
+/* eslint-disable import/extensions */
+import md5 from 'md5';
 import UserService from '../services/usersService.js';
 import validates from '../services/auxiliaries.js';
 import NotFoundError from '../errors/NotFoundError.js';
-import md5 from 'md5';
 
 class UserController {
+  static getAllUsers = async (_req, res) => {
+    const listUsers = await UserService.getAllUsers();
+    res.status(200).json(listUsers);
+  };
 
-    static getAllUsers = async (_req, res) => {
-        const listUsers = await UserService.getAllUsers();
-        res.status(200).json(listUsers);
-    };
+  static getUserById = async (req, res) => {
+    const { id } = req.params;
+    const isValideID = validates.paramsID(id);
 
-    static getUserById = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
+    if (!isValideID) {
+      res.status(400).send({ message: 'ID inválido!' });
+    }
 
-        if (!isValideID) {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
+    const user = await UserService.getUserById(id);
+    if (!user) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(200).json(user);
+    }
+  };
 
-        const user = await UserService.getUserById(id);
-        if (!user) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(200).json(user);
-        };
-    };
+  static getUserByName = async (req, res) => {
+    const { users } = req.query;
+    const searchName = new RegExp(`${users}.*`, 'igm');
+    const result = await UserService.getUserByName(searchName);
+    if (!result) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(200).json(result);
+    }
+  };
 
-    static getUserByName = async (req, res) => {
-        const { users } = req.query;
-        const searchName = new RegExp(`${users}.*`, 'igm');
-        const result = await UserService.getUserByName(searchName);
-        if (!result) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(200).json(result);
-        };
-    };
+  static createUser = async (req, res) => {
+    const {
+      email, senha, cpf, endereco,
+    } = validates.paramsUser(req.body);
+    const { uf } = endereco;
 
-    static createUser = async (req, res) => {
-        const { email, senha, cpf, endereco } = validates.paramsUser(req.body);
-        const { uf } = endereco;
+    const isExist = await UserService.checkIsExistsUser(email);
+    if (isExist) {
+      const message = 'Usuário já cadastrado!';
+      throw new NotFoundError(message);
+    }
 
-        const isExist = await UserService.checkIsExistsUser(email);
-        if (isExist) {
-            const message = 'Usuário já cadastrado!';
-            throw new NotFoundError(message);
-        }
-        
-        validates.paramsPassword(senha);
-        validates.paramsCPF(cpf);
-        validates.paramsUf(uf);
+    validates.paramsPassword(senha);
+    validates.paramsCPF(cpf);
+    validates.paramsUf(uf);
 
-        req.body.senha = md5(req.body.senha);
+    req.body.senha = md5(req.body.senha);
 
-        const newUser = await UserService.createUser(req.body);
-        res.status(201).send(newUser.toJSON());
-    };
+    const newUser = await UserService.createUser(req.body);
+    res.status(201).send(newUser.toJSON());
+  };
 
-    static updateUser = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
-        
-        if (!isValideID) {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
+  static updateUser = async (req, res) => {
+    const { id } = req.params;
+    const isValideID = validates.paramsID(id);
 
-        const { senha, cpf, endereco } = validates.paramsUser(req.body);
-        const { uf } = endereco;
+    if (!isValideID) {
+      res.status(400).send({ message: 'ID inválido!' });
+    }
 
-        validates.paramsPassword(senha);
-        validates.paramsCPF(cpf);
-        validates.paramsUf(uf);
+    const { senha, cpf, endereco } = validates.paramsUser(req.body);
+    const { uf } = endereco;
 
-        req.body.senha = md5(req.body.senha);
+    validates.paramsPassword(senha);
+    validates.paramsCPF(cpf);
+    validates.paramsUf(uf);
 
-        const updateUser = await UserService.updateUser(id, req.body);
-        if (!updateUser) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(201).send({ message: 'Usuário atualizado!' });
-        };
-    };
+    req.body.senha = md5(req.body.senha);
 
-    static deleteUserById = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
+    const updateUser = await UserService.updateUser(id, req.body);
+    if (!updateUser) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(201).send({ message: 'Usuário atualizado!' });
+    }
+  };
 
-        if (!isValideID) {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
+  static deleteUserById = async (req, res) => {
+    const { id } = req.params;
+    const isValideID = validates.paramsID(id);
 
-        const deleteUser = await UserService.deleteUserById(id);
-        if (!deleteUser) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(204);
-        };
-    };
-};
+    if (!isValideID) {
+      res.status(400).send({ message: 'ID inválido!' });
+    }
+
+    const deleteUser = await UserService.deleteUserById(id);
+    if (!deleteUser) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(204);
+    }
+  };
+}
 
 export default UserController;
