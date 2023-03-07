@@ -3,6 +3,7 @@ import md5 from 'md5';
 import UserService from '../services/usersService.js';
 import validates from '../services/auxiliaries.js';
 import NotFoundError from '../errors/NotFoundError.js';
+import { createHashWihtSalt } from '../services/passwordManagement.js';
 
 class UserController {
   static getAllUsers = async (_req, res) => {
@@ -53,7 +54,7 @@ class UserController {
     validates.paramsCPF(cpf);
     validates.paramsUf(uf);
 
-    req.body.senha = md5(req.body.senha);
+    req.body.senha = createHashWihtSalt(req.body.senha);
 
     const newUser = await UserService.createUser(req.body);
     res.status(201).send(newUser.toJSON());
