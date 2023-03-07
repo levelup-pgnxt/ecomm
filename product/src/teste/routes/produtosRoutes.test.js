@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import request from 'supertest';
-import app from '../../app';
-import db from '../../config/dbConnect';
+import app from '../../app.js';
+import db from '../../config/dbConnect.js';
 
 beforeAll(async () => {
   db.once('open', () => {});

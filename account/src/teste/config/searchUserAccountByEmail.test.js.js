@@ -1,4 +1,4 @@
-import { searchUserAccountByEmailUseCase } from "../use-case/searchUserAccountByEmail.js";
+import { searchUserAccountByEmailUseCase } from "../../use-case/searchUserAccountByEmail.js";
 import { listaUsuariosTeste } from "./creatUserAccount.teste.js";
 //importar a função de procurar um usuário
 const emailPesquisado = "testeProcura@gmail.com"

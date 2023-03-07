@@ -1,19 +1,19 @@
-import Categories from '../models/categories.js';
+import accounts from '../models/account.js';
 
-class CategoriesController {
-  static listarCategories = (req, res) => {
-    Categories.find((err, category) => {
+class AccountController {
+  static listarAccounts = (req, res) => {
+    accounts.find((err, users) => {
       if (err) {
         return res
           .status(400)
           .send({ message: `${err.message} - Informações não encontradas.` });
       }
-      return res.status(200).send(category);
+      return res.status(200).send(users);
     });
   };
-
-  static inserirCategories = (req, res) => {
-    const category = new Categories(req.body);
+  
+  static inserirAccounts = (req, res) => {
+    const category = new accounts(req.body);
 
     category.save((err) => {
       if (err) {
@@ -27,10 +27,10 @@ class CategoriesController {
   };
   // foi inserido uma categoria
 
-  static listarCategoriesPorId = (req, res) => {
+  static listarAccountsPorId = (req, res) => {
     const { id } = req.params;
 
-    Categories.findById(id, (err, category) => {
+    accounts.findById(id, (err, category) => {
       if (err) {
         res.status(400).send({
           message: `${err.message} - Id da categoria não localizado.`,
@@ -43,10 +43,10 @@ class CategoriesController {
     // busquei by id
   };
 
-  static atualizarCategories = (req, res) => {
+  static atualizarAccounts = (req, res) => {
     const { id } = req.params;
 
-    Categories.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    accounts.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Categoria atualizada com sucesso' });
       } else {
@@ -55,22 +55,22 @@ class CategoriesController {
     });
   };
 
-  static ativarCategories = (req, res) => {
+//   static ativarAccounts = (req, res) => {
+//     const { id } = req.params;
+
+//     accounts.findByIdAndUpdate(id, { $set: { STATUS: 'ATIVA' } }, (err) => {
+//       if (!err) {
+//         res.status(200).send({ message: 'Categoria atualizada com sucesso' });
+//       } else {
+//         res.status(500).send({ message: err.message });
+//       }
+//     });
+//   };
+
+  static excluirAccounts = (req, res) => {
     const { id } = req.params;
 
-    Categories.findByIdAndUpdate(id, { $set: { STATUS: 'ATIVA' } }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Categoria atualizada com sucesso' });
-      } else {
-        res.status(500).send({ message: err.message });
-      }
-    });
-  };
-
-  static excluirCategories = (req, res) => {
-    const { id } = req.params;
-
-    Categories.findByIdAndDelete(id, (err) => {
+    accounts.findByIdAndDelete(id, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Categoria removida com sucesso' });
         // se colocar 204 a mensagem não aparece
@@ -79,7 +79,7 @@ class CategoriesController {
       }
     });
   };
-  // atualizou um categories
+  // atualizou um Accounts
 }
 
 /*
@@ -87,6 +87,6 @@ class CategoriesController {
 ***importante*** abrir chaves
 }
 */
-export default CategoriesController;
+export default AccountController;
 
 // utilizado para criar "funções" que realizarão as funções, como buscar, excluir e etc

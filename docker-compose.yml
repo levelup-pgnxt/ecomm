@@ -8,11 +8,13 @@ services:
       - 3000:3000 
     depends_on:
       - mongo
-  # account:
-  #   build: ./account
-  #   container_name: ecomm-account
-  #   ports:
-  #     - 3003:3003
+  account:
+    build: ./account
+    container_name: ecomm-account
+    ports:
+      - 3004:3004
+    depends_on:
+      - mongo
   finance:
     build: ./finance
     container_name: ecomm-finance

@@ -1,5 +1,6 @@
-import app from './src/app';
-import db from './src/config/dbConnect';
+import app from './src/app.js';
+import db from './src/config/dbConnect.js';
+// se tirar o .js n funciona
 
 const PORT = process.env.PORT || 3000;
 

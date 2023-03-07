@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import CategoryModel from '../../models/categories';
+import CategoryModel from '../../models/categories.js';
 
 describe('Testando o modelo categoies', () => {
   const objetoCategories = {

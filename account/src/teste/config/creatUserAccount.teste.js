@@ -1,7 +1,7 @@
 import {
     createUserUseCase, 
     listaUsuariosTeste,  
-} from "../use-case/createUserAccount.js"
+} from "../../use-case/createUserAccount.js"
 
 
 createUserUseCase("Isac Queiroz","isac@gmail.com",Math.random())

@@ -1,4 +1,4 @@
-import Products from '../models/produtos';
+import Products from '../models/produtos.js';
 
 class produtosController {
   static listarProdutos = (req, res) => {
