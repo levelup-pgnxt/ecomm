@@ -11,7 +11,7 @@ class AccountController {
       return res.status(200).send(users);
     });
   };
-  
+
   static inserirAccounts = (req, res) => {
     const category = new accounts(req.body);
 
@@ -55,17 +55,17 @@ class AccountController {
     });
   };
 
-//   static ativarAccounts = (req, res) => {
-//     const { id } = req.params;
+  //   static ativarAccounts = (req, res) => {
+  //     const { id } = req.params;
 
-//     accounts.findByIdAndUpdate(id, { $set: { STATUS: 'ATIVA' } }, (err) => {
-//       if (!err) {
-//         res.status(200).send({ message: 'Categoria atualizada com sucesso' });
-//       } else {
-//         res.status(500).send({ message: err.message });
-//       }
-//     });
-//   };
+  //     accounts.findByIdAndUpdate(id, { $set: { STATUS: 'ATIVA' } }, (err) => {
+  //       if (!err) {
+  //         res.status(200).send({ message: 'Categoria atualizada com sucesso' });
+  //       } else {
+  //         res.status(500).send({ message: err.message });
+  //       }
+  //     });
+  //   };
 
   static excluirAccounts = (req, res) => {
     const { id } = req.params;

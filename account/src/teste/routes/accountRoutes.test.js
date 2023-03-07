@@ -39,13 +39,13 @@ describe('POST em /api/admin/accounts', () => {
         cpf: '230024835',
         telefone: '42280873',
         endereco: {
-            rua_endereco: 'rua tal 2',
-            n_endereco: '11',
-            complemento: 'alameda tal',
-            cep: '55513233',
-            cidade: 'belem 3',
-            estado: 'para3'
-        }
+          rua_endereco: 'rua tal 2',
+          n_endereco: '11',
+          complemento: 'alameda tal',
+          cep: '55513233',
+          cidade: 'belem 3',
+          estado: 'para3',
+        },
       })
       .expect('content-type', /json/)
       .expect(201);

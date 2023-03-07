@@ -1,27 +1,22 @@
-const listaUsuariosTeste = []
+const listaUsuariosTeste = [];
 
+function createUserUseCase(nome, emailCadastrado, senha) {
+  const usuario = {
+    id: listaUsuariosTeste.length,
+    name: nome,
+    email: emailCadastrado,
+    password: senha,
+    createdDate: new Date().toLocaleDateString(),
+  };
 
+  listaUsuariosTeste.push(usuario);
 
-function createUserUseCase(nome,emailCadastrado,senha){
-
-    let usuario = {
-        id: listaUsuariosTeste.length,
-        name : nome,
-        email: emailCadastrado,
-        password: senha,
-        createdDate: new Date().toLocaleDateString(),
-    };
-
-
-    listaUsuariosTeste.push(usuario);
-
-    return usuario;
+  return usuario;
 }
 
-console.log("----------essa msg esta fora da funcao (createUsuario)-----------")
+console.log('----------essa msg esta fora da funcao (createUsuario)-----------');
 
 export {
-    createUserUseCase,
-    listaUsuariosTeste,
+  createUserUseCase,
+  listaUsuariosTeste,
 };
-

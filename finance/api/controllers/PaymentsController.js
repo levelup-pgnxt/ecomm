@@ -21,7 +21,7 @@ class PaymentsController {
       });
       return res.status(200).json(pegaUmDado);
     } catch (erro) {
-      return res.status(404).json(error.message);
+      return res.status(404).json(erro.message);
     }
   }
 
@@ -31,7 +31,7 @@ class PaymentsController {
       const criarNovoDado = await dataBase.dbFinance.create(novoPagamento);
       return res.status(200).json(criarNovoDado);
     } catch (erro) {
-      return res.status(500).json(error.message);
+      return res.status(500).json(erro.message);
     }
   }
 
@@ -43,7 +43,7 @@ class PaymentsController {
       const pagamentoTotal = await dataBase.dbFinance.findOne({ where: { id: Number(id) } });
       return res.status(200).json(pagamentoTotal);
     } catch (erro) {
-      return res.status(500).json(error.message);
+      return res.status(500).json(erro.message);
     }
   }
 
@@ -80,7 +80,7 @@ class PaymentsController {
       await dataBase.dbFinance.destroy({ where: { id: Number(id) } });
       return res.status(200).json({ message: 'Pagamento removido com sucesso' });
     } catch (erro) {
-      return res.status(500).json(error.message);
+      return res.status(500).json(erro.message);
     }
   }
 }

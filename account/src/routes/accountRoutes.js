@@ -8,7 +8,7 @@ router
   .get('/api/accounts/:id', AccountsController.listarAccountsPorId)
   .post('/api/admin/accounts', AccountsController.inserirAccounts)
   .put('/api/admin/accounts/:id', AccountsController.atualizarAccounts)
-  .delete('/api/admin/accounts/:id', AccountsController.excluirAccounts)
+  .delete('/api/admin/accounts/:id', AccountsController.excluirAccounts);
 //   .patch('/api/admin/accounts/:id', AccountsController.ativarAccounts);
 
 export default router;
