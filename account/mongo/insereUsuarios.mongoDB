@@ -4,7 +4,7 @@ db.users.insertMany([
     {
         nome: 'Túlio Yoshimura',
         email: 'yoshimura_tulio@gmail.com',
-        senha: '5pAwX2diMD',
+        senha: '5pAwX2diMD@',
         data: new Date(),
         cpf: '887.604.980-05',
         telefone: '(42) 93524-3869',
