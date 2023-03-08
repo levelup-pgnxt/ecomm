@@ -1,8 +1,10 @@
 /* eslint-disable import/extensions */
 import LocalStrategy from 'passport-local';
+import BearerStrategy from 'passport-http-bearer';
 import UserService from '../services/usersService.js';
 import NotFoundError from '../errors/NotFoundError.js';
 import { verifyPassword } from './passwordManagement.js';
+import { validadeTokenJWT } from './tokenManagement.js';
 
 const authenticationStrategyLocal = new LocalStrategy({
   usernameField: 'email',
@@ -26,4 +28,14 @@ const authenticationStrategyLocal = new LocalStrategy({
   }
 });
 
-export default authenticationStrategyLocal;
+const authenticationStrategyBearer = new BearerStrategy(async (token, done) => {
+  try {
+    const payload = validadeTokenJWT(token);
+    const user = await UserService.getUserById(payload.id);
+    done(null, user);
+  } catch (erro) {
+    done(erro);
+  }
+});
+
+export { authenticationStrategyLocal, authenticationStrategyBearer };
