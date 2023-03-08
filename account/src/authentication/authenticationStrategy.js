@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import LocalStrategy from 'passport-local';
-import UserService from './usersService.js';
+import UserService from '../services/usersService.js';
 import NotFoundError from '../errors/NotFoundError.js';
 import { verifyPassword } from './passwordManagement.js';
 
