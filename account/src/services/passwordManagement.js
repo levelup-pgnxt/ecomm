@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 
 const createHashWihtSalt = (pass) => {
-  console.log(pass);
   const salt = bcrypt.genSaltSync(10);
   const passWhitHash = bcrypt.hashSync(pass, salt);
   return passWhitHash;
