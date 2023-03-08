@@ -6,6 +6,10 @@ import NotFoundError from '../errors/NotFoundError.js';
 import { createHashWihtSalt } from '../services/passwordManagement.js';
 
 class UserController {
+  static login = (_req, res) => {
+    res.status(204).send();
+  };
+
   static getAllUsers = async (_req, res) => {
     const listUsers = await UserService.getAllUsers();
     res.status(200).json(listUsers);
@@ -54,7 +58,7 @@ class UserController {
     validates.paramsCPF(cpf);
     validates.paramsUf(uf);
 
-    req.body.senha = createHashWihtSalt(req.body.senha);
+    req.body.senha = await createHashWihtSalt(req.body.senha);
 
     const newUser = await UserService.createUser(req.body);
     res.status(201).send(newUser.toJSON());
