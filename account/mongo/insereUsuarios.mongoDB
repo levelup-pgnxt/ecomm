@@ -148,5 +148,20 @@ db.users.insertMany([
       "uf": "AL",
       "cep": "57036270"
     }
+  },
+{
+    "nome": "Lauro Casado Garcia",
+    "email": "laurogarcia@gmail.com",
+    "senha": "lauRinho@123",
+    "cpf": "07001257443",
+    "telefone": "82312197869",
+    "endereco": {
+      "logradouro": "Rua Zadir Indío",
+      "numero": "745",
+      "bairro": "Centro",
+      "cidade": "Maceió",
+      "uf": "AL",
+      "cep": "57020480"
+    }
   }
 ]
