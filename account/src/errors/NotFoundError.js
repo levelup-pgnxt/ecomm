@@ -9,6 +9,7 @@ const MESSAGE_ERROR = {
   'Senha deve possuir pelo menos 1 caracter maiúsculo!': 400,
   'Senha deve possuir pelo menos 1 número!': 400,
   'Senha deve possuir pelo menos 1 caracter especial "@$%#&*!?.+-"!': 400,
+  'Usuário ou senha inválidos!': 401,
 };
 
 class NotFoundError extends Error {
