@@ -2,10 +2,14 @@
 import UserService from '../services/usersService.js';
 import validates from '../services/auxiliaries.js';
 import NotFoundError from '../errors/NotFoundError.js';
-import { createHashWithSalt } from '../services/passwordManagement.js';
+import { createHashWithSalt } from '../authentication/passwordManagement.js';
+import createTokenJWT from '../authentication/tokenManagement.js';
 
 class UserController {
-  static login = (_req, res) => {
+  static login = (req, res) => {
+    const token = createTokenJWT(req.user);
+
+    res.set('Authorization', token);
     res.status(204).send();
   };
 
