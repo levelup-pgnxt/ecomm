@@ -18,6 +18,11 @@ class UserService {
     return user;
   };
 
+  static getUserByEmail = async (email) => {
+    const user = await users.findOne({ email: { $eq: email } });
+    return user;
+  };
+
   static createUser = async (data) => {
     const newUser = new users(data);
     await newUser.save();
