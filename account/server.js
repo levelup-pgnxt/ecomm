@@ -1,4 +1,5 @@
 /* eslint-disable import/extensions */
+import {} from 'dotenv/config';
 import app from './src/app.js';
 
 const port = process.env.PORT || 3001;
