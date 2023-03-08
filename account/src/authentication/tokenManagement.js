@@ -13,4 +13,9 @@ const createTokenJWT = (user) => {
   return token;
 };
 
-export default createTokenJWT;
+const validadeTokenJWT = (token) => {
+  const result = jwt.verify(token, SECRET);
+  return result;
+};
+
+export { createTokenJWT, validadeTokenJWT };
