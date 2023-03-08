@@ -3,7 +3,7 @@ import UserService from '../services/usersService.js';
 import validates from '../services/auxiliaries.js';
 import NotFoundError from '../errors/NotFoundError.js';
 import { createHashWithSalt } from '../authentication/passwordManagement.js';
-import createTokenJWT from '../authentication/tokenManagement.js';
+import { createTokenJWT } from '../authentication/tokenManagement.js';
 
 class UserController {
   static login = (req, res) => {
