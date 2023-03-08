@@ -1,7 +1,8 @@
-import { searchUserAccountByEmailUseCase } from "../../src/use-case/searchUserAccountByEmail.js";
+/* eslint-disable no-console */
+import searchUserAccountByEmailUseCase from '../../src/use-case/searchUserAccountByEmail.js';
 
-const teste = searchUserAccountByEmailUseCase('teste@teste.com')
-const naoExiste = searchUserAccountByEmailUseCase('nao.existe@email.com')
+const teste = searchUserAccountByEmailUseCase('teste@teste.com');
+const naoExiste = searchUserAccountByEmailUseCase('nao.existe@email.com');
 
-console.log(teste)
-console.log(naoExiste)
+console.log(teste);
+console.log(naoExiste);

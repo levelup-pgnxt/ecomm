@@ -3,15 +3,15 @@ import produtos from './produtosRoutes.js';
 import categorias from './categoriasRoutes.js';
 
 const routes = (app) => {
-    app.route('/').get((req, res) => {
-        res.status(200).send({titulo: 'API de Produtos'})
-    })
+  app.route('/').get((req, res) => {
+    res.status(200).send({ titulo: 'API de Produtos' });
+  });
 
-    app.use(
-        express.json(),
-        categorias,
-        produtos
-    )
-}
+  app.use(
+    express.json(),
+    categorias,
+    produtos,
+  );
+};
 
-export default routes
+export default routes;

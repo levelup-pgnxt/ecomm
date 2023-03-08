@@ -1,4 +1,5 @@
-import express from "express";
+/* eslint-disable no-console */
+import express from 'express';
 import db from './config/dbConnect.js';
 import routes from './routes/index.js';
 
@@ -7,6 +8,6 @@ db.once('open', () => console.log('Conexão com o banco realizada com sucesso.')
 
 const app = express();
 app.use(express.json());
-routes(app)
+routes(app);
 
 export default app;

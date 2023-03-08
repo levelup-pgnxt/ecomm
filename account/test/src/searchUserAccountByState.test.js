@@ -1,3 +1,4 @@
-import { searchUserAccountByStateUseCase } from "../../src/use-case/searchUserAccountByState.js";
+import searchUserAccountByStateUseCase from '../../src/use-case/searchUserAccountByState.js';
 
-console.log(searchUserAccountByStateUseCase("SP"))
+// eslint-disable-next-line no-console
+console.log(searchUserAccountByStateUseCase('SP'));
