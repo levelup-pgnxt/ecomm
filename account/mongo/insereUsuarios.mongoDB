@@ -163,5 +163,20 @@ db.users.insertMany([
       "uf": "AL",
       "cep": "57020480"
     }
+  },
+  {
+    "nome": "Alnat Casado",
+    "email": "alnatcasado@hotmail.com",
+    "senha": "alnatcasado@20Gostoso",
+    "cpf": "77757795435",
+    "telefone": "82560311572",
+    "endereco": {
+      "logradouro": "Rua Olavo Bilac",
+      "numero": "58",
+      "bairro": "Ipioca",
+      "cidade": "Maceió",
+      "uf": "AL",
+      "cep": "57039868"
+    }
   }
 ]
