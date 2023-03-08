@@ -12,13 +12,15 @@ const pathAdminId = `/admin${path}/:id`;
 const pathAdminSearch = `/admin${path}/search`;
 const login = `${pathAdmin}/login`;
 
+const passportToken = passport.authenticate('bearer', { session: false });
+
 router
-  .get(pathAdmin, usersController.getAllUsers)
-  .get(pathAdminSearch, usersController.getUserByName)
+  .get(pathAdmin, passportToken, usersController.getAllUsers)
+  .get(pathAdminSearch, passportToken, usersController.getUserByName)
   .get(pathId, usersController.getUserById)
   .post(pathAdmin, usersController.createUser)
-  .put(pathAdminId, usersController.updateUser)
-  .delete(pathAdminId, usersController.deleteUserById)
+  .put(pathAdminId, passportToken, usersController.updateUser)
+  .delete(pathAdminId, passportToken, usersController.deleteUserById)
   .post(login, passport.authenticate('local', { session: false }), usersController.login);
 
 export default router;
