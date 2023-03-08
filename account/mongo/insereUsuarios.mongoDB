@@ -69,3 +69,84 @@ db.users.insertMany([
         }
     }
 ]);
+
+[
+  {
+    "nome": "Túlio Yoshimura",
+    "email": "yoshimura_tulio@gmail.com",
+    "senha": "5pAwX2diMD@",
+    "cpf": "88760498005",
+    "telefone": "42935243869",
+    "endereco": {
+      "rua": "Rua João Martins da Silva Filho",
+      "numero": "230",
+      "complemento": "Apto 801",
+      "bairro": "Alto Boqueirão",
+      "cidade": "Curitiba",
+      "uf": "PR",
+      "cep": "81720342"
+    }
+  },
+  {
+    "nome": "Mariana Hamada",
+    "email": "marianahamada@outlook.com",
+    "senha": "cejU00llJR#",
+    "cpf": "99708937002",
+    "telefone": "51935716066",
+    "endereco": {
+      "logradouro": "Rua Júlio de Castilhos 711",
+      "numero": "230",
+      "complemento": "Apto 502",
+      "bairro": "Centro",
+      "cidade": "Osório",
+      "uf": "RS",
+      "cep": "95520975"
+    }
+  },
+  {
+    "nome": "Alice Gonçalves",
+    "email": "goncalvesalice@hotmail.com",
+    "senha": "0iDCWlg7Wq$",
+    "cpf": "28636426006",
+    "telefone": "61923354645",
+    "endereco": {
+      "logradouro": "Quadra 511 Conjunto 11",
+      "numero": "88",
+      "bairro": "Recanto das Emas",
+      "cidade": "Brasília",
+      "uf": "DF",
+      "cep": "72660333"
+    }
+  },
+  {
+    "nome": "Renato Mantovani",
+    "email": "mantovani_renato@yahoo.com.br",
+    "senha": "uLTTFz86dl%",
+    "cpf": "88760498005",
+    "telefone": "82931432219",
+    "endereco": {
+      "logradouro": "Rua Prof. Sandoval Arroxelas",
+      "numero": "625",
+      "complemento": "Apto 902",
+      "bairro": "Ponta Verde",
+      "cidade": "Maceió",
+      "uf": "AL",
+      "cep": "57035230"
+    }
+  },
+    {
+    "nome": "Paulo Henrique Vieira Leite",
+    "email": "phvleite@gmail.com",
+    "senha": "XXX08Mei@9",
+    "cpf": "92679978404",
+    "telefone": "82987012116",
+    "endereco": {
+      "logradouro": "Rua Luiza Medeiros",
+      "numero": "37",
+      "bairro": "Jatiúca",
+      "cidade": "Maceió",
+      "uf": "AL",
+      "cep": "57036270"
+    }
+  }
+]
