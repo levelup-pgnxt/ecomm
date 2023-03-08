@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import bcrypt from 'bcryptjs';
 import Accounts from '../models/Account.js';
 
 class AccountController {
@@ -10,17 +12,39 @@ class AccountController {
     });
   };
 
-  static criarAccount = (req, res) => {
+  static criarAccount = async (req, res) => {
+    const senha = req.body.password;
+    const senhaValida = await AccountController.validarSenha(senha);
+
+    if (!senhaValida) {
+      res.status(400).send({ message: 'A senha não atende aos requisitos de segurança' });
+      return;
+    }
+
+    const senhaHash = await AccountController.gerarSenhaHash(senha);
+
     const account = new Accounts(req.body);
+    account.password = senhaHash;
 
     account.save((err) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else {
+        account.password = senhaHash;
         res.status(201).send(account.toJSON());
       }
     });
   };
+
+  static validarSenha(senha) {
+    const regexSenha = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%**#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return regexSenha.test(senha);
+  }
+
+  static gerarSenhaHash(senha) {
+    const custoHash = 12;
+    return bcrypt.hash(senha, custoHash);
+  }
 
   static listarAccountPorId = (req, res) => {
     const { id } = req.params;
