@@ -1,9 +1,8 @@
 /* eslint-disable import/extensions */
-import md5 from 'md5';
 import UserService from '../services/usersService.js';
 import validates from '../services/auxiliaries.js';
 import NotFoundError from '../errors/NotFoundError.js';
-import { createHashWihtSalt } from '../services/passwordManagement.js';
+import { createHashWithSalt } from '../services/passwordManagement.js';
 
 class UserController {
   static login = (_req, res) => {
@@ -58,7 +57,7 @@ class UserController {
     validates.paramsCPF(cpf);
     validates.paramsUf(uf);
 
-    req.body.senha = await createHashWihtSalt(req.body.senha);
+    req.body.senha = await createHashWithSalt(req.body.senha);
 
     const newUser = await UserService.createUser(req.body);
     res.status(201).send(newUser.toJSON());
@@ -79,7 +78,7 @@ class UserController {
     validates.paramsCPF(cpf);
     validates.paramsUf(uf);
 
-    req.body.senha = md5(req.body.senha);
+    req.body.senha = await createHashWithSalt(req.body.senha);
 
     const updateUser = await UserService.updateUser(id, req.body);
     if (!updateUser) {
