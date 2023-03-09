@@ -65,7 +65,7 @@ services:
     tty: true
     env_file: ./.env
     ports:
-      - "3308:3308"
+      - "3306:3306"
     volumes:
       - ecomm-mysqldb:/var/lib/mysql
     environment:
