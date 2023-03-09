@@ -46,6 +46,10 @@ class AccountController {
     return bcrypt.hash(senha, custoHash);
   }
 
+  static login = (req, res) => {
+    res.status(204).send();
+  };
+
   static listarAccountPorId = (req, res) => {
     const { id } = req.params;
 
@@ -59,6 +63,12 @@ class AccountController {
       }
     });
   };
+
+  static async buscaPorEmail(email) {
+    const account = await Accounts.findOne({ email });
+
+    return account;
+  }
 
   static atualizarAccount = (req, res) => {
     const { id } = req.params;
