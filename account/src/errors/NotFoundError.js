@@ -1,6 +1,7 @@
 const MESSAGE_ERROR = {
   'Categoria já cadastrada!': 409,
   'Produto já cadastrado!': 409,
+  'Usuário já cadastrado!': 409,
   'Valor mínimo maior que valor máximo. Operação não permitida!': 405,
   'Senha inválida!': 400,
   'Estado da Federação inválido!': 400,
