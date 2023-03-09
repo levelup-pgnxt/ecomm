@@ -70,9 +70,9 @@ services:
       - ecomm-mysqldb:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=ecomm-finance
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=null
-      - MYSQL_ROOT_PASSWORD=null
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
     networks:
       - ecomm-network
 
