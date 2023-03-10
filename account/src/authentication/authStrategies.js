@@ -5,7 +5,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import jwt from 'jsonwebtoken';
 import Account from '../controller/accountController.js';
-import Accounts from '../models/Account.js'
+import Accounts from '../models/Account.js';
 
 function verificaUsuario(usuario) {
   if (!usuario) {
