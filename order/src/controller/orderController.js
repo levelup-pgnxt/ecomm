@@ -37,7 +37,8 @@ class OrderController {
         const payload = {
           name, cpf, address, itens: order.itens,
         };
-        await fetchPayment(payload, paymentId);
+        const authHeader = req.headers.authorization;
+        await fetchPayment(payload, paymentId, authHeader);
       }
     });
   };
