@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
-const HOST = process.env.MONGO_PRODUCT_HOST || '127.0.0.1';
-const USER = process.env.MONGO_PRODUCT_USER || 'admin';
-const PASSWORD = process.env.MONGO_PRODUCT_PASSWORD || 'secret';
-const DATABASE = process.env.MONGO_PRODUCT_DATABASE || 'ecomm';
-const PORT = process.env.MONGO_PRODUCT_PORT || '27017';
+const HOST = process.env.MONGO_PRODUCT_HOST;
+const USER = process.env.MONGO_PRODUCT_USER;
+const PASSWORD = process.env.MONGO_PRODUCT_PASSWORD;
+const DATABASE = process.env.MONGO_PRODUCT_DATABASE;
+const PORT = process.env.MONGO_PRODUCT_PORT;
 
 mongoose.connect(`mongodb://${USER}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}?authSource=admin`);
 
