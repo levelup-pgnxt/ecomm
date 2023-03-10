@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import bcrypt from 'bcryptjs';
 import Accounts from '../models/Account.js';
+import criaTokenTJWT from '../authentication/generateToken.js';
 
 class AccountController {
   static listarAccounts = (req, res) => {
@@ -47,6 +48,8 @@ class AccountController {
   }
 
   static login = (req, res) => {
+    const token = criaTokenTJWT(req.user);
+    res.set('Authorization', token);
     res.status(204).send();
   };
 

@@ -2,7 +2,7 @@
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import { Strategy as LocalStrategy } from 'passport-local';
-import Account from './controller/accountController.js';
+import Account from '../controller/accountController.js';
 
 function verificaUsuario(usuario) {
   if (!usuario) {
