@@ -1,8 +1,10 @@
 /* eslint-disable import/extensions */
 import express from 'express';
+import passport from 'passport';
 import productsController from '../controllers/productsController.js';
 
 const router = express.Router();
+const passportToken = passport.authenticate('bearer', { session: false });
 
 const path = '/products';
 const pathSearch = `${path}/search`;
@@ -14,15 +16,15 @@ const pathAdminProducts = `/admin${path}`;
 const pathAdminProductsByID = `/admin${pathId}`;
 
 router
-  .get(path, productsController.getAllProducts)
-  .get(pathSearch, productsController.getProductByName)
-  .get(pathSearchByValue, productsController.getProductsByValue)
-  .get(pathSearchByStock, productsController.getProductsByStock)
-  .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
-  .get(pathId, productsController.getProductById)
-  .post(pathAdminProducts, productsController.createProduct)
-  .put(pathAdminProductsByID, productsController.updateProduct)
-  .delete(pathAdminProductsByID, productsController.deleteProductById);
+  .get(path, passportToken, productsController.getAllProducts)
+  .get(pathSearch, passportToken, productsController.getProductByName)
+  .get(pathSearchByValue, passportToken, productsController.getProductsByValue)
+  .get(pathSearchByStock, passportToken, productsController.getProductsByStock)
+  .get(pathSearchByCategoryId, passportToken, productsController.getProductsByCategoryId)
+  .get(pathId, passportToken, productsController.getProductById)
+  .post(pathAdminProducts, passportToken, productsController.createProduct)
+  .put(pathAdminProductsByID, passportToken, productsController.updateProduct)
+  .delete(pathAdminProductsByID, passportToken, productsController.deleteProductById);
 
 export default router;
 
