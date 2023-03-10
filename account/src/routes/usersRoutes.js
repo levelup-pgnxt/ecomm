@@ -13,6 +13,7 @@ const pathAdminSearch = `/admin${path}/search`;
 const login = `${pathAdmin}/login`;
 
 const passportToken = passport.authenticate('bearer', { session: false });
+const passportLogin = passport.authenticate('local', { session: false });
 
 router
   .get(pathAdmin, passportToken, usersController.getAllUsers)
@@ -21,6 +22,6 @@ router
   .post(pathAdmin, usersController.createUser)
   .put(pathAdminId, passportToken, usersController.updateUser)
   .delete(pathAdminId, passportToken, usersController.deleteUserById)
-  .post(login, passport.authenticate('local', { session: false }), usersController.login);
+  .post(login, passportLogin, usersController.login);
 
 export default router;
