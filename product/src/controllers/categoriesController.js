@@ -84,7 +84,7 @@ class CategoryController {
           status = 'ATIVA';
         }
         await CategoryService.changeStatusCategory(id, status);
-        res.status(201).send({ message: `Status da categoria atualizado para "${status}"!` });
+        res.status(200).send({ message: `Status da categoria atualizado para "${status}"!` });
       }
     } else {
       res.status(400).send({ message: 'ID inválido!' });

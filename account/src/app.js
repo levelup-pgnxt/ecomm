@@ -1,20 +1,25 @@
+/* eslint-disable import/extensions */
 import 'express-async-errors';
-import express from "express";
+import express from 'express';
+import passport from 'passport';
 import db from './config/dbConnect.js';
-import routes from './routes/index.js'
+import routes from './routes/index.js';
 import errorHandlerMiddleware from './services/erroHandlerMiddleware.js';
+import { authenticationStrategyLocal, authenticationStrategyBearer } from './authentication/authenticationStrategy.js';
 
 db.on('error', console.log.bind(console, 'Erro de conexão!'));
 
 db.once('open', () => {
-    console.log('Conexão com o banco feita com sucesso!')
+  console.log('Conexão com o banco feita com sucesso!');
 });
 
 const app = express();
 
 app.use(express.json());
+passport.use(authenticationStrategyLocal);
+passport.use(authenticationStrategyBearer);
 
-routes(app)
+routes(app);
 
 app.use(errorHandlerMiddleware);
 

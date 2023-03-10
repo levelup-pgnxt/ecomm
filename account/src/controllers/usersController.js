@@ -1,102 +1,112 @@
+/* eslint-disable import/extensions */
 import UserService from '../services/usersService.js';
 import validates from '../services/auxiliaries.js';
 import NotFoundError from '../errors/NotFoundError.js';
-import md5 from 'md5';
+import { createHashWithSalt } from '../authentication/passwordManagement.js';
+import { createTokenJWT } from '../authentication/tokenManagement.js';
 
 class UserController {
+  static login = (req, res) => {
+    const token = createTokenJWT(req.user);
 
-    static getAllUsers = async (_req, res) => {
-        const listUsers = await UserService.getAllUsers();
-        res.status(200).json(listUsers);
-    };
+    res.set('Authorization', token);
+    res.status(204).send();
+  };
 
-    static getUserById = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
+  static getAllUsers = async (_req, res) => {
+    const listUsers = await UserService.getAllUsers();
+    res.status(200).json(listUsers);
+  };
 
-        if (!isValideID) {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
+  static getUserById = async (req, res) => {
+    const { id } = req.params;
+    const isValideID = validates.paramsID(id);
 
-        const user = await UserService.getUserById(id);
-        if (!user) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(200).json(user);
-        };
-    };
+    if (!isValideID) {
+      res.status(400).send({ message: 'ID inválido!' });
+    }
 
-    static getUserByName = async (req, res) => {
-        const { users } = req.query;
-        const searchName = new RegExp(`${users}.*`, 'igm');
-        const result = await UserService.getUserByName(searchName);
-        if (!result) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(200).json(result);
-        };
-    };
+    const user = await UserService.getUserById(id);
+    if (!user) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(200).json(user);
+    }
+  };
 
-    static createUser = async (req, res) => {
-        const { email, senha, cpf, endereco } = validates.paramsUser(req.body);
-        const { uf } = endereco;
+  static getUserByName = async (req, res) => {
+    const { users } = req.query;
+    const searchName = new RegExp(`${users}.*`, 'igm');
+    const result = await UserService.getUserByName(searchName);
+    if (!result) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(200).json(result);
+    }
+  };
 
-        const isExist = await UserService.checkIsExistsUser(email);
-        if (isExist) {
-            const message = 'Usuário já cadastrado!';
-            throw new NotFoundError(message);
-        }
-        
-        validates.paramsPassword(senha);
-        validates.paramsCPF(cpf);
-        validates.paramsUf(uf);
+  static createUser = async (req, res) => {
+    const {
+      email, senha, cpf, endereco,
+    } = validates.paramsUser(req.body);
+    const { uf } = endereco;
 
-        req.body.senha = md5(req.body.senha);
+    const isExist = await UserService.checkIsExistsUser(email);
+    if (isExist) {
+      const message = 'Usuário já cadastrado!';
+      throw new NotFoundError(message);
+    }
 
-        const newUser = await UserService.createUser(req.body);
-        res.status(201).send(newUser.toJSON());
-    };
+    validates.paramsPassword(senha);
+    validates.paramsCPF(cpf);
+    validates.paramsUf(uf);
 
-    static updateUser = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
-        
-        if (!isValideID) {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
+    req.body.senha = await createHashWithSalt(req.body.senha);
 
-        const { senha, cpf, endereco } = validates.paramsUser(req.body);
-        const { uf } = endereco;
+    const newUser = await UserService.createUser(req.body);
+    res.status(201).send(newUser.toJSON());
+  };
 
-        validates.paramsPassword(senha);
-        validates.paramsCPF(cpf);
-        validates.paramsUf(uf);
+  static updateUser = async (req, res) => {
+    const { id } = req.params;
+    const isValideID = validates.paramsID(id);
 
-        req.body.senha = md5(req.body.senha);
+    if (!isValideID) {
+      res.status(400).send({ message: 'ID inválido!' });
+    }
 
-        const updateUser = await UserService.updateUser(id, req.body);
-        if (!updateUser) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(201).send({ message: 'Usuário atualizado!' });
-        };
-    };
+    const { senha, cpf, endereco } = validates.paramsUser(req.body);
+    const { uf } = endereco;
 
-    static deleteUserById = async (req, res) => {
-        const { id } = req.params;
-        const isValideID = validates.paramsID(id);
+    validates.paramsPassword(senha);
+    validates.paramsCPF(cpf);
+    validates.paramsUf(uf);
 
-        if (!isValideID) {
-            res.status(400).send({ message: 'ID inválido!' });
-        }
+    req.body.senha = await createHashWithSalt(req.body.senha);
 
-        const deleteUser = await UserService.deleteUserById(id);
-        if (!deleteUser) {
-            res.status(404).send({ message: 'Usuário não localizado!' });
-        } else {
-            res.status(204);
-        };
-    };
-};
+    const updateUser = await UserService.updateUser(id, req.body);
+    if (!updateUser) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(201).send({ message: 'Usuário atualizado!' });
+    }
+  };
+
+  static deleteUserById = async (req, res) => {
+    const { id } = req.params;
+    const isValideID = validates.paramsID(id);
+
+    if (!isValideID) {
+      res.status(400).send({ message: 'ID inválido!' });
+    }
+
+    const deleteUser = await UserService.deleteUserById(id);
+    if (!deleteUser) {
+      res.status(404).send({ message: 'Usuário não localizado!' });
+    } else {
+      res.status(204);
+    }
+  };
+}
 
 export default UserController;

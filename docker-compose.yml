@@ -65,14 +65,14 @@ services:
     tty: true
     env_file: ./.env
     ports:
-      - "3308:3308"
+      - "3306:3306"
     volumes:
       - ecomm-mysqldb:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=ecomm-finance
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=null
-      - MYSQL_ROOT_PASSWORD=null
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
     networks:
       - ecomm-network
 

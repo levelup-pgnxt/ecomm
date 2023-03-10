@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
 
-// mongoose.connect('mongodb://admin:secret@127.0.0.1:27017/ecomm-account?authSource=admin');
-mongoose.connect('mongodb://admin:secret@ecomm-mongodb:27017/ecomm-account?authSource=admin');
+const HOST = process.env.MONGO_ACCOUNT_HOST;
+const USER = process.env.MONGO_ACCOUNT_USER;
+const PASSWORD = process.env.MONGO_ACCOUNT_PASSWORD;
+const DATABASE = process.env.MONGO_ACCOUNT_DATABASE;
+const PORT = process.env.MONGO_ACCOUNT_PORT;
+
+mongoose.connect(`mongodb://${USER}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}?authSource=admin`);
 
 const db = mongoose.connection;
 

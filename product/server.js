@@ -1,8 +1,9 @@
 /* eslint-disable import/extensions */
+import {} from 'dotenv/config';
 import app from './src/app.js';
 
-const port = process.env.PORT || 3000;
+const { PORT } = process.env;
 
-app.listen(port, () => {
-  console.log(`Servidor escutando em http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Servidor escutando em http://localhost:${PORT}`);
 });

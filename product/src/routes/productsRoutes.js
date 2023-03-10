@@ -1,8 +1,10 @@
 /* eslint-disable import/extensions */
 import express from 'express';
+import passport from 'passport';
 import productsController from '../controllers/productsController.js';
 
 const router = express.Router();
+const passportToken = passport.authenticate('bearer', { session: false });
 
 const path = '/products';
 const pathSearch = `${path}/search`;
@@ -20,9 +22,9 @@ router
   .get(pathSearchByStock, productsController.getProductsByStock)
   .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
   .get(pathId, productsController.getProductById)
-  .post(pathAdminProducts, productsController.createProduct)
-  .put(pathAdminProductsByID, productsController.updateProduct)
-  .delete(pathAdminProductsByID, productsController.deleteProductById);
+  .post(pathAdminProducts, passportToken, productsController.createProduct)
+  .put(pathAdminProductsByID, passportToken, productsController.updateProduct)
+  .delete(pathAdminProductsByID, passportToken, productsController.deleteProductById);
 
 export default router;
 
