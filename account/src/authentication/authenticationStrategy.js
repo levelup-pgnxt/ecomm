@@ -28,14 +28,16 @@ const authenticationStrategyLocal = new LocalStrategy({
   }
 });
 
-const authenticationStrategyBearer = new BearerStrategy(async (token, done) => {
-  try {
-    const payload = validadeTokenJWT(token);
-    const user = await UserService.getUserById(payload.id);
-    done(null, user);
-  } catch (erro) {
-    done(erro);
-  }
-});
+const authenticationStrategyBearer = new BearerStrategy(
+  async (token, done) => {
+    try {
+      const payload = validadeTokenJWT(token);
+      const user = await UserService.getUserById(payload.id);
+      done(null, user);
+    } catch (erro) {
+      done(erro);
+    }
+  },
+);
 
 export { authenticationStrategyLocal, authenticationStrategyBearer };
