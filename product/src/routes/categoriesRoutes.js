@@ -13,9 +13,9 @@ const pathAdmin = `/admin${path}`;
 const pathSearch = `${path}/search`;
 
 router
-  .get(path, passportToken, categoriesController.getAllCategories)
-  .get(pathSearch, passportToken, categoriesController.getCategoryByName)
-  .get(pathId, passportToken, categoriesController.getCategoryById)
+  .get(path, categoriesController.getAllCategories)
+  .get(pathSearch, categoriesController.getCategoryByName)
+  .get(pathId, categoriesController.getCategoryById)
   .post(pathAdmin, passportToken, categoriesController.createCategory)
   .put(pathAdminId, passportToken, categoriesController.updateCategory)
   .patch(pathAdminId, passportToken, categoriesController.changeStatusCategory)

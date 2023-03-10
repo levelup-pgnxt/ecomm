@@ -16,12 +16,12 @@ const pathAdminProducts = `/admin${path}`;
 const pathAdminProductsByID = `/admin${pathId}`;
 
 router
-  .get(path, passportToken, productsController.getAllProducts)
-  .get(pathSearch, passportToken, productsController.getProductByName)
-  .get(pathSearchByValue, passportToken, productsController.getProductsByValue)
-  .get(pathSearchByStock, passportToken, productsController.getProductsByStock)
-  .get(pathSearchByCategoryId, passportToken, productsController.getProductsByCategoryId)
-  .get(pathId, passportToken, productsController.getProductById)
+  .get(path, productsController.getAllProducts)
+  .get(pathSearch, productsController.getProductByName)
+  .get(pathSearchByValue, productsController.getProductsByValue)
+  .get(pathSearchByStock, productsController.getProductsByStock)
+  .get(pathSearchByCategoryId, productsController.getProductsByCategoryId)
+  .get(pathId, productsController.getProductById)
   .post(pathAdminProducts, passportToken, productsController.createProduct)
   .put(pathAdminProductsByID, passportToken, productsController.updateProduct)
   .delete(pathAdminProductsByID, passportToken, productsController.deleteProductById);
