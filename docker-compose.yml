@@ -25,6 +25,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: secret
 
+  redis:
+    image: redis
+    volumes:
+    - redis_data:/data
+    container_name: redis-ecomm
+    restart: always
+    ports:
+    - 6379:6379
+
   product:
     container_name: ecomm-product
     build: ./product
@@ -44,6 +53,7 @@ services:
       - 3002:3002
     depends_on:
       - mongodb
+      - redis
 
   finance:
     container_name: ecomm-finance
@@ -68,3 +78,4 @@ services:
 volumes:
   db-mongo-alura:
   mysql-ecomm-volume:
+  redis_data:

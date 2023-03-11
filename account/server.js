@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import dotenv from 'dotenv';
 import app from './src/app.js';
 import db from './src/config/dbConnect.js';
+import blocklist from './redis/blocklist.js';
 
 dotenv.config();
 

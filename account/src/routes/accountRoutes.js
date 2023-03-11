@@ -10,6 +10,7 @@ router
   .get('/api/admin/accounts/:id', AccountController.listarAccountPorId)
   .post('/api/admin/accounts', AccountController.criarAccount)
   .post('/api/accounts/login', middlewareLocal, AccountController.login)
+  .get('/api/accounts/logout', middlewareBearer, AccountController.logout)
   .put('/api/admin/accounts/:id', middlewareBearer, AccountController.atualizarAccount)
   .delete('/api/admin/accounts/:id', middlewareBearer, AccountController.excluirAccount);
 
