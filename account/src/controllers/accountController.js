@@ -1,4 +1,10 @@
+import bcrypt from 'bcryptjs';
 import accounts from '../models/account.js';
+
+function gerarSenhaHash(senha) {
+  const custoHash = 12;
+  return bcrypt.hash(senha, custoHash);
+}
 
 class AccountController {
   static listarAccounts = (req, res) => {
@@ -12,9 +18,10 @@ class AccountController {
     });
   };
 
-  static inserirAccounts = (req, res) => {
+  static inserirAccounts = async (req, res) => {
     const category = new accounts(req.body);
-
+    const senhaUser = await gerarSenhaHash(req.body.senhaHash);
+    category.senhaHash = senhaUser;
     category.save((err) => {
       if (err) {
         res.status(500).send({

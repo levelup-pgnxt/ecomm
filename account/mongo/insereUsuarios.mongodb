@@ -5,7 +5,7 @@ db.users.insertMany([
 	{
         "nome": "sadsdasdasdasd",
         "email": "isac1@gmail.com", 
-        "senha": "senha1",
+        "senhaHash": "senha1",
         "dataCriacao": new ISODate(),
         "cpf": 01555363202,
         "telefone": "32280873",
@@ -20,7 +20,7 @@ db.users.insertMany([
   },{
         "nome": "isac 2",
         "email": "isac2@gmail.com", 
-        "senha": "senha2",
+        "senhaHash": "senha2",
         "dataCriacao": new ISODate(),
         "cpf": 01555363203,
         "telefone": "42280873",
@@ -34,7 +34,7 @@ db.users.insertMany([
   },{
         "nome": "isac 3",
         "email": "isac3@gmail.com", 
-        "senha": "senha3",
+        "senhaHash": "senha3",
         "dataCriacao": new ISODate(),
         "cpf": 01555363203,
         "telefone": "42280874",
