@@ -1,8 +1,10 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import passport from 'passport';
 import db from './config/dbConnect.js';
 import routes from './routes/index.js';
+import './middlewares/authentication.js';
 
 const swaggerDocument = YAML.load('./swagger/account.yaml');
 
@@ -12,6 +14,9 @@ db.once('open', () => {
 });
 
 const app = express();
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/account/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());

@@ -1,6 +1,9 @@
 /* eslint-disable no-shadow */
 import users from '../models/User.js';
 
+// eslint-disable-next-line import/extensions
+import hashPassword from '../middlewares/hashPassword.js';
+
 class UserController {
   static listUsers = (req, res) => {
     // eslint-disable-next-line array-callback-return
@@ -9,8 +12,10 @@ class UserController {
     });
   };
 
-  static insertUser = (req, res) => {
+  static insertUser = async (req, res) => {
     const user = new users(req.body);
+
+    user.password = await hashPassword(req.body.password);
 
     user.save((err) => {
       if (err) {
@@ -27,6 +32,18 @@ class UserController {
     users.findById(id, (err, users) => {
       if (err) {
         res.status(400).send({ message: `${err.message} - Id do Usuário não localizado.` });
+      } else {
+        res.status(200).send(users);
+      }
+    });
+  };
+
+  static findUserEmail = (req, res) => {
+    const { email } = req.params;
+
+    users.findOne(email, (err, users) => {
+      if (err) {
+        res.status(400).send({ message: `${err.message} - Email não cadastrado.` });
       } else {
         res.status(200).send(users);
       }
@@ -55,6 +72,10 @@ class UserController {
         res.status(500).send({ message: err.message });
       }
     });
+  };
+
+  static login = (req, res) => {
+    res.status(204).send();
   };
 }
 
