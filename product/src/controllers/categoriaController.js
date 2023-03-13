@@ -1,10 +1,10 @@
-import Categorias from '../models/Categoria.js';
-import validacaoCategoria from '../validations/categoriaValidations.js';
+import Categoria from '../models/Categoria.js';
+import isNomeCategoriaValido from '../validations/categoriaValidations.js';
 import STATUS_ATIVA from '../constantes.js';
 
 class CategoriaController {
   static listarCategorias = (req, res) => {
-    Categorias.find((err, categorias) => {
+    Categoria.find((err, categorias) => {
       if (!categorias) {
         return res.status(404).send({ message: 'Categorias não encontradas' });
       }
@@ -15,7 +15,7 @@ class CategoriaController {
   static listarCategoriaPorId = (req, res) => {
     const { id } = req.params;
 
-    Categorias.findById(id, (err, categorias) => {
+    Categoria.findById(id, (err, categorias) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!categorias) {
@@ -29,10 +29,10 @@ class CategoriaController {
   static criarCategoria = (req, res) => {
     const nomeCategoria = req.body.nome;
 
-    if (!validacaoCategoria(nomeCategoria)) {
+    if (!isNomeCategoriaValido(nomeCategoria)) {
       res.status(400).send({ message: 'Nome da categoria inválido' });
     } else {
-      const categoria = new Categorias(req.body);
+      const categoria = new Categoria(req.body);
 
       categoria.save((err) => {
         if (err) {
@@ -48,10 +48,10 @@ class CategoriaController {
     const nomeCategoria = req.body.nome;
     const { id } = req.params;
 
-    if (!validacaoCategoria(nomeCategoria)) {
+    if (!isNomeCategoriaValido(nomeCategoria)) {
       res.status(400).send({ message: 'Nome da categoria inválido' });
     } else {
-      Categorias.findByIdAndUpdate(id, req.body, (err, categorias) => {
+      Categoria.findByIdAndUpdate(id, req.body, (err, categorias) => {
         if (err) {
           res.status(500).send({ message: err.message });
         } else if (!categorias) {
@@ -66,7 +66,7 @@ class CategoriaController {
   static excluirCategoria = (req, res) => {
     const { id } = req.params;
 
-    Categorias.findByIdAndDelete(id, (err, categorias) => {
+    Categoria.findByIdAndDelete(id, (err, categorias) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!categorias) {
@@ -80,7 +80,7 @@ class CategoriaController {
   static ativaCategoria = (req, res) => {
     const { id } = req.params;
 
-    Categorias.findByIdAndUpdate(
+    Categoria.findByIdAndUpdate(
       id,
       { $set: { status: STATUS_ATIVA } },
       { new: true },

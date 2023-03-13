@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-import Produtos from '../models/Produto.js';
+import Produto from '../models/Produto.js';
 
 class ProdutoController {
   static listarProdutos = (req, res) => {
-    Produtos.find((err, produtos) => res.status(200).json(produtos));
+    Produto.find((err, produtos) => res.status(200).json(produtos));
   };
 
   static criarProduto = (req, res) => {
-    const produto = new Produtos(req.body);
+    const produto = new Produto(req.body);
 
     produto.save((err, product) => {
       if (err) {
@@ -21,7 +21,7 @@ class ProdutoController {
   static listarProdutoPorId = (req, res) => {
     const { id } = req.params;
 
-    Produtos.findById(id, (err, produto) => {
+    Produto.findById(id, (err, produto) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!produto) {
@@ -35,7 +35,7 @@ class ProdutoController {
   static atualizarProduto = (req, res) => {
     const { id } = req.params;
 
-    Produtos.findByIdAndUpdate(id, req.body, (err, produto) => {
+    Produto.findByIdAndUpdate(id, req.body, (err, produto) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!produto) {
@@ -49,7 +49,7 @@ class ProdutoController {
   static excluirProduto = (req, res) => {
     const { id } = req.params;
 
-    Produtos.findByIdAndDelete(id, (err, produto) => {
+    Produto.findByIdAndDelete(id, (err, produto) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!produto) {

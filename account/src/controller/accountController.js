@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import bcrypt from 'bcryptjs';
-import Accounts from '../models/Account.js';
+import Account from '../models/Account.js';
 import criaTokenTJWT from '../authentication/generateToken.js';
 import { addTokenToBlocklist } from '../../redis/manipulaBlocklist.js';
 
 class AccountController {
   static listarAccounts = (req, res) => {
-    Accounts.find((err, accounts) => {
+    Account.find((err, accounts) => {
       if (err) {
         return res.status(500).send({ message: err.message });
       }
@@ -25,7 +25,7 @@ class AccountController {
 
     const senhaHash = await AccountController.gerarSenhaHash(senha);
 
-    const account = new Accounts(req.body);
+    const account = new Account(req.body);
     account.password = senhaHash;
 
     account.save((err) => {
@@ -67,7 +67,7 @@ class AccountController {
   static listarAccountPorId = (req, res) => {
     const { id } = req.params;
 
-    Accounts.findById(id, (err, account) => {
+    Account.findById(id, (err, account) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!account) {
@@ -79,7 +79,7 @@ class AccountController {
   };
 
   static async buscaPorEmail(email) {
-    const account = await Accounts.findOne({ email });
+    const account = await Account.findOne({ email });
 
     return account;
   }
@@ -87,7 +87,7 @@ class AccountController {
   static atualizarAccount = (req, res) => {
     const { id } = req.params;
 
-    Accounts.findByIdAndUpdate(id, req.body, (err, account) => {
+    Account.findByIdAndUpdate(id, req.body, (err, account) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!account) {
@@ -101,7 +101,7 @@ class AccountController {
   static excluirAccount = (req, res) => {
     const { id } = req.params;
 
-    Accounts.findByIdAndDelete(id, (err, account) => {
+    Account.findByIdAndDelete(id, (err, account) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!account) {
