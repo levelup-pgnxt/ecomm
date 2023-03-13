@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import accounts from '../models/account.js';
+import createToken from '../security/token.js';
 
 function gerarSenhaHash(senha) {
   const custoHash = 12;
@@ -19,16 +20,16 @@ class AccountController {
   };
 
   static inserirAccounts = async (req, res) => {
-    const category = new accounts(req.body);
+    const account = new accounts(req.body);
     const senhaUser = await gerarSenhaHash(req.body.senhaHash);
-    category.senhaHash = senhaUser;
-    category.save((err) => {
+    account.senhaHash = senhaUser;
+    account.save((err) => {
       if (err) {
         res.status(500).send({
           message: `${err.message} - falha ao cadastrar uma categoria.`,
         });
       } else {
-        res.status(201).send(category.toJSON());
+        res.status(201).send(account.toJSON());
       }
     });
   };
@@ -62,18 +63,6 @@ class AccountController {
     });
   };
 
-  //   static ativarAccounts = (req, res) => {
-  //     const { id } = req.params;
-
-  //     accounts.findByIdAndUpdate(id, { $set: { STATUS: 'ATIVA' } }, (err) => {
-  //       if (!err) {
-  //         res.status(200).send({ message: 'Categoria atualizada com sucesso' });
-  //       } else {
-  //         res.status(500).send({ message: err.message });
-  //       }
-  //     });
-  //   };
-
   static excluirAccounts = (req, res) => {
     const { id } = req.params;
 
@@ -87,13 +76,14 @@ class AccountController {
     });
   };
   // atualizou um Accounts
+
+  static logarAccounts = (req, res) => {
+    const token = createToken(req.user);
+    res.set('Authorization', token);
+    res.status(204).send();
+  };
 }
 
-/*
-
-***importante*** abrir chaves
-}
-*/
 export default AccountController;
 
 // utilizado para criar "funções" que realizarão as funções, como buscar, excluir e etc

@@ -10,12 +10,6 @@ afterAll(async () => {
   await db.close();
 });
 
-// .get('/api/accounts', AccountsController.listarAccounts)
-//   .get('/api/accounts/:id', AccountsController.listarAccountsPorId)
-//   .post('/api/admin/accounts', AccountsController.inserirAccounts)
-//   .put('/api/admin/accounts/:id', AccountsController.atualizarAccounts)
-//   .delete('/api/admin/accounts/:id', AccountsController.excluirAccounts)
-
 describe('GET em /api/accounts', () => {
   it('Deve retornar todas as accounts', async () => {
     await request(app)
