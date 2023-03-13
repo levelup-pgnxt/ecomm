@@ -4,10 +4,9 @@ import status from './constantes.js';
 export const fetchAccount = async (id) => {
   const cliente = await fetch(`http://account:3002/api/admin/accounts/${id}`);
   const clienteData = await cliente.json();
-  if (clienteData.message === 'Account não encontrada.') {
+  if (cliente.status === status.NOT_FOUND) {
     throw new Error('Token inválido.');
   }
-  // console.dir(clienteData)
   return clienteData;
 };
 
@@ -25,6 +24,6 @@ export const fetchPayment = async (payload, id, authHeader) => {
     },
   });
   const content = await response.json();
-  console.log(content);
+  // console.log(content);
   return content;
 };

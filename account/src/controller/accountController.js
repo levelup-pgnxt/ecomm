@@ -16,14 +16,14 @@ class AccountController {
 
   static criarAccount = async (req, res) => {
     const senha = req.body.password;
-    const senhaValida = await AccountController.validarSenha(senha);
+    const senhaValida = await this.validarSenha(senha);
 
     if (!senhaValida) {
       res.status(400).send({ message: 'A senha não atende aos requisitos de segurança' });
       return;
     }
 
-    const senhaHash = await AccountController.gerarSenhaHash(senha);
+    const senhaHash = await this.gerarSenhaHash(senha);
 
     const account = new Account(req.body);
     account.password = senhaHash;
@@ -32,8 +32,9 @@ class AccountController {
       if (err) {
         res.status(500).send({ message: err.message });
       } else {
-        account.password = senhaHash;
-        res.status(201).send(account.toJSON());
+        const accountWithoutPassword = account.toObject();
+        delete accountWithoutPassword.password;
+        res.status(201).send(accountWithoutPassword);
       }
     });
   };
