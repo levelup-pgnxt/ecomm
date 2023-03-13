@@ -1,8 +1,12 @@
 /* eslint-disable no-shadow */
 import users from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 // eslint-disable-next-line import/extensions
 import hashPassword from '../middlewares/hashPassword.js';
+
+dotenv.config();
 
 class UserController {
   static listUsers = (req, res) => {
@@ -38,17 +42,11 @@ class UserController {
     });
   };
 
-  static findUserEmail = (req, res) => {
-    const { email } = req.params;
-
-    users.findOne(email, (err, users) => {
-      if (err) {
-        res.status(400).send({ message: `${err.message} - Email não cadastrado.` });
-      } else {
-        res.status(200).send(users);
-      }
-    });
-  };
+  static async findUserEmail(email) {
+    const user = await users.findOne({ email });
+    return user || null;
+  }
+  
 
   static updateUser = (req, res) => {
     const { id } = req.params;
@@ -75,8 +73,11 @@ class UserController {
   };
 
   static login = (req, res) => {
-    res.status(204).send();
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    res.header('auth-token', token).send(token);
+    //res.status(204).send({ message: 'Usuário logado' });
   };
 }
 
 export default UserController;
+ 
