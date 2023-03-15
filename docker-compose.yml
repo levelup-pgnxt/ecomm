@@ -63,7 +63,6 @@ services:
     container_name: ecomm-mysqldb
     restart: always
     tty: true
-    env_file: ./.env
     ports:
       - "3306:3306"
     volumes:
