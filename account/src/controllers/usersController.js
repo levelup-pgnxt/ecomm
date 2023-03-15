@@ -61,9 +61,10 @@ class UserController {
     validates.paramsCPF(cpf);
     validates.paramsUf(uf);
 
-    req.body.senha = await createHashWithSalt(req.body.senha);
+    const dataUser = req.body;
+    dataUser.senha = await createHashWithSalt(dataUser.senha);
 
-    const newUser = await UserService.createUser(req.body);
+    const newUser = await UserService.createUser(dataUser);
     res.status(201).send(newUser.toJSON());
   };
 

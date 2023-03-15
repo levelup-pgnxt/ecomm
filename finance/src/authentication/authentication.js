@@ -10,7 +10,6 @@ const validadeTokenJWT = (token) => {
 
 const authenticationStrategyBearer = new BearerStrategy(
   async (token, done) => {
-    console.log(token);
     try {
       const result = validadeTokenJWT(token);
       done(null, result);
