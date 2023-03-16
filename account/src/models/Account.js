@@ -41,10 +41,6 @@ const accountSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      validate: {
-        validator: (senha) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%**#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(senha),
-        message: 'A senha deve conter mais que 8 caracteres e deve possuir letras, números e caracteres especiais.',
-      },
     },
     cpf: {
       type: Number,
@@ -64,6 +60,6 @@ const accountSchema = new mongoose.Schema(
   },
 );
 
-const accounts = mongoose.model('accounts', accountSchema);
+const Account = mongoose.model('accounts', accountSchema);
 
-export default accounts;
+export default Account;

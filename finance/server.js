@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+const dotenv = require('dotenv').config();
 const app = require('./src/app.js');
 
 const port = process.env.port || 3003;

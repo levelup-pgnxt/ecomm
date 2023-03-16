@@ -1,3 +1,4 @@
 const STATUS_ATIVA = 'ATIVA';
+const NOT_FOUND = 404;
 
-export default STATUS_ATIVA;
+export { STATUS_ATIVA, NOT_FOUND };

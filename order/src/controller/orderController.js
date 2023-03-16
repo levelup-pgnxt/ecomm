@@ -1,17 +1,18 @@
-import Orders from '../models/Order.js';
+import Order from '../models/Order.js';
 import status from '../constantes.js';
 import { fetchAccount, fetchPayment } from '../fetch.js';
 
 class OrderController {
   static criarOrder = (req, res) => {
-    const order = new Orders(req.body);
+    const order = new Order(req.body);
     order.status = status.STATUS_REALIZADO;
 
     order.save((err) => {
       if (err) {
-        return res.status(500).send({ message: err.message });
+        res.status(500).send({ message: err.message });
+      } else {
+        res.status(201).send(order.toJSON());
       }
-      return res.status(201).send(order.toJSON());
     });
   };
 
@@ -19,7 +20,7 @@ class OrderController {
     const { id } = req.params;
     const { paymentId } = req.body;
 
-    Orders.findByIdAndUpdate(id, { status: status.STATUS_PAGO }, async (err, order) => {
+    Order.findByIdAndUpdate(id, { status: status.STATUS_PAGO }, async (err, order) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else if (!order) {
@@ -29,7 +30,7 @@ class OrderController {
       }
     });
 
-    Orders.findById(id, async (err, order) => {
+    Order.findById(id, async (err, order) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else {
@@ -37,7 +38,8 @@ class OrderController {
         const payload = {
           name, cpf, address, itens: order.itens,
         };
-        await fetchPayment(payload, paymentId);
+        const authHeader = req.headers.authorization;
+        await fetchPayment(payload, paymentId, authHeader);
       }
     });
   };
