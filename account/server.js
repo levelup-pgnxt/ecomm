@@ -11,5 +11,4 @@ db.once('open', () => console.log('Conexão com o banco realizada com sucesso.')
 
 const port = process.env.PORT;
 
-// eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Servidor escutando em http://localhost:${port}`));
