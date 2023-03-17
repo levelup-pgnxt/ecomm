@@ -94,7 +94,7 @@ Neste projeto utilizamos os serviços de negócio, podemos observar isso, por ex
 ### **- API Gateway**
 Os serviços de API Gateway são um ponto único de entrada das requisições que fornece um proxy para as necessidades reais.
 
-**O API Gateway ainda não foi implementado neste projeto.**
+Neste projeto utilizamos o API Gateway como forma de centralização das rotas da aplicação.
 
 ### **- Agregador de processos**
 O Agregador de processos atendem aos casos onde as operações necessitam de mais de um processo, ou de mais de um serviço de negócios.
