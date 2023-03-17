@@ -27,7 +27,7 @@ Neste projeto utilizamos o [*npm*](https://www.npmjs.com/) para o controle das d
 ### **II. Configurações**
 O fator de Configurações implica em armazenar as configurações dentro do ambiente. As configurações são formas de acessar serviços externos, como credênciais, URLs, e valores que mudam de deploy em deploy, como por exemplo o hostname de um deploy específico. Ou seja, tudo que muda de um ambiente para o outro. Essas configurações podem ser preenchidas dentro de variáveis de ambiente, que devem ficar em arquivos .env de cada um dos serviços. Esses arquivos são suportados pela biblioteca [*dotenv*](https://www.npmjs.com/package/dotenv) e não são versionados para a proteção de dados confidenciais.
 
-**Atualmente este projeto não armazena as variáveis de ambiente**
+Neste projeto utilizamos as variáveis de ambiente para realizar as conexões com o Banco de Dados, para exibir as portas dos serviços e também como chave secreta dos tokens de autenticação.
 
 ### **IV. Serviços de Apoio**
 O fator de Serviços de Apoio implica na tratativa dos serviços como recursos anexados, como por exemplo bancos de dados, sistemas de cache, servidores SMTP, precisam ser completamente independentes do código e o código independente destes serviços. Caso um banco de dados MYSQL seja utilizado e precise trocar para um PostgreSQL isso precisará ser transparente para o sistema, mudando apenas as funções SQL porém a lógica dentro do sistema permanecerá a mesma.
