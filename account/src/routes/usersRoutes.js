@@ -5,23 +5,16 @@ import usersController from '../controllers/usersController.js';
 
 const router = express.Router();
 
-const path = '/users';
-const pathId = `${path}/:id`;
-const pathAdmin = `/admin${path}`;
-const pathAdminId = `/admin${path}/:id`;
-const pathAdminSearch = `/admin${path}/search`;
-const login = `${pathAdmin}/login`;
-
 const passportToken = passport.authenticate('bearer', { session: false });
 const passportLogin = passport.authenticate('local', { session: false });
 
 router
-  .get(pathAdmin, passportToken, usersController.getAllUsers)
-  .get(pathAdminSearch, passportToken, usersController.getUserByName)
-  .get(pathId, usersController.getUserById)
-  .post(pathAdmin, usersController.createUser)
-  .put(pathAdminId, passportToken, usersController.updateUser)
-  .delete(pathAdminId, passportToken, usersController.deleteUserById)
-  .post(login, passportLogin, usersController.login);
+  .get('/admin/users', passportToken, usersController.getAllUsers)
+  .get('/admin/users/search', passportToken, usersController.getUserByName)
+  .get('/users/:id', usersController.getUserById)
+  .post('/admin/users', usersController.createUser)
+  .put('/admin/users/:id', passportToken, usersController.updateUser)
+  .delete('/admin/users/:id', passportToken, usersController.deleteUserById)
+  .post('/admin/users/login', passportLogin, usersController.login);
 
 export default router;
