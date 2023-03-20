@@ -10,12 +10,6 @@ afterAll(async () => {
   await db.close();
 });
 
-// .get('/api/accounts', AccountsController.listarAccounts)
-//   .get('/api/accounts/:id', AccountsController.listarAccountsPorId)
-//   .post('/api/admin/accounts', AccountsController.inserirAccounts)
-//   .put('/api/admin/accounts/:id', AccountsController.atualizarAccounts)
-//   .delete('/api/admin/accounts/:id', AccountsController.excluirAccounts)
-
 describe('GET em /api/accounts', () => {
   it('Deve retornar todas as accounts', async () => {
     await request(app)
@@ -61,15 +55,6 @@ describe('GET em /api/accounts/:id', () => {
     // colocar o status correto é extremamente importante
   });
 });
-
-// describe('PATCH em /api/categories/:id', () => {
-//   it('Deve ATIVAR um account especifica', async () => {
-//     await request(app)
-//       .patch(`/api/admin/categories/${idResposta}`)
-//       .expect(200);
-//     // colocar o status correto é extremamente importante
-//   });
-// });
 
 describe('put em /api/admin/accounts/:id', () => {
   it('Deve atualizar um account especifica', async () => {
