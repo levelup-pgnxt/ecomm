@@ -16,7 +16,7 @@ const middlewareBearer = (req, res, next) => {
         return res.status(400).json({ erro: erro.message });
       }
       if (!usuario) {
-        return res.status(401).json({ erro: erro.message });
+        return res.status(401).json({ message: 'Token inválido' });
       }
 
       req.token = info.token;
