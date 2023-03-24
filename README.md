@@ -143,3 +143,33 @@ Esse conceito ainda não foi implementado na aplicação
 A agregação de métricas refere-se à coleta, processamento e análise de dados de desempenho de diferentes serviços. Essas métricas podem incluir informações sobre a latência, erros e outros indicadores importantes de desempenho da aplicação.
 
 Esse conceito ainda não foi implementado na aplicação.
+
+## **Mais aspectos sobre Microservices**
+
+### **- Padronização das Stacks**
+
+A padronização é necessária para facilitar a criação de novos serviços e a utilização dos serviços.
+
+Neste projeto utilizamos a linguagem Javascript com Node.js e utilizamos também o Eslint para nos auxiliar com a padronização.
+
+### **- Solução para Service Discovery**
+
+O Service Discovery é responsável por gerenciar os serviços e permitir que eles se comuniquem entre si.
+
+Uma possível solução seria a utilização de Kubernetes.
+
+### **- Aspectos de Segurança**
+
+A aplicação conta com a utilização de tokens JWT para a autenticação, utilização de hash nas senhas no banco. Além da utilização do api-gateway, servindo como uma única porta de entrada para a aplicação.
+
+### **- Tecnologias a adotar para deploy e build**
+
+Algumas tecnologias que podem ser adotadas para o processo de build são ferramentas como o Jenkins, Travis CI ou GitHub Actions. Já para o processo de deploy podemos utilizar ferramentas como Docker Swarm, Kubernetes ou cloud providers.
+
+### **- Tolerância a falhas em aplicações síncronas**
+
+O uso de cache e circuit braker são boas formas de lidar com falhas em aplicações síncronas. Auxiliam na contenção de danos como sobrecargas.
+
+### **- Comunicação assíncrona**
+
+A comunicação assíncrona pode ser utilizada em nosso projeto no serviço de pedidos, por exemplo, onde criamos uma nota fiscal após o pagamento ser efetivado.
