@@ -75,6 +75,19 @@ services:
     depends_on:
       - mongodb
 
+  api-gateway:
+    container_name: ecomm-api-gateway
+    build: ./api-gateway
+    volumes:
+      - ./api-gateway:/app/ecomm-api-gateway
+    ports:
+      - 3000:3000
+    depends_on:
+      - product
+      - account
+      - finance
+      - order
+
 volumes:
   db-mongo-alura:
   mysql-ecomm-volume:

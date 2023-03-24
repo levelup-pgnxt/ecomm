@@ -1,6 +1,6 @@
 import Categoria from '../models/Categoria.js';
 import isNomeCategoriaValido from '../validations/categoriaValidations.js';
-import STATUS_ATIVA from '../constantes.js';
+import { STATUS_ATIVA } from '../constantes.js';
 
 class CategoriaController {
   static listarCategorias = (req, res) => {

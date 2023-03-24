@@ -2,7 +2,7 @@
 import bcrypt from 'bcryptjs';
 import Account from '../models/Account.js';
 import criaTokenTJWT from '../authentication/generateToken.js';
-import { addTokenToBlocklist } from '../../redis/manipulaBlocklist.js';
+import addTokenToBlocklist from '../../redis/manipulaBlocklist.js';
 
 class AccountController {
   static listarAccounts = (req, res) => {
@@ -57,7 +57,11 @@ class AccountController {
 
   static logout = async (req, res) => {
     try {
-      const { token } = req;
+      const { authorization } = req.headers;
+      let token;
+      if (authorization.startsWith('Bearer ')) {
+        token = authorization.substring(7, authorization.length);
+      }
       await addTokenToBlocklist(token);
       res.status(204).send();
     } catch (error) {
