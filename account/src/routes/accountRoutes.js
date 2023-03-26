@@ -7,10 +7,10 @@ const router = express.Router();
 
 router
   .get('/api/accounts', bearerMiddlewareAut, AccountsController.listarAccounts)
-  .get('/api/accounts/:id', AccountsController.listarAccountsPorId)
-  .post('/api/admin/accounts', AccountsController.inserirAccounts)
-  .put('/api/admin/accounts/:id', bearerMiddlewareAut, AccountsController.atualizarAccounts)
-  .delete('/api/admin/accounts/:id', bearerMiddlewareAut, AccountsController.excluirAccounts)
-  .post('/api/accounts/login', localMiddlewareAut, AccountsController.logarAccounts);
+  .get('/api/accounts/:id', AccountsController.listarAccountPorId)
+  .post('/api/admin/accounts', AccountsController.inserirAccount)
+  .put('/api/admin/accounts/:id', bearerMiddlewareAut, AccountsController.atualizarAccount)
+  .delete('/api/admin/accounts/:id', bearerMiddlewareAut, AccountsController.excluirAccount)
+  .post('/api/accounts/login', localMiddlewareAut, AccountsController.logarAccount);
 
 export default router;

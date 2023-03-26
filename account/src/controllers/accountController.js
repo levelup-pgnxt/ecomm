@@ -19,29 +19,29 @@ class AccountController {
     });
   };
 
-  static inserirAccounts = async (req, res) => {
+  static inserirAccount = async (req, res) => {
     const account = new accounts(req.body);
     const senhaUser = await gerarSenhaHash(req.body.senhaHash);
     account.senhaHash = senhaUser;
     account.save((err) => {
       if (err) {
         res.status(500).send({
-          message: `${err.message} - falha ao cadastrar uma categoria.`,
+          message: `${err.message} - falha ao cadastrar um usuario`,
         });
       } else {
         res.status(201).send(account.toJSON());
       }
     });
   };
-  // foi inserido uma categoria
+  // foi inserido uma Usuário
 
-  static listarAccountsPorId = (req, res) => {
+  static listarAccountPorId = (req, res) => {
     const { id } = req.params;
 
     accounts.findById(id, (err, category) => {
       if (err) {
-        res.status(400).send({
-          message: `${err.message} - Id da categoria não localizado.`,
+        res.status(404).send({
+          message: `${err.message} - Id de usuário não localizado.`,
         });
       } else {
         res.status(200).send(category);
@@ -51,33 +51,33 @@ class AccountController {
     // busquei by id
   };
 
-  static atualizarAccounts = (req, res) => {
+  static atualizarAccount = (req, res) => {
     const { id } = req.params;
 
     accounts.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Categoria atualizada com sucesso' });
-      } else {
+      if (err) {
         res.status(500).send({ message: err.message });
+      } else {
+        res.status(200).send({ message: 'Usuário atualizado com sucesso' });
       }
     });
   };
 
-  static excluirAccounts = (req, res) => {
+  static excluirAccount = (req, res) => {
     const { id } = req.params;
 
     accounts.findByIdAndDelete(id, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Categoria removida com sucesso' });
+      if (err) {
+        res.status(500).send({ message: err.message });
         // se colocar 204 a mensagem não aparece
       } else {
-        res.status(500).send({ message: err.message });
+        res.status(200).send({ message: 'Usuário removido com sucesso' });
       }
     });
   };
   // atualizou um Accounts
 
-  static logarAccounts = (req, res) => {
+  static logarAccount = (req, res) => {
     const token = createToken(req.user);
     res.set('Authorization', token);
     res.status(204).send();

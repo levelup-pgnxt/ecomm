@@ -6,9 +6,6 @@ function searchUserAccountByEmailUseCase(emailPesquisado) {
 }
 
 // função que pesquisa e retorna o objeto encontrado
-console.log('----------essa msg esta fora da funcao (procurarAccount)-----------');
-// error catch
-
 export {
   searchUserAccountByEmailUseCase,
 };

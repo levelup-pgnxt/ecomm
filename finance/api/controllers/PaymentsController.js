@@ -57,7 +57,8 @@ class PaymentsController {
         },
       });
 
-      if (status === 'CONFIRMADO' || status === 'CANCELADO') {
+      const statusCriado = 'CRIADO'
+      if (!(status === 'CRIADO')) {
         return res.status(405).json({ message: 'o status não pode ser alterado!' });
       }
       await dataBase.dbFinance.update(statusPagamento, { where: { id: Number(id) } });
