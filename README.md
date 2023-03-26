@@ -70,3 +70,25 @@ Então o que fazer? Como agir? Retornando ao nosso questionamento inicial, podem
 **Single database vs Bancos diferentes** – Nossa API já possui um banco de dados distinto para cada domínio.
 
 **Eventos Assíncronos** – Esse evento é será evidenciado em nossa API no processo de migração de pedido para compra efetivada, onde o usuário receberá uma mensagem informando sobre confirmação de compra em andamento, enquanto o sistema finaliza todas as verificações de segurança e emite a nota fiscal de venda, onde ao finalizar, será retornado o status atualizado da compra.
+
+
+
+# Aspectos dos Microserviços
+
+## Padronização das tecnologias
+A padronização das tecnologias de serviços é um aspecto importante da arquitetura de microsserviços. Nossa API, embora use NodeJS, não procurou usar um padrão no modo de abordar os módulos, em um serviço usou módulo ES e em outro usou o módulo CommonJS.
+
+## Solução de descoberta de serviço
+Nossa API ainda não implementou esse processo, entendemos nossa necessidade, ainda não optamos qual abordagem seguir, seja descoberta por lado do cliente, do lado do servidor, ou híbrida.
+
+## Aspectos de segurança
+Nossa API utiliza autenticação e autorização, com uso de token e as senhas dos nossos usuários são salvas com criptografia com uma pitada de sal.
+
+## Tecnologias para implantar e construir
+Tanto CI quanto CD dependem de ferramentas e processos de automação para tornar a entrega de software mais rápida, mais eficiente e menos propensa a erros. Algumas ferramentas permitem que os desenvolvedores automatizem os processos de construção, teste e implantação e se integrem facilmente a outras ferramentas e plataformas de desenvolvimento, nossa API não tem ainda uma definição sobre qual usar.
+
+## Como lidar com tolerância a falhas em aplicações síncronas
+Algumas das principais abordagens para lidar com tolerância a falhas em aplicativos síncronos são redundância, timeouts, degradação normal e mecanismos de detecção e recuperação de falhas. No geral, lidar com a tolerância a falhas em aplicativos síncronos requer uma combinação destes, e ao projetar o sistema com essas considerações em mente, é possível garantir que ele continue a operar mesmo na presença de falhas ou erros.
+
+## Em que pontos faz sentido usar comunicação assíncrona
+A comunicação assíncrona é adequada para tarefas de execução longa que podem levar um tempo significativo para serem concluídas. Em nossa API o processo que se adequa a esse uso é de pagamento e emissão de nota fiscal do pedido.
