@@ -59,3 +59,32 @@ Bancos diferentes foram utilizados para cada serviço diferente
 
 ### Eventos assíncronos
 Esse padrão foi utilizado nos serviços da aplicação
+
+
+
+
+## Aspectos de Microsserviços
+
+### Padronização das Stacks
+
+Ocorreu uma padronização das Stacks pois foi utilizado Node.js e Express.js em todos o       projeto.
+
+### Solução para service discovery
+
+Como utilizamos o docker o gerencimante de cada container e a comunicação entre eles pode ser feito de forma rápida e fácil 
+
+### Aspectos de segurança
+
+Algumas praticas de seguranças foram utilizadas, como emcriptografar a senha para depois salvar no banco de dados, e a autentificação e autorização de serviçoes usando o token jwt
+
+### Tecnologias a adotar para deploy e build
+
+Apesar de utilziar o ESlint para auxiliar o build, não foi utilizado nenhuma ferramenta para o deploy, para isso seria interessante a utilização do Github Actions
+
+### Tolerância a falhas em aplicações síncronas 
+
+Não foram utilizadas nenhuma ferramenta ou tecnologia para prevenção de falhas ou sobrecargas no servidor
+
+### Quando usar comunicação assíncrona
+
+É interessante a utilziando de comunicação assícrona quando ocorre dependencia de serviços, no nosso caso, essa implentação seria necessária entre o serviço de finance e order. (ao realizar uma compra, uma ordem é gerada)
