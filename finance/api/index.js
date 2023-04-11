@@ -1,10 +1,17 @@
-const express = require('express')
-const routes = require('./routes')
+const express = require('express');
+const routes = require('./routes/index.js');
 
-const app = express()
-const port = 3000
+const app = express();
 
-routes(app)
+app.use(express.json());
+routes(app);
 
-app.listen(port, () => console.log(`servidor está rodando na porta ${port}`))
-module.exports = app
+module.exports = app;
+
+// como tava antes
+// const port = 3001
+
+// routes(app)
+
+// app.listen(port, () => console.log(`servidor está rodando na porta ${port}`))
+// module.exports = app

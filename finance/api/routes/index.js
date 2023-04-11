@@ -1,9 +1,7 @@
-const bodyParser = require('body-parser')
-const dbFinances = require('./dbFinancesRoute')
+const bodyParser = require('body-parser');
+const dbFinances = require('./dbFinancesRoute');
 
-
-module.exports = app => {
-    app.use(bodyParser.json())
-    app.use(dbFinances)
-
-}
+module.exports = (app) => {
+  app.use(bodyParser.json());
+  app.use(dbFinances);
+};

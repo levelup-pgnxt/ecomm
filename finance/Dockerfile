@@ -1,10 +1,10 @@
 
 FROM node:18-alpine 
-WORKDIR /app-ecomm/product
+WORKDIR /app-ecomm/finance
 COPY package*.json ./
 RUN npm install
 COPY . ./
-EXPOSE 3000
+EXPOSE 3001
 ENTRYPOINT npm start
 # FROM: baixar o node
 # WORKDIR: pasta dentro do dokcer
