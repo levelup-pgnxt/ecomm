@@ -11,5 +11,4 @@ function searchUserAccountByEmailUseCase(emailPesquisado) {
 export {
   searchUserAccountByEmailUseCase,
 };
-// exporta a função de procurar o email
-
+// exporta a função de procurar o
