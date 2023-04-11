@@ -1,7 +1,10 @@
+// ## Documento usado para estudos, apagar depois de implementação
+
 import {
   createUserUseCase,
   listaUsuariosTeste,
-} from '../../use-case/createUserAccount.js';
+}
+  from '../../use-case/createUserAccount.js';
 
 createUserUseCase('Isac Queiroz', 'isac@gmail.com', Math.random());
 createUserUseCase('Isac Queiroz', 'testeProcura@gmail.com', Math.random());

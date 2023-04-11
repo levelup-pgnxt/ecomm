@@ -1,3 +1,5 @@
+// ## Documento usado para estudos, apagar depois de implementação
+
 import { searchUserAccountByEmailUseCase } from '../../use-case/searchUserAccountByEmail.js';
 import { listaUsuariosTeste } from './creatUserAccount.teste.js';
 // importar a função de procurar um usuário

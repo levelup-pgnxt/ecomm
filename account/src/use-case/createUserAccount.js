@@ -1,3 +1,5 @@
+// ## Documento usado para estudos, apagar depois de implementação
+
 const listaUsuariosTeste = [];
 
 function createUserUseCase(nome, emailCadastrado, senha) {
@@ -13,8 +15,6 @@ function createUserUseCase(nome, emailCadastrado, senha) {
 
   return usuario;
 }
-
-console.log('----------essa msg esta fora da funcao (createUsuario)-----------');
 
 export {
   createUserUseCase,
