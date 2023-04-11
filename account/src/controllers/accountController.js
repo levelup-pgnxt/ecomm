@@ -1,4 +1,11 @@
+import bcrypt from 'bcryptjs';
 import accounts from '../models/account.js';
+import createToken from '../security/token.js';
+
+function gerarSenhaHash(senha) {
+  const custoHash = 12;
+  return bcrypt.hash(senha, custoHash);
+}
 
 class AccountController {
   static listarAccounts = (req, res) => {
@@ -12,16 +19,17 @@ class AccountController {
     });
   };
 
-  static inserirAccounts = (req, res) => {
-    const category = new accounts(req.body);
-
-    category.save((err) => {
+  static inserirAccounts = async (req, res) => {
+    const account = new accounts(req.body);
+    const senhaUser = await gerarSenhaHash(req.body.senhaHash);
+    account.senhaHash = senhaUser;
+    account.save((err) => {
       if (err) {
         res.status(500).send({
           message: `${err.message} - falha ao cadastrar um usuário.`,
         });
       } else {
-        res.status(201).send(category.toJSON());
+        res.status(201).send(account.toJSON());
       }
     });
   };
@@ -68,6 +76,12 @@ class AccountController {
     });
   };
   // atualizou um Accounts
+
+  static logarAccounts = (req, res) => {
+    const token = createToken(req.user);
+    res.set('Authorization', token);
+    res.status(204).send();
+  };
 }
 
 export default AccountController;

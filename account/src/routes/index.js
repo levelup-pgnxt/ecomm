@@ -1,5 +1,6 @@
 import express from 'express';
 import accounts from './accountRoutes.js';
+import '../security/estrategiaAutenticacao.js';
 
 const routes = (app) => {
   app.route('/').get((_req, res) => {
