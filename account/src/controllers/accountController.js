@@ -13,7 +13,7 @@ class AccountController {
       if (err) {
         return res
           .status(400)
-          .send({ message: `${err.message} - Informações não encontradas.` });
+          .send({ message: `${err.message} - Falha ao encontrar usuário.` });
       }
       return res.status(200).send(users);
     });
@@ -26,7 +26,9 @@ class AccountController {
     account.save((err) => {
       if (err) {
         res.status(500).send({
-          message: `${err.message} - falha ao cadastrar um usuario`,
+
+          message: `${err.message} - falha ao cadastrar um usuário.`,
+          
         });
       } else {
         res.status(201).send(account.toJSON());
@@ -40,8 +42,10 @@ class AccountController {
 
     accounts.findById(id, (err, category) => {
       if (err) {
+
         res.status(404).send({
           message: `${err.message} - Id de usuário não localizado.`,
+
         });
       } else {
         res.status(200).send(category);
@@ -58,7 +62,9 @@ class AccountController {
       if (err) {
         res.status(500).send({ message: err.message });
       } else {
+
         res.status(200).send({ message: 'Usuário atualizado com sucesso' });
+
       }
     });
   };
@@ -69,9 +75,11 @@ class AccountController {
     accounts.findByIdAndDelete(id, (err) => {
       if (err) {
         res.status(500).send({ message: err.message });
+
         // se colocar 204 a mensagem não aparece
       } else {
         res.status(200).send({ message: 'Usuário removido com sucesso' });
+
       }
     });
   };

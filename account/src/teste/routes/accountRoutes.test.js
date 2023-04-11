@@ -56,15 +56,6 @@ describe('GET em /api/accounts/:id', () => {
   });
 });
 
-// describe('PATCH em /api/categories/:id', () => {
-//   it('Deve ATIVAR um account especifica', async () => {
-//     await request(app)
-//       .patch(`/api/admin/categories/${idResposta}`)
-//       .expect(200);
-//     // colocar o status correto é extremamente importante
-//   });
-// });
-
 describe('put em /api/admin/accounts/:id', () => {
   it('Deve atualizar um account especifica', async () => {
     await request(app)
