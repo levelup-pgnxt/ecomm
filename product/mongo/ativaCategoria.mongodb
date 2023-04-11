@@ -1,1 +1,3 @@
 use('ecomm-product')
+
+db.categories.findOneAndUpdate({ NOME:"ESPORTE" }, { $set:{ STATUS:"ATIVA" }})
