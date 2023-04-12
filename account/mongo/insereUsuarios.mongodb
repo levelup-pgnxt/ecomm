@@ -1,50 +1,35 @@
 use('ecomm-account');
-db.createCollection('users');
 
 db.users.insertMany([
-	{
-        "nome": "sadsdasdasdasd",
-        "email": "isac1@gmail.com", 
-        "senhaHash": "senha1",
-        "dataCriacao": new ISODate(),
-        "cpf": 01555363202,
-        "telefone": "32280873",
-        "endereco":{
-                    "rua_endereco":"rua tal 1",
-                    "n_endereco":"10",
-                    "complemento":"alameda tal",
-                    "cep":"55513235",
-                    "cidade":"belem2",
-                    "estado":"para2",
-                    }
-  },{
-        "nome": "isac 2",
-        "email": "isac2@gmail.com", 
-        "senhaHash": "senha2",
-        "dataCriacao": new ISODate(),
-        "cpf": 01555363203,
-        "telefone": "42280873",
-        "endereco":{"rua_endereco":"rua tal 2",
-                    "n_endereco":"11",
-                    "complemento":"alameda tal",
-                    "cep":"55513233",
-                    "cidade":"belem3",
-                    "estado":"para3",
-                    }
-  },{
-        "nome": "isac 3",
-        "email": "isac3@gmail.com", 
-        "senhaHash": "senha3",
-        "dataCriacao": new ISODate(),
-        "cpf": 01555363203,
-        "telefone": "42280874",
-        "endereco":{"rua_endereco":"rua tal 3",
-                    "n_endereco":"13",
-                    "complemento":"alameda tal",
-                    "cep":"55513333",
-                    "cidade":"belem1",
-                    "estado":"para1",
-                    }
+  {
+    name: "Rodrigo Freitas Maceno",
+    email: "rodrigo@example.com",
+    password: "senhasecreta",
+    cpf: "74136985202",
+    phone: "+5585988473528",
+    address: {
+      street: "Rua Veny, Bairro Central",
+      number: "155",
+      cep: "21189687",
+      city: "Betim",
+      state: "Minas Gerais",
+      more_info: "Terceira casa ao lado da avenida"
+    }
+  },
+  {
+    name: "Letícia Freitas Albuquerque",
+    email: "leticia@example.com",
+    password: "senhasecreta01",
+    cpf: "47583214798",
+    phone: "+5511981574269",
+    address: {
+      street: "Rua Assis, Bairro Cabral",
+      number: "25",
+      cep: "89052977",
+      city: "São Paulo",
+      state: "São Paulo",
+      more_info: "Terceira casa ao lado da avenida"
+    }
   }
 ]);
 
