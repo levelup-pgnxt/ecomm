@@ -1,0 +1,31 @@
+use('ecomm');
+
+const qtdeItem = 1;
+const produto = db.products.findOneAndUpdate({
+    nome: 'Sofá 3 lugares',
+    $and: [{ estoque: {$gt: 0 }}, { estoque: { $gte: qtdeItem }}]
+}, {
+    $inc: {
+        estoque: -qtdeItem
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1,
+        desconto: 1,
+    }
+});
+produto['qtdeItem'] = qtdeItem;
+produto['valorDescontos'] = Decimal128((qtdeItem * produto.desconto).toFixed(2));
+produto['subTotal'] = Decimal128((qtdeItem * produto.precoUnitario).toFixed(2));
+produto['subTotalLiquido'] = Decimal128((produto.subTotal - produto.valorDescontos).toFixed(2));
+
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Alice Gonçalves'
+}, {
+    $push: {
+        'carrinho.produtos': produto
+    }
+});

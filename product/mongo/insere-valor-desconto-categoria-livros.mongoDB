@@ -1,0 +1,29 @@
+use('ecomm');
+
+// db.products.updateMany({
+//     'categoria.nome': { $eq: 'LIVROS' }
+// }, [{
+//     $set: { desconto: '$precoUnitario' }
+// }]);
+
+// db.products.updateMany({
+//     'categoria.nome': { $eq: 'LIVROS' }
+// }, {
+//     $mul: { desconto: Decimal128((0.10).toFixed(2)) }
+// });
+
+const productsByCategory = db.products.find({
+    'categoria.nome': { $eq: 'LIVROS' }
+});
+
+const discountIndex = 0.25;
+productsByCategory.forEach((product) => {
+    const discountAmount = Decimal128((product.precoUnitario * discountIndex).toFixed(2));
+    db.products.updateOne({
+        _id: { $eq: product._id }
+    }, {
+        $set: {
+            desconto: discountAmount
+        }
+    });
+});

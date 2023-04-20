@@ -1,0 +1,441 @@
+openapi: 3.0.1
+info:
+  title: API ecomm - products
+  description: API para consulta produtos da plataforma ecomm
+  version: 0.0.1
+  termsOfService: https://www.ecomm.com/terms-of-services
+  contact:
+    name: Suporte ao usuário
+    email: suporte@ecomm.com
+    url: https://www.ecomm.com/support
+  license:
+    name: 'licença: GPLv3'
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Documentação Operacional
+  url: https://www.ecomm.com/ecomm-operations
+servers:
+- url: https://www.ecomm.com/api
+  description: API plataforma ecomm
+- url: https://www.ecomm.com/api/admin
+  description: API plataforma ecomm administrador
+paths:
+  /api/categories:
+    get:
+      summary: Recupera todas as categorias
+      tags:
+      - categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Categories'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/categories/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Recupera uma categoria
+      tags:
+      - categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/categories:
+    post:
+      summary: Cadastra uma nova categoria
+      tags:
+      - admin/categories
+      requestBody:
+        $ref: '#/components/requestBodies/CategoriesBodies'
+      responses:
+        '201':
+          $ref: '#/components/responses/Category'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/categories/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    put:
+      summary: Atualiza os dados de uma categoria
+      tags:
+      - admin/categories
+      requestBody:
+        $ref: '#/components/requestBodies/CategoriesBodies'
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Ativa/Desativa uma categoria
+      tags:
+      - admin/categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Exclui uma categoria
+      tags:
+      - admin/categories
+      responses:
+        '200':
+          $ref: '#/components/responses/Category'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products:
+    get:
+      summary: Recupera todos os produtos
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Recupera um produto
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products/search:
+    parameters:
+      - $ref: '#/components/parameters/ProductsName'
+    get:
+      summary: Recupera 1 ou mais produtos pelo nome solicitado
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/products/search-by-value:
+    parameters:
+      - $ref: '#/components/parameters/MaxValue'
+      - $ref: '#/components/parameters/MinValue'
+    get:
+      summary: Recupera os produto entres os valores solicitados
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/products/search-by-stock:
+    parameters:
+      - $ref: '#/components/parameters/Stock'
+    get:
+      summary: Recupera os produto com o estoque maior que o valor solicitado
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/products/search-by-category/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    get:
+      summary: Recupera os produtos de uma determinada categoria
+      tags:
+      - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Products'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products:
+    post:
+      summary: Cadastra um novo produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductsBodies'
+      responses:
+        '201':
+          $ref: '#/components/responses/Product'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    put:
+      summary: Atualiza os dados de um produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductsBodies'
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Exclui um produto
+      tags:
+      - admin/products
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/discounts-values/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    patch:
+      summary: Registra um valor de desconto a um produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductDiscountsBodiesByValueOrPercentage'
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/discounts-percentage/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+    patch:
+      summary: Registra um valor percentual de desconto sobre o preço de venda de um produto
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductDiscountsBodiesByValueOrPercentage'
+      responses:
+        '200':
+          $ref: '#/components/responses/Product'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/admin/products/discounts-category:
+    parameters:
+      - $ref: '#/components/parameters/Category'
+    patch:
+      summary: Registra um desconto percentual para todos os produtos de uma categoria
+      tags:
+      - admin/products
+      requestBody:
+        $ref: '#/components/requestBodies/ProductDiscountsBodiesByCategory'
+      responses:
+        '201':
+          $ref: '#/components/responses/Products'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+    CategoryCreateUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        estoque:
+          type: integer
+        desconto:
+          type: number
+        categoria:
+          type: object
+          properties:
+            categoria_id:
+              type: integer
+            nome:
+              type: string
+    Products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+    ProductCreateUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        estoque:
+          type: integer
+        categoria_id:
+          type: integer
+    ProductDiscountsByValueOrPercentage:
+      type: object
+      properties:
+        value:
+          type: number
+    ProductsDiscountsByCategory:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+        value:
+          type: number
+  responses:
+    Categories:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Categories'
+    Category:
+      description: Sucesso
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/Category'
+    Products:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Products'
+    Product:
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+    '401':
+      description: usuário não autorizado
+      content:
+        application/json:
+          example: 'Unauthorized'
+    '404':
+      description: recurso não encontrado
+      content:
+        application/json:
+          example: 'Not Found'
+    '500':
+      description: Erro servidor
+      content:
+        application/json:
+          example: 'Internal Server Error'        
+  requestBodies:
+    CategoriesBodies:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CategoryCreateUpdate'
+    ProductsBodies:
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/ProductCreateUpdate'
+    ProductDiscountsBodiesByValueOrPercentage:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductDiscountsByValueOrPercentage'
+    ProductDiscountsBodiesByCategory:
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/ProductsDiscountsByCategory'
+  parameters:
+    ID: 
+      name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    MaxValue:
+      name: max-value
+      in: query
+      schema: 
+        type: number
+      required: true
+    MinValue:
+      name: min-value
+      in: query
+      schema:
+        type: integer
+      required: true
+    Category:
+      name: category
+      in: query
+      schema:
+        type: string
+      required: true
+    Stock:
+      name: stock 
+      in: query
+      schema:
+        type: integer
+      required: true
+    ProductsName:
+      name: products
+      in: query
+      schema:
+        type: string
+      required: true

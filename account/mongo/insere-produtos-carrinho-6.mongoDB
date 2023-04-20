@@ -1,0 +1,53 @@
+use('ecomm');
+
+let qtdeItem = 3;
+const produto1 = db.products.findOneAndUpdate({
+    nome: 'Cabo HDMI 2.0 - 4k',
+    $and: [{ estoque: {$gt: 0 }}, { estoque: { $gte: qtdeItem }}] 
+}, {
+    $inc: {
+        estoque: -qtdeItem
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1,
+        desconto: 1,
+    }
+});
+produto1['qtdeItem'] = qtdeItem;
+produto1['valorDescontos'] = Decimal128((qtdeItem * produto1.desconto).toFixed(2));
+produto1['subTotal'] = Decimal128((qtdeItem * produto1.precoUnitario).toFixed(2));
+produto1['subTotalLiquido'] = Decimal128((produto1.subTotal - produto1.valorDescontos).toFixed(2));
+
+qtdeItem = 5;
+const produto2 = db.products.findOneAndUpdate({
+    nome: 'Camiseta Masculina Fitness Tech 2.0',
+    $and: [{ estoque: {$gt: 0 }}, { estoque: { $gt: qtdeItem }}] 
+}, {
+    $inc: {
+        estoque: -qtdeItem
+    }
+}, {
+    projection: {
+        nome: 1,
+        precoUnitario: 1,
+        desconto: 1,
+    }
+});
+produto2['qtdeItem'] = qtdeItem;
+produto2['valorDescontos'] = Decimal128((qtdeItem * produto2.desconto).toFixed(2));
+produto2['subTotal'] = Decimal128((qtdeItem * produto2.precoUnitario).toFixed(2));
+produto2['subTotalLiquido'] = Decimal128((produto2.subTotal - produto2.valorDescontos).toFixed(2));
+
+use('ecomm-account');
+
+db.users.updateOne({
+    nome: 'Renato Mantovani'
+}, {
+    $push: {
+        'carrinho.produtos': {
+            $each: [produto1, produto2]
+        }
+    }
+});

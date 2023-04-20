@@ -1,0 +1,139 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Ecomm - Categories",
+    "dateExported": "2023-03-27T13:06:04.059Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "47a4c2b1-a647-4e67-8840-a1539e8fe343",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "GET All Categories",
+            "url": "http://localhost:3000/categories/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-02-03T01:42:32.898Z",
+            "modified": "2023-03-10T18:10:19.225Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDdkNzNjNjAwYjA3N2YwYzBlZmU5MCIsImlhdCI6MTY3ODQ2OTE4MX0.7hau1SM-dxYfqLSfFC2PvccAZQEnDldmFdVmHt0xp5o"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ca3af07a-9ebd-42b3-8002-5dca4850700b",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "POST Category",
+            "url": "http://localhost:3003/admin/categories",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-02-03T01:43:17.932Z",
+            "modified": "2023-02-23T13:09:33.889Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nome\": \"UTILIDADES DOMÉSTICAS\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e87fb41c-ba5a-401e-988e-c3cd168fa69f",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "GET Category by ID",
+            "url": "http://localhost:3000/categories/63dd8be23138b0c3320e26fe",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-02-03T12:34:45.816Z",
+            "modified": "2023-03-10T18:10:35.900Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDdkNzNjNjAwYjA3N2YwYzBlZmU5MCIsImlhdCI6MTY3ODQ2OTE4MX0.7hau1SM-dxYfqLSfFC2PvccAZQEnDldmFdVmHt0xp5o"
+            },
+            "tests": []
+        },
+        {
+            "_id": "537a21f6-fe7e-451c-865e-6711aba54694",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "GET Categories By Nome",
+            "url": "http://localhost:3000/categories/search?categories=ti",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-02-03T14:13:57.996Z",
+            "modified": "2023-03-10T18:10:49.858Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "categories",
+                    "value": "ti",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDdkNzNjNjAwYjA3N2YwYzBlZmU5MCIsImlhdCI6MTY3ODQ2OTE4MX0.7hau1SM-dxYfqLSfFC2PvccAZQEnDldmFdVmHt0xp5o"
+            },
+            "tests": []
+        },
+        {
+            "_id": "292cf964-df22-4b73-b5a8-745dbe99e334",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "PUT Category",
+            "url": "http://localhost:3000/admin/categories/63dd8be23138b0c3320e26fe",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-02-03T15:22:42.178Z",
+            "modified": "2023-02-04T15:02:37.096Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nome\": \"UTILIDADES DOMÉSTICAS\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "254f59f1-d607-407c-8dfd-87ff3cd12598",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "PATCH Category",
+            "url": "http://localhost:3000/admin/categories/63dd925c8988fc9d6d4465d8",
+            "method": "PATCH",
+            "sortNum": 80000,
+            "created": "2023-02-03T16:01:15.155Z",
+            "modified": "2023-03-10T18:11:17.743Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDdkNzNjNjAwYjA3N2YwYzBlZmU5MCIsImlhdCI6MTY3ODQ2OTE4MX0.7hau1SM-dxYfqLSfFC2PvccAZQEnDldmFdVmHt0xp5o"
+            },
+            "tests": []
+        },
+        {
+            "_id": "93fda0d0-6503-4524-b8ad-db899ed2d26d",
+            "colId": "dc407c87-2c60-4930-91f0-3f8c88ede99f",
+            "containerId": "",
+            "name": "DELETE Category",
+            "url": "http://localhost:3000/admin/categories/63eccf58458462bc37005652",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2023-02-03T16:11:09.922Z",
+            "modified": "2023-02-15T12:44:24.736Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

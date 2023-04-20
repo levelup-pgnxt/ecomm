@@ -1,0 +1,40 @@
+use('ecomm-account');
+
+db.users.aggregate([{
+    $match: {
+        nome: 'Renato Mantovani'
+    }
+}, {
+    $project: {
+        _id: 0,
+        userId: "$_id",
+        nome: "$nome",
+        data: ISODate(),
+        enderecoEntrega: '$enderecoEntrega',
+        itens: '$carrinho.produtos',
+        qtdeTotalItens: {
+            $sum: '$carrinho.produtos.qtdeItem'
+        },
+        valorTotalDescontos: {
+            $sum: '$carrinho.produtos.valorDescontos'
+        },
+        valorTotal: {
+            $sum: '$carrinho.produtos.subTotal'
+        },
+        valorTotalLiquido: {
+            $sum: '$carrinho.produtos.subTotalLiquido'
+        }
+    }
+}, {
+    $merge: {
+        into: { db: 'ecomm-order', coll: 'orders' }
+    }
+}]);
+
+db.users.updateOne({
+    nome: 'Renato Mantovani'
+}, {
+    $set: {
+        'carrinho.produtos': []
+    }
+});

@@ -1,0 +1,207 @@
+[{
+  "_id": {
+    "$oid": "63c5ca11d8b003c583732c91"
+  },
+  "nome": "Túlio Yoshimura",
+  "email": "yoshimura_tulio@gmail.com",
+  "senha": "5pAwX2diMD",
+  "data": {
+    "$date": {
+      "$numberLong": "1673906705300"
+    }
+  },
+  "cpf": "887.604.980-05",
+  "telefone": "(42) 93524-3869",
+  "endereco": {
+    "numero": "230",
+    "complemento": "Apto 801",
+    "bairro": "Alto Boqueirão",
+    "cidade": "Curitiba",
+    "uf": "PR",
+    "cep": "81720-342",
+    "logragouro": "Rua João Martins da Silva Filho"
+  },
+  "carrinho": {
+    "produtos": [
+      {
+        "_id": {
+          "$oid": "63c806d6c5d2d456bbe411fe"
+        },
+        "nome": "Cabo HDMI 2.0 - 4k",
+        "precoUnitario": {
+          "$numberDecimal": "34.99"
+        },
+        "desconto": {
+          "$numberDecimal": "0"
+        },
+        "qtdeItem": 1,
+        "valorDescontos": {
+          "$numberDecimal": "0.00"
+        },
+        "subTotal": {
+          "$numberDecimal": "34.99"
+        },
+        "subTotalLiquido": {
+          "$numberDecimal": "34.99"
+        }
+      },
+      {
+        "_id": {
+          "$oid": "63c806d6c5d2d456bbe411ff"
+        },
+        "nome": "Camiseta Masculina Fitness Tech 2.0",
+        "precoUnitario": {
+          "$numberDecimal": "99.99"
+        },
+        "desconto": {
+          "$numberDecimal": "19.99"
+        },
+        "qtdeItem": 1,
+        "valorDescontos": {
+          "$numberDecimal": "19.99"
+        },
+        "subTotal": {
+          "$numberDecimal": "99.99"
+        },
+        "subTotalLiquido": {
+          "$numberDecimal": "80.00"
+        }
+      }
+    ]
+  }
+},{
+  "_id": {
+    "$oid": "63c5ca11d8b003c583732c92"
+  },
+  "nome": "Mariana Hamada",
+  "email": "marianahamada@outlook.com",
+  "senha": "cejU00llJR",
+  "data": {
+    "$date": {
+      "$numberLong": "1673906705300"
+    }
+  },
+  "cpf": "997.089.370-02",
+  "telefone": "(51) 93571-6066",
+  "endereco": {
+    "numero": "230",
+    "complemento": "Apto 502",
+    "bairro": "Centro",
+    "cidade": "Osório",
+    "uf": "RS",
+    "cep": "95520-975",
+    "logragouro": "Rua Júlio de Castilhos 711"
+  },
+  "carrinho": {
+    "produtos": []
+  }
+},{
+  "_id": {
+    "$oid": "63c5ca11d8b003c583732c93"
+  },
+  "nome": "Alice Gonçalves",
+  "email": "goncalvesalice@hotmail.com",
+  "senha": "0iDCWlg7Wq",
+  "data": {
+    "$date": {
+      "$numberLong": "1673906705300"
+    }
+  },
+  "cpf": "286.364.260-06",
+  "telefone": "(61) 92335-4645",
+  "endereco": {
+    "numero": "88",
+    "bairro": "Recanto das Emas",
+    "cidade": "Brasília",
+    "uf": "DF",
+    "cep": "72660-333",
+    "logragouro": "Quadra 511 Conjunto 11"
+  },
+  "carrinho": {
+    "produtos": []
+  }
+},{
+  "_id": {
+    "$oid": "63c5ca11d8b003c583732c94"
+  },
+  "nome": "Renato Mantovani",
+  "email": "mantovani_renato@yahoo.com.br",
+  "senha": "uLTTFz86dl",
+  "data": {
+    "$date": {
+      "$numberLong": "1673906705300"
+    }
+  },
+  "cpf": "887.604.980-05",
+  "telefone": "(82) 93143-2219",
+  "endereco": {
+    "numero": "625",
+    "complemento": "Apto 902",
+    "bairro": "Ponta Verde",
+    "cidade": "Maceió",
+    "uf": "AL",
+    "cep": "57035-230",
+    "logragouro": "Rua Prof. Sandoval Arroxelas"
+  },
+  "carrinho": {
+    "produtos": []
+  },
+  "enderecoEntrega": {
+    "numero": "529",
+    "bairro": "Pitanguinha",
+    "cidade": "Maceió",
+    "uf": "AL",
+    "cep": "57052-372",
+    "logragouro": "Rua Guedes Nogueira"
+  }
+},{
+  "_id": {
+    "$oid": "63e6535e71092f327fe175e1"
+  },
+  "nome": "Paulo Henrique Vieira Leite",
+  "email": "phvleite@gmail.com",
+  "senha": "cd88566f51f9a2db51dbc45152f3d222",
+  "cpf": "92679978404",
+  "telefone": "82987012116",
+  "endereco": {
+    "logradouro": "Rua Luiza Medeiros",
+    "numero": "37",
+    "bairro": "Jatiúca",
+    "cidade": "Maceió",
+    "uf": "AL",
+    "cep": "57036270"
+  },
+  "carrinho": {
+    "produtos": []
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1676039006982"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63e659108f9e6e065037ceb1"
+  },
+  "nome": "Paulo Vieira Leite",
+  "email": "paulo.leite.al@gmail.com",
+  "senha": "cd88566f51f9a2db51dbc45152f3d222",
+  "cpf": "92679978404",
+  "telefone": "82987012116",
+  "endereco": {
+    "logradouro": "Rua Luiza Medeiros",
+    "numero": "37",
+    "bairro": "Jatiúca",
+    "cidade": "Maceió",
+    "uf": "AL",
+    "cep": "57036270"
+  },
+  "carrinho": {
+    "produtos": []
+  },
+  "data": {
+    "$date": {
+      "$numberLong": "1676040464952"
+    }
+  }
+}]

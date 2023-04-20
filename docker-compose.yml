@@ -1,0 +1,83 @@
+version: '3.9'
+services:
+  ecomm-product:
+    build:
+      context: product
+    container_name: ecomm-product
+    networks:
+      - ecomm-network
+    volumes:
+      - ./product:/app
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ecomm-mongodb
+
+  ecomm-account:
+    build:
+      context: account
+    container_name: ecomm-account
+    networks:
+      - ecomm-network
+    volumes:
+      - ./account:/app
+    tty: true
+    ports:
+      - "3001:3001"
+    depends_on:
+      - ecomm-mongodb
+
+  ecomm-finance:
+    build:
+      context: finance
+    container_name: ecomm-finance
+    networks:
+      - ecomm-network
+    volumes:
+      - ./finance:/app
+    tty: true
+    ports:
+      - "3002:3002"
+    depends_on:
+      - ecomm-mysqldb
+
+  ecomm-mongodb:
+    image: mongo
+    container_name: ecomm-mongodb
+    restart: always
+    tty: true
+    ports:
+      - "27017:27017"
+    volumes:
+      - ecomm-mongodb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=ecomm
+    networks:
+      - ecomm-network
+
+  ecomm-mysqldb:
+    image: mysql/mysql-server:latest
+    container_name: ecomm-mysqldb
+    restart: always
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ecomm-mysqldb:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=ecomm-finance
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    networks:
+      - ecomm-network
+
+volumes:
+  ecomm-mongodb:
+  ecomm-mysqldb:
+networks:
+  ecomm-network:
+    driver: bridge
