@@ -4,7 +4,6 @@ const MESSAGE_ERROR = {
   'Valor mínimo maior que valor máximo. Operação não permitida!': 405,
   'ID inválido!': 400,
   'ID categoria inválido!': 400,
-  'Categoria não localizada!': 400,
   'Categoria Inativa!': 400,
   'Objeto vazio, sem propriedades!': 400,
 };

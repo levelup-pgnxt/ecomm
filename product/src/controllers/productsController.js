@@ -1,8 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/extensions */
 import ProductService from '../services/productsService.js';
-import CategoryService from '../services/categoriesService.js';
-import validates from '../services/utils.js';
+import validates from '../auxiliaries/utils.js';
 import NotFoundError from '../errors/NotFoundError.js';
 
 class ProductController {
@@ -13,17 +12,13 @@ class ProductController {
 
   static getProductById = async (req, res) => {
     const { id } = req.params;
-    const isValideID = validates.paramsID(id);
+    validates.paramsID(id);
 
-    if (isValideID) {
-      const product = await ProductService.getProductById(id);
-      if (!product) {
-        res.status(404).send({ message: 'Produto não localizado!' });
-      } else {
-        res.status(200).json(product);
-      }
+    const product = await ProductService.getProductById(id);
+    if (!product) {
+      res.status(404).send({ message: 'Produto não localizado!' });
     } else {
-      res.status(400).send({ message: 'ID inválido!' });
+      res.status(200).json(product);
     }
   };
 
@@ -52,18 +47,12 @@ class ProductController {
 
   static getProductsByCategoryId = async (req, res) => {
     const { id } = req.params;
-    const isValideID = validates.paramsID(id);
+    validates.paramsID(id);
 
-    if (isValideID) {
-      const isExistCategory = await CategoryService.checkIsExistsCategoryById(id);
-      if (isExistCategory) {
-        const products = await ProductService.getProductsByCategoryId(id);
-        res.status(200).json(products);
-      }
-      res.status(404).send({ message: 'Categoria não localizada!' });
-    } else {
-      res.status(400).send({ message: 'ID inválido!' });
-    }
+    await validates.checkIsExistsCategoryById(id);
+
+    const products = await ProductService.getProductsByCategoryId(id);
+    res.status(200).json(products);
   };
 
   static createProduct = async (req, res) => {
@@ -72,19 +61,12 @@ class ProductController {
       const message = 'Objeto vazio, sem propriedades!';
       throw new NotFoundError(message);
     }
+
     const { nome, categoria } = validates.paramsProduct(req.body);
-
-    const isExist = await ProductService.checkIsExistsProduct(nome);
-    if (isExist) return res.status(400).send({ message: 'Produto já cadastrado!' });
-
-    const isValideIdCategory = validates.paramsID(categoria);
-    if (!isValideIdCategory) return res.status(400).send({ message: 'ID categoria inválido!' });
-
-    const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
-    if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
-
-    const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
-    if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+    await validates.checkIsExistsProduct(nome);
+    validates.paramsID(categoria);
+    await validates.checkIsExistsCategoryById(categoria);
+    await validates.checkIsCategoryActive(categoria);
 
     const newProduct = await ProductService.createProduct(req.body);
     res.status(201).send(newProduct.toJSON());
@@ -93,11 +75,7 @@ class ProductController {
   static updateProduct = async (req, res) => {
     const { id } = req.params;
 
-    const isValideID = validates.paramsID(id);
-    if (!isValideID) {
-      const message = 'ID inválido!';
-      throw new NotFoundError(message);
-    }
+    validates.paramsID(id);
 
     const keys = Object.keys(req.body);
     if (keys.length === 0) {
@@ -109,14 +87,9 @@ class ProductController {
     const { nome, categoria } = dataProduct;
 
     if (nome) {
-      const isValideIdCategory = validates.paramsID(categoria);
-      if (!isValideIdCategory) return res.status(400).send({ message: 'ID categoria inválido!' });
-
-      const isExistCategory = await CategoryService.checkIsExistsCategoryById(categoria);
-      if (!isExistCategory) return res.status(400).send({ message: 'Categoria não localizada!' });
-
-      const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
-      if (!isActiveCategory) return res.status(400).send({ message: 'Categoria Inativa!' });
+      validates.paramsID(categoria);
+      await validates.checkIsExistsCategoryById(categoria);
+      await validates.checkIsCategoryActive(categoria);
     }
 
     const updateProduct = await ProductService.updateProduct(id, dataProduct);
@@ -129,17 +102,13 @@ class ProductController {
 
   static deleteProductById = async (req, res) => {
     const { id } = req.params;
-    const isValideID = validates.paramsID(id);
+    validates.paramsID(id);
 
-    if (isValideID) {
-      const deleteProduct = await ProductService.deleteProductById(id);
-      if (!deleteProduct) {
-        res.status(404).send({ message: 'Categoria não localizada!' });
-      } else {
-        res.status(204).send();
-      }
+    const deleteProduct = await ProductService.deleteProductById(id);
+    if (!deleteProduct) {
+      res.status(404).send({ message: 'Categoria não localizada!' });
     } else {
-      res.status(400).send({ message: 'ID inválido!' });
+      res.status(204).send();
     }
   };
 }

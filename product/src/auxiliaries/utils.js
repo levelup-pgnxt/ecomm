@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import Joi from 'joi';
 import runSchema from './validator.js';
 import CategoryService from '../services/categoriesService';
+import ProductService from '../services/productsService.js';
 import NotFoundError from '../errors/NotFoundError.js';
 
 const limit = 3;
@@ -139,6 +140,30 @@ const validates = {
     const isExist = await CategoryService.checkIsExistsCategory(nome);
     if (isExist) {
       const message = 'Categoria já cadastrada!';
+      throw new NotFoundError(message);
+    }
+  },
+
+  checkIsExistsProduct: async (nome) => {
+    const isExist = await ProductService.checkIsExistsProduct(nome);
+    if (isExist) {
+      const message = 'Produto já cadastrado!';
+      throw new NotFoundError(message);
+    }
+  },
+
+  checkIsExistsCategoryById: async (id) => {
+    const isExist = await CategoryService.checkIsExistsCategoryById(id);
+    if (!isExist) {
+      const message = 'Categoria não localizada!';
+      throw new NotFoundError(message);
+    }
+  },
+
+  checkIsCategoryActive: async (categoria) => {
+    const isActiveCategory = await CategoryService.checkIsCategoryActive(categoria);
+    if (!isActiveCategory) {
+      const message = 'Categoria Inativa!';
       throw new NotFoundError(message);
     }
   },
