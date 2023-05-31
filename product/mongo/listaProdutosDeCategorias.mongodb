@@ -1,0 +1,13 @@
+use('ecomm-product')
+
+
+
+db.products.find({$or:[
+    {"categoria":"LIVROS"},
+    {"categoria":"CELULARES"}
+]},
+{
+     "produto":1,_id:0
+
+})
+

@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Listagem de Categorias na API de produtos
+  description: API para listagem de categorias
+  version: 0.0.1
+paths:
+  /api/categories:
+    get:
+      summary: categories list
+      description: lista de categorais
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Objeto'
+        '404':
+          description: Categories not found
+          content:
+            application/json:
+              example: Not Found
+  /api/admin/categories:
+    post:
+      summary: inserindo novas categorias
+      description: inserir uma categoria ativa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        '201':
+          description: Categoria criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Objeto'
+  /api/categories/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      summary: localizar uma categoria pelo id
+      responses:
+        '200':
+          description: caterogia do id:{} localizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Objeto'
+        '404':
+          description: Categoria com o id {} não localizado
+          content:
+            application/json:
+              example: Not Found
+components:
+  schemas:
+    Objeto:
+      type: object
+      properties:
+        _id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string

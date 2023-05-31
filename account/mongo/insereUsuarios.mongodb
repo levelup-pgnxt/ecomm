@@ -1,0 +1,50 @@
+use('ecomm-account');
+db.createCollection('users');
+
+db.users.insertMany([
+	{
+        "nome": "sadsdasdasdasd",
+        "email": "isac1@gmail.com", 
+        "senhaHash": "senha1",
+        "dataCriacao": new ISODate(),
+        "cpf": 01555363202,
+        "telefone": "32280873",
+        "endereco":{
+                    "rua_endereco":"rua tal 1",
+                    "n_endereco":"10",
+                    "complemento":"alameda tal",
+                    "cep":"55513235",
+                    "cidade":"belem2",
+                    "estado":"para2",
+                    }
+  },{
+        "nome": "isac 2",
+        "email": "isac2@gmail.com", 
+        "senhaHash": "senha2",
+        "dataCriacao": new ISODate(),
+        "cpf": 01555363203,
+        "telefone": "42280873",
+        "endereco":{"rua_endereco":"rua tal 2",
+                    "n_endereco":"11",
+                    "complemento":"alameda tal",
+                    "cep":"55513233",
+                    "cidade":"belem3",
+                    "estado":"para3",
+                    }
+  },{
+        "nome": "isac 3",
+        "email": "isac3@gmail.com", 
+        "senhaHash": "senha3",
+        "dataCriacao": new ISODate(),
+        "cpf": 01555363203,
+        "telefone": "42280874",
+        "endereco":{"rua_endereco":"rua tal 3",
+                    "n_endereco":"13",
+                    "complemento":"alameda tal",
+                    "cep":"55513333",
+                    "cidade":"belem1",
+                    "estado":"para1",
+                    }
+  }
+]);
+

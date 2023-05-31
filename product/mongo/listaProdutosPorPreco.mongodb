@@ -1,0 +1,13 @@
+use('ecomm-product')
+
+
+
+db.products.find({$and:[
+    {"preco_unitario":{$gte:1000}},
+    {"preco_unitario":{$lte:2000}}
+]},
+{
+    "preco_unitario": 1, "produto":1, _id:1
+
+})
+
